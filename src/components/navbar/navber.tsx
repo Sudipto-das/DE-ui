@@ -3,7 +3,7 @@ import SearchBox from '../../common/search';
 
 const Navbar: React.FC = () => {
     return (
-        <div className="border-b border-gray-300 p-4 flex justify-between items-center w-full">
+        <div className="p-4 flex justify-between items-center w-full">
             <div className="w-3/5 flex"> 
                 <SearchBox />
             </div>
