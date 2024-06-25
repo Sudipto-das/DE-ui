@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => {
         { icon: 'message-question.png', name: 'Help & Support' },
     ];
     return (
-        <div className="bg-white h-screen w-80 shadow-md flex flex-col">
+        <div className="bg-white h-screen w-[40%] shadow-md flex flex-col 2xl:w-[20%]">
             {/* Logo Section */}
             <div className="p-4 flex items-center mt-2">
                 <img
