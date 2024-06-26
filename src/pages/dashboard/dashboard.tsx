@@ -7,10 +7,10 @@ const Dashboard: React.FC = () => {
     return <>
         <DashboardHeader />
         <div className="flex gap-3">
-            <div className="w-[70%]">
+            <div className="w-[65%]">
                 <ProjectsList />
             </div>
-            <div className="w-[30%]">
+            <div className="w-[35%]">
                 <CommentsList />
             </div>
         </div>

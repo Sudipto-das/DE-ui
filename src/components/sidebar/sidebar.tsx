@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => {
         { icon: 'message-question.png', name: 'Help & Support' },
     ];
     return (
-        <div className="bg-white h-screen w-[40%] shadow-md flex flex-col 2xl:w-[20%]">
+        <div className="bg-white h-screen shadow-md flex flex-col">
             {/* Logo Section */}
             <div className="p-4 flex items-center mt-2">
                 <img
@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
                         alt="User Avatar"
                         className="w-16 h-16 rounded-full mb-2"
                     />
-                    <div className='flex flex-col items-center'>
+                    <div className='flex flex-col'>
                         <span className="font-medium text-sm">Nguyen Duy Phuoc</span>
                         <span className="text-gray-500 text-xs">Designer</span>
                     </div>
