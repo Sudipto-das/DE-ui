@@ -9,8 +9,8 @@ import ProductionPage from './pages/production/production';
 const Layout = () => {
   return (
     <div className="flex items-start justify-start">
-      <div className='w-[18%]'><Sidebar /></div>  
-      <div className="flex-grow w-[82%]">
+      <div className='md:w-[18%]'><Sidebar /></div>  
+      <div className="flex-grow w-full md:w-[82%]">
         <Navbar />
         <div className="p-4">
           <Routes>

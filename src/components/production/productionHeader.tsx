@@ -1,35 +1,53 @@
-const ProductionHeader: React.FC = () => {
-    return <>
-        <div className="flex gap-2">
-            <div className="flex justify-between items-center border rounded-lg px-4 py-5 w-[25%]">
-                <div>
-                    
-                    <h1 className="text-xl text-[#23262F] font-medium">Factories</h1>
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { selectedCategoryState } from '../../store/selectCatagoryState';
+
+
+
+const ProductionHeader: React.FC<{ renderComponent: React.ReactNode }> = ({ renderComponent }) => {
+    const [selectedCategory, setSelectedCategory] = useRecoilState(selectedCategoryState);
+    const [isOpen,setIsOpen] = useState(false)
+    
+    const categories = [
+        { name: 'Factories', img: 'Frame 919.png' },
+        { name: 'False ceiling', img: 'Frame 920.png' },
+        { name: 'Painting', img: 'Frame 918.png' },
+        { name: 'Loose Furniture', img: 'Frame 917.png' },
+    ];
+    const handleCategoryClick = (categoryName: string) => {
+        if (selectedCategory === categoryName) {
+            setIsOpen(!isOpen);
+        } else {
+            setSelectedCategory(categoryName);
+            setIsOpen(true);
+        }
+    };
+
+    return (
+        <div className="flex gap-2 flex-col md:flex-row">
+            {categories.map((category) => (
+                <div key={category.name} className="w-full md:w-1/4">
+                    <div
+                        className={`flex justify-between items-center border rounded-lg px-4 py-5 cursor-pointer ${
+                            selectedCategory === category.name ? 'bg-gray-200' : ''
+                        }`}
+                        onClick={() => handleCategoryClick(category.name)}
+                    >
+                        <div>
+                            <h1 className="text-xl text-[#23262F] font-medium">{category.name}</h1>
+                        </div>
+                        <img src={category.img} className="w-10 h-10" alt={category.name} />
+                    </div>
+                    {/* Render component for mobile screens only */}
+                    {isOpen && selectedCategory === category.name && (
+                        <div className="block md:hidden">
+                            {renderComponent}
+                        </div>
+                    )}
                 </div>
-                <img src='Frame.png' className="w-10 h-10" />
-            </div>
-            <div className="flex justify-between items-center border rounded-lg px-4 py-4 w-[25%]">
-                <div>
-                    
-                    <h1 className="text-xl text-[#23262F] font-medium">False ceiling</h1>
-                </div>
-                <img src='Frame2.png' className="w-10 h-10" />
-            </div>
-            <div className="flex justify-between items-center border rounded-lg px-4 py-4 w-[25%]">
-                <div>
-                   
-                    <h1 className="text-xl text-[#23262F] font-medium">Painting</h1>
-                </div>
-                <img src='Frame3.png' className="w-10 h-10" />
-            </div>
-            <div className="flex justify-between items-center border rounded-lg px-4 py-4 w-[25%]">
-                <div>
-                    
-                    <h1 className="text-xl text-[#23262F] font-medium">Loose Furniture</h1>
-                </div>
-                <img src='Frame4.png' className="w-10 h-10" />
-            </div>
+            ))}
         </div>
-    </>
-}
+    );
+};
+
 export default ProductionHeader;

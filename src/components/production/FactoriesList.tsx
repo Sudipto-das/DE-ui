@@ -42,7 +42,7 @@ const factories = [
     image: 'https://via.placeholder.com/150',  // Replace with actual image URL
     title: 'Luxury',
     discount: '30%',
-    rating: 5,
+    rating: 4,
     budget: '$50,000',
     duration: '12 weeks',
     size: '800 sq ft / 1 bedroom apartment',
