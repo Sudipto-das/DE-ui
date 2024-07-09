@@ -1,5 +1,7 @@
 import React from 'react';
 import Rating from '../../common/rating';
+import { useSetRecoilState } from 'recoil';
+import { selectedCategoryState } from '../../store/selectCatagoryState';
 
 interface FactoryCardProps {
     image: string;
@@ -12,6 +14,10 @@ interface FactoryCardProps {
 }
 
 const FactoryCard: React.FC<FactoryCardProps> = ({ image, title, discount, rating, budget, duration, size }) => {
+    const setSelectedCatagory = useSetRecoilState(selectedCategoryState)
+    const handleClick = () =>{
+        setSelectedCatagory('book-button')
+    }
     return (
         <div className="flex flex-col md:flex-row bg-white border shadow-sm rounded-lg overflow-hidden mb-4 md:items-center md:px-2">
             <div className="relative w-full md:w-32 h-32">
@@ -27,7 +33,7 @@ const FactoryCard: React.FC<FactoryCardProps> = ({ image, title, discount, ratin
                         <Rating rating={rating}/>
                         <div className="flex gap-2">
                             <button className="text-[#005B3E] px-3 py-1 rounded-lg border border-[#005B3E] hover:bg-green-200">View Quote</button>
-                            <button className="bg-[#005B3E] text-white px-4 py-1 rounded-lg hover:bg-green-600">Book</button>
+                            <button className="bg-[#005B3E] text-white px-4 py-1 rounded-lg hover:bg-green-600" onClick={handleClick}>Book</button>
                         </div>
                     </div>
                     <div>

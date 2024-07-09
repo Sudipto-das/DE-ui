@@ -5,7 +5,7 @@ const UserProfile = () => {
         name: 'Nguyen Duy Phuoc',
         designation: 'Designer',
         rating: 4,
-        status: 'premium'
+        status: 'Premium'
     };
 
     return (
@@ -24,7 +24,7 @@ const UserProfile = () => {
                     </div>
                 </div>
                 <div className=" -rotate-90">
-                    <span className={`block ${user.status === 'premium' ? 'text-green-700 font-bold' : 'text-gray-500'}`}>
+                    <span className={`block ${user.status === 'Premium' ? 'text-green-700 font-bold' : 'text-gray-500'}`}>
                         {user.status}
                     </span>
                 </div>

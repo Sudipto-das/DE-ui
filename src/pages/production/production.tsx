@@ -1,16 +1,19 @@
-import React from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import CommentsList from '../../components/comments/commentsList';
 import ProductionHeader from '../../components/production/productionHeader';
 import FactoriesList from '../../components/production/FactoriesList';
 import { selectedCategoryState } from '../../store/selectCatagoryState';
+import DetailsPage from '../../components/production/DetailsPage';
 
 
 
 
 const ProductionPage: React.FC = () => {
-    const selectedCategory = useRecoilValue(selectedCategoryState);
-    
+    const [selectedCategory, setSelectedCatagory] = useRecoilState(selectedCategoryState);
+    useEffect(()=>{
+        setSelectedCatagory('Factories')
+    },[])
 
     let renderComponent;
     switch (selectedCategory) {
@@ -25,6 +28,9 @@ const ProductionPage: React.FC = () => {
             break;
         case 'Loose Furniture':
             renderComponent = null;
+            break;
+        case 'book-button':
+            renderComponent = <DetailsPage />;
             break;
         default:
             renderComponent = null;
