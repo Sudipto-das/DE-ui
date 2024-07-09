@@ -1,4 +1,5 @@
 import React from 'react';
+import Rating from '../../common/rating';
 
 interface FactoryCardProps {
     image: string;
@@ -23,18 +24,7 @@ const FactoryCard: React.FC<FactoryCardProps> = ({ image, title, discount, ratin
                 <div>
                     <h3 className="text-lg font-semibold mb-1">{title}</h3>
                     <div className="flex justify-between items-center mb-2">
-                        <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                                <svg
-                                    key={i}
-                                    className={`w-4 h-4 fill-current ${i < rating ? 'text-green-500' : 'text-gray-300'}`}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.973 1.432 8.297L12 18.896l-7.368 4.68L6.064 15.28 0 9.308l8.332-1.151L12 .587z" />
-                                </svg>
-                            ))}
-                        </div>
+                        <Rating rating={rating}/>
                         <div className="flex gap-2">
                             <button className="text-[#005B3E] px-3 py-1 rounded-lg border border-[#005B3E] hover:bg-green-200">View Quote</button>
                             <button className="bg-[#005B3E] text-white px-4 py-1 rounded-lg hover:bg-green-600">Book</button>
