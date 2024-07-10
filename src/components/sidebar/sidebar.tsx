@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavItem from './navItem';
+import UserProfile from './userProfile';
 
 const Sidebar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,19 +48,7 @@ const Sidebar: React.FC = () => {
                     <span className="font-semibold text-lg">Design Elementary</span>
                 </div>
                 {/* User Profile Section */}
-                <div className='bg-[#F4F5F6] m-4 rounded-md'>
-                    <div className="p-4 flex items-center gap-2">
-                        <img
-                            src="Avatar.png"
-                            alt="User Avatar"
-                            className="w-16 h-16 rounded-full mb-2"
-                        />
-                        <div className='flex flex-col'>
-                            <span className="font-medium text-sm">Nguyen Duy Phuoc</span>
-                            <span className="text-gray-500 text-xs">Designer</span>
-                        </div>
-                    </div>
-                </div>
+                <UserProfile/>
                 {/* Navigation Items */}
                 <nav className="flex-grow">
                     <ul>
