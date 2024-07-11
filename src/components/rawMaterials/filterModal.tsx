@@ -1,18 +1,40 @@
-// FilterModal.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { products } from '../../common/product';
 
 interface FilterModalProps {
     isOpen: boolean;
-    onClose: () => void;
+    onClose: (selectedFilters: { categories: string[]; priceRange: string[] }) => void;
 }
 
 const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+    const [selectedPriceRange, setSelectedPriceRange] = useState<string[]>([]);
+
     if (!isOpen) return null;
 
     // Extract unique categories from products
     const uniqueCategories = [...new Set(products.map(product => product.category))];
-    const PriceRange = ['0 - 10', '11 - 20', '21 - 30', '31 - 40', '41 - 50', '51 - 60', '61 - 70', '71 - 80', '91 - 100'];
+    const priceRange = ['0 - 10', '11 - 20', '21 - 30', '31 - 40', '41 - 50', '51 - 60', '61 - 70', '71 - 80', '91 - 100'];
+
+    const handleCategoryChange = (category: string) => {
+        setSelectedCategories(prevSelectedCategories =>
+            prevSelectedCategories.includes(category)
+                ? prevSelectedCategories.filter(cat => cat !== category)
+                : [...prevSelectedCategories, category]
+        );
+    };
+
+    const handlePriceChange = (price: string) => {
+        setSelectedPriceRange(prevSelectedPrice =>
+            prevSelectedPrice.includes(price)
+                ? prevSelectedPrice.filter(item => item !== price)
+                : [...prevSelectedPrice, price]
+        );
+    };
+
+    const handleClose = () => {
+        onClose({ categories: selectedCategories, priceRange: selectedPriceRange });
+    };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-end items-center">
@@ -26,7 +48,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
                         </div>
                         <h2 className="text-xl font-bold">Filter</h2>
                     </div>
-                    <button onClick={onClose} className="text-red-500 hover:underline">Close</button>
+                    <button onClick={handleClose} className="text-red-500 hover:underline">Close</button>
                 </div>
                 <div className="mb-8">
                     <h3 className="text-lg font-semibold mb-4">Categories</h3>
@@ -37,7 +59,9 @@ const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
                                     type="checkbox"
                                     id={`category-${index}`}
                                     value={category}
+                                    checked={selectedCategories.includes(category)}
                                     className="form-checkbox h-5 w-5 text-violet-500 rounded"
+                                    onChange={() => handleCategoryChange(category)}
                                 />
                                 <label htmlFor={`category-${index}`} className="text-gray-700">{category}</label>
                             </li>
@@ -47,15 +71,17 @@ const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
                 <div>
                     <h3 className="text-lg font-semibold mb-4">Price Range</h3>
                     <ul className="space-y-2">
-                        {PriceRange.map((price, index) => (
+                        {priceRange.map((range, index) => (
                             <li key={index} className="flex items-center gap-2">
                                 <input
                                     type="checkbox"
                                     id={`price-${index}`}
-                                    value={price}
+                                    value={range}
+                                    checked={selectedPriceRange.includes(range)}
                                     className="form-checkbox h-5 w-5 text-violet-500 rounded"
+                                    onChange={() => handlePriceChange(range)}
                                 />
-                                <label htmlFor={`price-${index}`} className="text-gray-700">{price}</label>
+                                <label htmlFor={`price-${index}`} className="text-gray-700">{range}</label>
                             </li>
                         ))}
                     </ul>
