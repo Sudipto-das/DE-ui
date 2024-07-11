@@ -1,8 +1,16 @@
+export type product = {
+    name:string;
+    description:string;
+    price:number;
+    rating:number;
+    image:string;
+    category:string
+}
 export const products = [
     {
         name: 'Steel Rod',
         description: 'High quality steel rod',
-        price: '$50',
+        price: 50,
         rating: 4,
         image: 'https://via.placeholder.com/150?text=Steel+Rod',
         category: 'Steel'
@@ -10,7 +18,7 @@ export const products = [
     {
         name: 'Cement',
         description: 'Premium grade cement',
-        price: '$100',
+        price: 100,
         rating: 5,
         image: 'https://via.placeholder.com/150?text=Cement',
         category: 'Cement'
@@ -18,7 +26,7 @@ export const products = [
     {
         name: 'Bricks',
         description: 'Durable construction bricks',
-        price: '$200',
+        price: 200,
         rating: 3,
         image: 'https://via.placeholder.com/150?text=Bricks',
         category: 'Bricks'
@@ -26,7 +34,7 @@ export const products = [
     {
         name: 'Sand',
         description: 'Fine quality sand',
-        price: '$30',
+        price: 30,
         rating: 4,
         image: 'https://via.placeholder.com/150?text=Sand',
         category: 'Sand'
@@ -34,7 +42,7 @@ export const products = [
     {
         name: 'Gravel',
         description: 'Coarse gravel for construction',
-        price: '$25',
+        price: 25,
         rating: 2,
         image: 'https://via.placeholder.com/150?text=Gravel',
         category: 'Gravel'
@@ -42,7 +50,7 @@ export const products = [
     {
         name: 'Bricks',
         description: 'Durable construction bricks',
-        price: '$200',
+        price: 200,
         rating: 3,
         image: 'https://via.placeholder.com/150?text=Bricks',
         category: 'Bricks'
@@ -50,7 +58,7 @@ export const products = [
     {
         name: 'Sand',
         description: 'Fine quality sand',
-        price: '$30',
+        price: 30,
         rating: 4,
         image: 'https://via.placeholder.com/150?text=Sand',
         category: 'Sand'
@@ -58,7 +66,7 @@ export const products = [
     {
         name: 'Gravel',
         description: 'Coarse gravel for construction',
-        price: '$25',
+        price: 25,
         rating: 3,
         image: 'https://via.placeholder.com/150?text=Gravel',
         category: 'Gravel'
