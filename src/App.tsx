@@ -5,6 +5,7 @@ import Sidebar from "./components/sidebar/sidebar";
 import Dashboard from "./pages/dashboard/dashboard";
 import Navbar from './components/navbar/navber';
 import ProductionPage from './pages/production/production';
+import RawMaterials from './pages/rawMaterials/rawmaterials';
 
 const Layout = () => {
   return (
@@ -16,6 +17,7 @@ const Layout = () => {
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/production-Installation" element={<ProductionPage />} />
+            <Route path="/raw-materials" element={<RawMaterials />} />
             {/* Add more routes here */}
           </Routes>
         </div>
