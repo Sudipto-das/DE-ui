@@ -52,7 +52,7 @@ const factories = [
 
 const FactoriesList: React.FC = () => {
   return (
-    <div className='p-4 border rounded-lg mt-4 h-[44rem]'>
+    <div className='p-4 border rounded-lg mt-4 h-[30rem] 2xl:h-[44rem]'>
       <div className='flex justify-between items-center mb-4'>
         <h1 className='text-xl font-bold'>Factories</h1>
         <button className='text-blue-500 hover:underline text-sm'>SEE MORE</button>
