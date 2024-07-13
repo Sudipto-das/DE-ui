@@ -35,7 +35,7 @@ const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
     const handleClose = () => {
         onClose({ categories: selectedCategories, priceRange: selectedPriceRange });
     };
-
+    const isFilterSelected = selectedCategories.length > 0 || selectedPriceRange.length > 0;
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-end items-center">
             <div className="bg-white shadow-md rounded-lg p-6 w-72">
@@ -48,7 +48,16 @@ const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
                         </div>
                         <h2 className="text-xl font-bold">Filter</h2>
                     </div>
-                    <button onClick={handleClose} className="text-red-500 hover:underline">Close</button>
+                    <button
+                        onClick={handleClose}
+                        className={`py-1 px-3 rounded-lg text-white font-semibold transition-all ${
+                            isFilterSelected
+                                ? 'bg-violet-500 hover:bg-violet-600'
+                                : 'bg-gray-500 hover:bg-gray-600'
+                        }`}
+                    >
+                        {isFilterSelected ? 'Apply' : 'Close'}
+                    </button>
                 </div>
                 <div className="mb-8">
                     <h3 className="text-lg font-semibold mb-4">Categories</h3>

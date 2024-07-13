@@ -45,9 +45,9 @@ const comments = [
 
 const CommentsList: React.FC = () => {
     return (
-        <div className='p-4 border rounded-lg mt-4 h-[44rem]'>
+        <div className='p-4 border rounded-lg mt-4 h-[30rem] 2xl:h-[44rem]'>
             <h1 className='text-xl font-bold mb-4 text-slate-600'>Project Comments</h1>
-            <div className="overflow-y-auto h-[80%]">
+            <div className="overflow-y-auto h-[69%] 2xl:h-[80%]">
                 {comments.map((comment, index) => (
                     <CommentCard key={index} {...comment} />
                 ))}

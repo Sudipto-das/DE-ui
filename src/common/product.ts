@@ -1,4 +1,5 @@
 export type product = {
+    id:string
     name:string;
     description:string;
     price:number;
@@ -8,6 +9,7 @@ export type product = {
 }
 export const products = [
     {
+        id:'1',
         name: 'Steel Rod',
         description: 'High quality steel rod',
         price: 50,
@@ -16,6 +18,7 @@ export const products = [
         category: 'Steel'
     },
     {
+        id:'2',
         name: 'Cement',
         description: 'Premium grade cement',
         price: 100,
@@ -24,6 +27,7 @@ export const products = [
         category: 'Cement'
     },
     {
+        id:'3',
         name: 'Bricks',
         description: 'Durable construction bricks',
         price: 200,
@@ -32,6 +36,7 @@ export const products = [
         category: 'Bricks'
     },
     {
+        id:'4',
         name: 'Sand',
         description: 'Fine quality sand',
         price: 30,
@@ -40,6 +45,7 @@ export const products = [
         category: 'Sand'
     },
     {
+        id:'5',
         name: 'Gravel',
         description: 'Coarse gravel for construction',
         price: 25,
@@ -48,6 +54,7 @@ export const products = [
         category: 'Gravel'
     },
     {
+        id:'6',
         name: 'Bricks',
         description: 'Durable construction bricks',
         price: 200,
@@ -56,6 +63,7 @@ export const products = [
         category: 'Bricks'
     },
     {
+        id:'7',
         name: 'Sand',
         description: 'Fine quality sand',
         price: 30,
@@ -64,6 +72,7 @@ export const products = [
         category: 'Sand'
     },
     {
+        id:'8',
         name: 'Gravel',
         description: 'Coarse gravel for construction',
         price: 25,
