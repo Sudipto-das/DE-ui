@@ -21,7 +21,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                     <img
                         src="Avatar.png"
                         alt="User Avatar"
-                        className="w-20 h-20 rounded-full mb-4 border-4 border-white"
+                        className="w-20 h-20 rounded-full mb-2 border-4 border-white"
                     />
 
                     <span className="font-bold 2xl:text-2xl mb-2 text-gray-900 md:text-center text-lg">{user.name}</span>
