@@ -17,7 +17,6 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         <div className={`relative w-full max-w-sm mx-auto rounded-lg shadow-lg overflow-hidden ${cardColors[user.category]}`}>
             <div className="p-4">
                 <div className="flex flex-col items-center">
-
                     <img
                         src="Avatar.png"
                         alt="User Avatar"
@@ -25,12 +24,15 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                     />
 
                     <span className="font-bold 2xl:text-2xl mb-2 text-gray-900 md:text-center text-lg">{user.name}</span>
-                    <div className="2xl:flex items-center gap-1 mb-2">
-                        <span className="text-gray-700 text-sm font-medium">{user.designation} | </span>
-                        <span className="text-gray-600 text-sm font-medium">{user.projects}+ projects | </span>
-                        <span className="text-gray-600 text-sm font-medium">Exp.{user.experience}</span>
 
+                    <div className="flex flex-wrap justify-center 2xl:justify-start gap-x-1 gap-y-2 mb-2 text-sm font-medium text-gray-600">
+                        <span className="text-gray-700">{user.designation}</span>
+                        <span className="hidden sm:inline-block">|</span>
+                        <span>{user.projects}+ projects</span>
+                        <span className="hidden sm:inline-block">|</span>
+                        <span>Exp. {user.experience}</span>
                     </div>
+
                     <div className="mt-2">
                         <Rating rating={user.rating} />
                     </div>
