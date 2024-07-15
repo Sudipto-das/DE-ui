@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
-import { selectedCategoryState } from '../../../store/selectCatagoryState';
-import Rating from '../../../common/rating';
+import { selectedCategoryState } from '../../store/selectCatagoryState';
+import Rating from '../../common/rating';
+
 
 
 interface FactoryCardProps {
@@ -14,7 +15,7 @@ interface FactoryCardProps {
     size: string;
 }
 
-const FactoryCard: React.FC<FactoryCardProps> = ({ image, title, discount, rating, budget, duration, size }) => {
+const ItemCard: React.FC<FactoryCardProps> = ({ image, title, discount, rating, budget, duration, size }) => {
     const setSelectedCatagory = useSetRecoilState(selectedCategoryState)
     const handleClick = () =>{
         setSelectedCatagory('book-button')
@@ -56,4 +57,4 @@ const FactoryCard: React.FC<FactoryCardProps> = ({ image, title, discount, ratin
     );
 };
 
-export default FactoryCard;
+export default ItemCard;
