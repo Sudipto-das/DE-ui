@@ -1,7 +1,8 @@
 import React from 'react';
-import Rating from '../../common/rating';
 import { useSetRecoilState } from 'recoil';
-import { selectedCategoryState } from '../../store/selectCatagoryState';
+import { selectedCategoryState } from '../../../store/selectCatagoryState';
+import Rating from '../../../common/rating';
+
 
 interface FactoryCardProps {
     image: string;

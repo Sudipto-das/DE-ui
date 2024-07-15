@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import CommentsList from '../../components/comments/commentsList';
 import ProductionHeader from '../../components/production/productionHeader';
-import FactoriesList from '../../components/production/FactoriesList';
+
 import { selectedCategoryState } from '../../store/selectCatagoryState';
 import DetailsPage from '../../components/production/DetailsPage';
+import FactoriesList from '../../components/production/Factories/FactoriesList';
 
 
 
