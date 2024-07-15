@@ -35,10 +35,12 @@ const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
     const handleClose = () => {
         onClose({ categories: selectedCategories, priceRange: selectedPriceRange });
     };
+
     const isFilterSelected = selectedCategories.length > 0 || selectedPriceRange.length > 0;
+
     return (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-end items-center">
-            <div className="bg-white shadow-md rounded-lg p-6 w-72">
+            <div className="bg-white shadow-md rounded-lg p-6 w-64  h-auto 2xl:h-auto max-h-[72vh] overflow-y-auto">
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-4">
                         <div className="bg-violet-500 p-3 rounded-full">
