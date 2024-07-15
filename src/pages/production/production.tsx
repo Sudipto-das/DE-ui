@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import CommentsList from '../../components/comments/commentsList';
 import ProductionHeader from '../../components/production/productionHeader';
-
 import { selectedCategoryState } from '../../store/selectCatagoryState';
 import DetailsPage from '../../components/production/DetailsPage';
-import FactoriesList from '../../components/production/Factories/FactoriesList';
+import FactoriesComponent from '../../components/production/Factories/FectoriesComponent';
+import FalseCeilingComponent from '../../components/production/FalseCeiling/FalseCeilingComponent';
 
 
 
@@ -19,10 +19,10 @@ const ProductionPage: React.FC = () => {
     let renderComponent;
     switch (selectedCategory) {
         case 'Factories':
-            renderComponent = <FactoriesList />;
+            renderComponent = <FactoriesComponent/>;
             break;
         case 'False ceiling':
-            renderComponent = null;
+            renderComponent = <FalseCeilingComponent/>;
             break;
         case 'Painting':
             renderComponent = null;
