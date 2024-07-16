@@ -7,6 +7,7 @@ import RawMaterials from './pages/rawMaterials/rawmaterials';
 import InspirationsPage from './pages/inspiration/inspirations';
 import Navbar from './components/navbar/navber';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import HelpAndSupport from './components/help&support/supportPage';
 
 const Layout = () => {
   return (
@@ -24,6 +25,7 @@ const Layout = () => {
             <Route path="/production-Installation" element={<ProductionPage />} />
             <Route path="/raw-materials" element={<RawMaterials />} />
             <Route path="/inspirations" element={<InspirationsPage />} />
+            <Route path="/help-support" element={<HelpAndSupport />} />
             {/* Add more routes here */}
           </Routes>
         </div>
