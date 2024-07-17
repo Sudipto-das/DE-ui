@@ -21,7 +21,7 @@ const Layout = () => {
         <div className="md:fixed md:top-0 md:left-[18%] md:w-[82%] bg-white md:z-40">
           <Navbar />
         </div>
-        <div className="md:pt-16 p-4 md:mt-10">
+        <div className="md:pt-16 p-4 md:mt-6">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/production-Installation" element={<ProductionPage />} />
