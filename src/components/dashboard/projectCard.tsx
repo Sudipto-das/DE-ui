@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface ProjectCardProps {
+  id:string;
   image: string;
   title: string;
   description: string;

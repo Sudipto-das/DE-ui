@@ -1,7 +1,7 @@
 import React from 'react';
-import ContactInfo from './ContactInfo';
-import ContactForm from './ContactForm';
-import ContactHeader from './ContactHeader';
+import ContactInfo from '../../components/help&support/ContactInfo';
+import ContactForm from '../../components/help&support/ContactForm';
+import ContactHeader from '../../components/help&support/ContactHeader';
 
 const HelpAndSupport: React.FC = () => {
     return (
