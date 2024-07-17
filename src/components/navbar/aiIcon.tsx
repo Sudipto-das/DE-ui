@@ -7,10 +7,10 @@ const AiIcon: React.FC = () => {
         <button className="flex items-center ml-4">
             <img
                 src="sparkling.png"
-                className="w-9 h-9 animate-spin"
+                className="w-7 h-7 animate-spin"
                 alt="Sparkling Icon"
             />
-            <span className="text-blue-600 font-bold text-lg">AI</span>
+            <span className="text-violet-600 font-extrabold text-lg">AI</span>
         </button>
     );
 };
