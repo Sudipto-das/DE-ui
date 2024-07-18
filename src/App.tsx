@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import HelpAndSupport from './pages/help&support/supportPage';
 import FinancePage from './pages/finance/financePage';
 import ProjectPage from './pages/project/projectPage';
+import ProjectDetailsPage from './pages/project/projectDetailsPage';
 
 const Layout = () => {
   return (
@@ -30,7 +31,8 @@ const Layout = () => {
             <Route path="/help-support" element={<HelpAndSupport />} />
             <Route path="/finance-your-project" element={<FinancePage />} />
             <Route path="/project" element={<ProjectPage />} />
-            {/* Add more routes here */}
+            <Route path="/project/:id" element={<ProjectDetailsPage />} />
+            
           </Routes>
         </div>
       </div>
