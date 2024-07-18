@@ -39,7 +39,7 @@ const Slider: FC<SliderProps> = ({ images }) => {
   return (
     <div className="relative w-full overflow-hidden">
       <div
-        className="flex transition-transform duration-500"
+        className="flex transition-transform duration-500 hover:cursor-pointer"
         ref={carouselRef}
       >
         {images.map((image, index) => (
