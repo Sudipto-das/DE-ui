@@ -1,17 +1,12 @@
 import React from 'react';
-import ContactInfo from '../../components/help&support/ContactInfo';
-import ContactForm from '../../components/help&support/ContactForm';
 import ContactHeader from '../../components/help&support/ContactHeader';
 
 const HelpAndSupport: React.FC = () => {
     return (
-        <div className=" bg-white md:p-2 ">
-            <ContactHeader/>
-            <div className="container mx-auto bg-gradient-to-r from-green-200 to-white rounded-lg md:p-10 shadow-lg">
-                <div className="flex flex-col md:flex-row justify-between items-start space-y-10 md:space-y-0 md:space-x-10">
-                    <ContactInfo />
-                    <ContactForm />
-                </div>
+        <div className="bg-white flex flex-col items-center justify-center gap-28 border rounded-lg" style={{ height: 'calc(94vh - 88px)' }}>
+            <h1 className="text-3xl font-bold mt-4 text-slate-500">Help & Support</h1>
+            <div className="flex justify-center" style={{ height: '100%', width: '100%' }}>
+                <ContactHeader />
             </div>
         </div>
     );
