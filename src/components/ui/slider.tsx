@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, FC } from "react";
 
 interface SliderProps {
   images: string[];
+
 }
 
 const Slider: FC<SliderProps> = ({ images }) => {
@@ -39,7 +40,7 @@ const Slider: FC<SliderProps> = ({ images }) => {
   return (
     <div className="relative w-full overflow-hidden">
       <div
-        className="flex transition-transform duration-500"
+        className="flex transition-transform duration-500 hover:cursor-pointer"
         ref={carouselRef}
       >
         {images.map((image, index) => (
@@ -48,7 +49,7 @@ const Slider: FC<SliderProps> = ({ images }) => {
               src={image}
               alt={`slide ${index + 1}`}
               loading="lazy"
-              className="md:object-cover w-full h-52 md:h-72 flex-shrink-0"
+              className="md:object-fit w-full h-52 md:h-[22rem] flex-shrink-0"
               style={{ minWidth: "100%" }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-60"></div>

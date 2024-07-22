@@ -23,14 +23,14 @@ const Navbar: React.FC = () => {
                         <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full"></span>
                         <button className="text-gray-600 hover:text-gray-800">
                             <img
-                                src="notification.png"
+                                src="/notification.png"
                                 alt="Vector"
                                 className="w-7 h-7 ml-4"
                             />
                         </button>
                     </div>
                     <img
-                        src="Avatar.png"
+                        src="/Avatar.png"
                         alt="User Avatar"
                         className="w-10 h-10 rounded-full ml-4"
                     />

@@ -14,11 +14,11 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
     };
 
     return (
-        <div className={`relative w-full max-w-sm mx-auto rounded-lg shadow-lg overflow-hidden ${cardColors[user.category]}`}>
+        <div className={`transition-opacity duration-300 relative w-full max-w-sm mx-auto rounded-lg shadow-lg overflow-hidden ${cardColors[user.category]}`}>
             <div className="p-4">
                 <div className="flex flex-col items-center">
                     <img
-                        src="Avatar.png"
+                        src="/Avatar.png"
                         alt="User Avatar"
                         className="w-20 h-20 rounded-full mb-2 border-4 border-white"
                     />

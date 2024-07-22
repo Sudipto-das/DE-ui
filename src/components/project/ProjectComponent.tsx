@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProjectsList from "../dashboard/projectList";
 
 const ProjectComponent = () => {
-    const [isProject] = useState(false)
+    const [isProject] = useState(true)
     if (!isProject) {
         return (
             <div className="flex items-center justify-center border rounded-lg" style={{ height: 'calc(94vh - 88px)' }}>
@@ -11,7 +11,7 @@ const ProjectComponent = () => {
                         <h3 className="text-sm">You Have No Current Projects. Create Your First Project Now</h3>
                     </div>
                     <button className="px-7 py-5 text-xl font-bold bg-gradient-to-r from-green-700 to-blue-900 rounded-lg shadow-2xl text-slate-200">
-                        Create Project
+                        Create Your Project
                     </button>
                 </div>
             </div>

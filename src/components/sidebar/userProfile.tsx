@@ -53,7 +53,7 @@ const UserProfile: React.FC = () => {
         >
            {!isHovered &&  <div className="flex-grow pl-4 py-4 flex items-center gap-3">
                 <img
-                    src="Avatar.png"
+                    src="/Avatar.png"
                     alt="User Avatar"
                     className="w-16 h-16 rounded-full mb-2"
                 />

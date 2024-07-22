@@ -10,7 +10,7 @@ const SearchBox: React.FC = () => {
             />
             <button>
                 <img
-                    src="Small.png"
+                    src="/Small.png"
                     alt="Search"
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 w-7 h-7"
                 />
