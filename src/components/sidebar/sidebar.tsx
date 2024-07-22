@@ -8,7 +8,7 @@ const Sidebar: React.FC = () => {
     const navItems = [
         { icon: 'sidebar/dashboards.png', name: 'Dashboard' },
         { icon: 'sidebar/account.png', name: 'Profile' },
-        { icon: 'sidebar/briefcase.png', name: 'Project' },
+        { icon: 'sidebar/briefcase.png', name: `Projects` },
         { icon: 'sidebar/dashboards.png', name: 'Inspirations' },
         { icon: 'sidebar/customer-support.png', name: 'Production & Installation' },
         { icon: 'sidebar/steel.png', name: 'Raw materials' },
@@ -41,7 +41,7 @@ const Sidebar: React.FC = () => {
                 {/* Logo Section */}
                 <div className="p-4 flex items-center mt-2">
                     <img
-                        src="LOGO.png" 
+                        src="/LOGO.png" 
                         alt="Design Elementary"
                         className="h-8 mr-3"
                     />

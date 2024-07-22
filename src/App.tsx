@@ -30,9 +30,7 @@ const Layout = () => {
             <Route path="/inspirations" element={<InspirationsPage />} />
             <Route path="/help-support" element={<HelpAndSupport />} />
             <Route path="/finance-your-project" element={<FinancePage />} />
-            <Route path="/project" element={<ProjectPage />} />
-            <Route path="/project/:id" element={<ProjectDetailsPage />} />
-            
+            <Route path="/projects/*" element={<ProjectLayout />} />
           </Routes>
         </div>
       </div>
@@ -40,8 +38,17 @@ const Layout = () => {
   );
 };
 
+const ProjectLayout = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<ProjectPage />} />
+      <Route path=":id" element={<ProjectDetailsPage />} />
+    </Routes>
+  );
+};
+
 const App = () => {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Router>

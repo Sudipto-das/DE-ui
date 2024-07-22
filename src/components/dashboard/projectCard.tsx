@@ -1,7 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ProjectCardProps {
-  id:string;
+  id: string;
   image: string;
   title: string;
   description: string;
@@ -11,11 +12,16 @@ interface ProjectCardProps {
   size: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ image, title, description, designer, duration, budget, size }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ id, image, title, description, designer, duration, budget, size }) => {
+  const navigate = useNavigate()
+  const handleClick = (id: string) => {
+    navigate(`/projects/${id}`)
+  }
   return (
-    <div className="flex flex-col bg-white border shadow-sm rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row">
+    <div className="flex flex-col bg-white border shadow-sm rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer"
+      onClick={() => { handleClick(id) }}>
       <img src={image} alt={title} className="w-32 h-32 object-cover pt-2 md:pt-0" />
-      <div className="p-4 flex flex-col justify-between">
+      <div className="p-6 flex flex-col justify-between">
         <div>
           <h2 className="text-lg font-semibold mb-1 text-[#353945]">{title}</h2>
           <p className="text-sm text-gray-600 mb-2">{description}</p>

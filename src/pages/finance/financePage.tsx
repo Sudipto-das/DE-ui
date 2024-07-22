@@ -1,5 +1,5 @@
 import PartnerList from "../../components/finance-project/PartnerList"
-import Slider from "../../components/finance-project/slider";
+import Slider from "../../components/ui/slider";
 const data = [
     'demo1.jpg',
     'demo2.jpg',

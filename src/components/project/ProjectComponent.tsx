@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProjectsList from "../dashboard/projectList";
 
 const ProjectComponent = () => {
-    const [isProject] = useState(false)
+    const [isProject] = useState(true)
     if (!isProject) {
         return (
             <div className="flex items-center justify-center border rounded-lg" style={{ height: 'calc(94vh - 88px)' }}>
