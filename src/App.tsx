@@ -11,6 +11,7 @@ import HelpAndSupport from './pages/help&support/supportPage';
 import FinancePage from './pages/finance/financePage';
 import ProjectPage from './pages/project/projectPage';
 import ProjectDetailsPage from './pages/project/projectDetailsPage';
+import ProfilePage from './pages/profile/profilePage';
 
 const Layout = () => {
   return (
@@ -31,6 +32,7 @@ const Layout = () => {
             <Route path="/help-support" element={<HelpAndSupport />} />
             <Route path="/finance-your-project" element={<FinancePage />} />
             <Route path="/projects/*" element={<ProjectLayout />} />
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
       </div>
