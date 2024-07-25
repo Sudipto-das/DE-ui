@@ -41,7 +41,7 @@ const DashboardHeader: React.FC = () => {
         }
     };
     return <>
-        <div className="flex gap-2 flex-col md:flex-row">
+        <div className="flex gap-2 flex-col md:flex-row font-inter">
             {HeaderData.map((item, index) => (
                 <HeaderBox
                     key={index}

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 import Sidebar from "./components/sidebar/sidebar";
 import Dashboard from "./pages/dashboard/dashboard";
@@ -12,19 +12,28 @@ import FinancePage from './pages/finance/financePage';
 import ProjectPage from './pages/project/projectPage';
 import ProjectDetailsPage from './pages/project/projectDetailsPage';
 import ProfilePage from './pages/profile/profilePage';
+import LoginPage from './pages/login/loginPage';
 
 const Layout = () => {
+  const location = useLocation();
+  const isLoginPage = location.pathname === '/';
+
   return (
     <div className="flex">
-      <div className="md:fixed md:top-0 md:left-0 h-full md:w-[18%] overflow-y-auto bg-gray-100 z-50 shadow-md">
-        <Sidebar />
-      </div>
-      <div className="md:ml-[18%] flex-grow md:w-[82%]">
-        <div className="md:fixed md:top-0 md:left-[18%] md:w-[82%] bg-white md:z-40">
-          <Navbar />
+      {!isLoginPage && (
+        <div className="md:fixed md:top-0 md:left-0 h-full md:w-[18%] overflow-y-auto bg-gray-100 z-50 shadow-md">
+          <Sidebar />
         </div>
-        <div className="md:pt-16 p-4 md:mt-6">
+      )}
+      <div className={!isLoginPage ? "md:ml-[18%] flex-grow md:w-[82%]" : "flex-grow w-full"}>
+        {!isLoginPage && (
+          <div className="md:fixed md:top-0 md:left-[18%] md:w-[82%] bg-white md:z-40">
+            <Navbar />
+          </div>
+        )}
+        <div className={!isLoginPage ? "md:pt-16 p-4 md:mt-6" : "p-0"}>
           <Routes>
+            <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/production-Installation" element={<ProductionPage />} />
             <Route path="/raw-materials" element={<RawMaterials />} />

@@ -5,7 +5,7 @@ import UserCard from './userCard';
 export interface User {
     name: string;
     experience: string;
-    designation: string;
+    role: string;
     rating: number;
     category: 'Premium' | 'Standard' | 'Ultimate';
     projects: number;
@@ -15,7 +15,7 @@ interface StatusBadgeProps {
     category: 'Premium' | 'Standard' | 'Ultimate';
 }
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
+export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
     const badgeColors: Record<User['category'], string> = {
         Premium: 'bg-green-500',
         Standard: 'bg-yellow-500',
@@ -37,7 +37,7 @@ const UserProfile: React.FC = () => {
     const user: User = {
         name: 'Nguyen Duy Phuoc',
         experience: '5 years',
-        designation: 'Designer',
+        role: 'Designer',
         rating: 4,
         category: 'Premium',
         projects: 10,
@@ -58,8 +58,8 @@ const UserProfile: React.FC = () => {
                     className="w-16 h-16 rounded-full mb-2"
                 />
                 <div className="flex flex-col">
-                    <span className="font-medium text-sm ">{user.name}</span>
-                    <span className="text-gray-500 text-xs">{user.designation}</span>
+                    <span className="font-bold text-sm font-inter ">{user.name}</span>
+                    <span className="text-gray-500 text-xs font-inter font-medium">{user.role}</span>
                     <div className="mt-2">
                         <Rating rating={user.rating} />
                     </div>

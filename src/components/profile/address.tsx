@@ -28,12 +28,12 @@ const Address: React.FC<AddressProps> = ({
     return (
         <div className="p-4 border rounded-lg">
                 <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-lg font-semibold">Address</h3>
+                    <h3 className="text-lg font-semibold font-inter">Address</h3>
                     <EditButton isEditing={isEditing} onClick={isEditing ? saveChanges : toggleEdit} />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <p className="text-sm text-gray-500">Country</p>
+                        <p className="text-sm text-gray-500 font-inter">Country</p>
                         {isEditing ? (
                             <input
                                 type="text"
@@ -42,11 +42,11 @@ const Address: React.FC<AddressProps> = ({
 
                             />
                         ) : (
-                            <p className="font-medium">{country}</p>
+                            <p className="font-medium font-inter">{country}</p>
                         )}
                     </div>
                     <div>
-                        <p className="text-sm text-gray-500">City/State</p>
+                        <p className="text-sm text-gray-500 font-inter">City/State</p>
                         {isEditing ? (
                             <input
                                 type="text"
@@ -55,11 +55,11 @@ const Address: React.FC<AddressProps> = ({
 
                             />
                         ) : (
-                            <p className="font-medium">{state}</p>
+                            <p className="font-medium font-inter">{state}</p>
                         )}
                     </div>
                     <div>
-                        <p className="text-sm text-gray-500">Postal Code</p>
+                        <p className="text-sm text-gray-500 font-inter">Postal Code</p>
                         {isEditing ? (
                             <input
                                 type="text"
@@ -68,11 +68,11 @@ const Address: React.FC<AddressProps> = ({
 
                             />
                         ) : (
-                            <p className="font-medium">{postalCode}</p>
+                            <p className="font-medium font-inter">{postalCode}</p>
                         )}
                     </div>
                     <div>
-                        <p className="text-sm text-gray-500">TAX ID</p>
+                        <p className="text-sm text-gray-500 font-inter">TAX ID</p>
                         {isEditing ? (
                             <input
                                 type="text"
@@ -81,7 +81,7 @@ const Address: React.FC<AddressProps> = ({
 
                             />
                         ) : (
-                            <p className="font-medium">{taxId}</p>
+                            <p className="font-medium font-inter">{taxId}</p>
                         )}
                     </div>
                 </div>
