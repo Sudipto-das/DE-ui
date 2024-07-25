@@ -25,7 +25,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
     return (
         <div className="mb-6 p-4 border rounded-lg">
             <div className="flex justify-between items-center mb-2">
-                <h3 className="text-lg font-semibold">Personal information</h3>
+                <h3 className="text-lg font-semibold font-inter">Personal information</h3>
                 <EditButton isEditing={isEditing} onClick={isEditing ? saveChanges : toggleEdit} />
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -43,7 +43,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                     )}
                 </div>
                 <div>
-                    <p className="text-sm text-gray-500">Last Name</p>
+                    <p className="text-sm text-gray-500 font-inter">Last Name</p>
                     {isEditing ? (
                         <input
                             type="text"
@@ -52,11 +52,11 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
 
                         />
                     ) : (
-                        <p className="font-medium">{name.split(' ')[1]}</p>
+                        <p className="font-medium font-inter">{name.split(' ')[1]}</p>
                     )}
                 </div>
                 <div>
-                    <p className="text-sm text-gray-500">Email address</p>
+                    <p className="text-sm text-gray-500 font-inter">Email address</p>
                     {isEditing ? (
                         <input
                             type="email"
@@ -65,11 +65,11 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
 
                         />
                     ) : (
-                        <p className="font-medium">{email}</p>
+                        <p className="font-medium font-inter">{email}</p>
                     )}
                 </div>
                 <div>
-                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="text-sm text-gray-500 font-inter">Phone</p>
                     {isEditing ? (
                         <input
                             type="tel"
@@ -78,11 +78,11 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
 
                         />
                     ) : (
-                        <p className="font-medium">{phone}</p>
+                        <p className="font-medium font-inter">{phone}</p>
                     )}
                 </div>
                 <div>
-                    <p className="text-sm text-gray-500">Bio</p>
+                    <p className="text-sm text-gray-500 font-inter">Bio</p>
                     {isEditing ? (
                         <input
                             type="text"
@@ -91,7 +91,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
 
                         />
                     ) : (
-                        <p className="font-medium">{bio}</p>
+                        <p className="font-medium font-inter">{bio}</p>
                     )}
                 </div>
             </div>

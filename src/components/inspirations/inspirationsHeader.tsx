@@ -20,7 +20,7 @@ const InspirationsHeader: React.FC<{ renderComponent: React.ReactNode }> = ({ re
         }
     };
     return (
-        <div className="flex gap-2 flex-col md:flex-row">
+        <div className="flex gap-2 flex-col md:flex-row font-inter">
             {categories.filter(category => category.name && category.img).map((category) => (
                 <div key={category.name} className="w-full md:w-1/4">
                     <div
@@ -29,7 +29,7 @@ const InspirationsHeader: React.FC<{ renderComponent: React.ReactNode }> = ({ re
                         onClick={() => handleCategoryClick(category.name)}
                     >
                         <div>
-                            <h1 className="text-xl text-[#23262F] font-medium">{category.name}</h1>
+                            <h1 className="text-xl text-[#23262F] font-semibold">{category.name}</h1>
                         </div>
                         <img src={category.img} className="w-10 h-10" alt={category.name} />
                     </div>

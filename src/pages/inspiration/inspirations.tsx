@@ -28,8 +28,8 @@ const InspirationsPage = () => {
     return (
         <>
             <InspirationsHeader  renderComponent={renderComponent}/>
-            <div className="md:flex gap-3 flex-col md:flex-row">
-            <div className="hidden md:block">
+            <div className="md:flex gap-3 flex-col md:flex-row ">
+            <div className="hidden md:block w-full">
                     {renderComponent}
                 </div>
             </div>

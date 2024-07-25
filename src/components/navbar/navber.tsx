@@ -4,7 +4,7 @@ import AiIcon from './aiIcon';
 
 const Navbar: React.FC = () => {
     return (
-        <div className="p-4 flex justify-between items-center w-full flex-col md:flex-row">
+        <div className="p-4 flex justify-between items-center w-full flex-col md:flex-row font-inter">
             <div className="w-[85%] flex ml-10 md:w-3/5">
                 <SearchBox />
             </div>

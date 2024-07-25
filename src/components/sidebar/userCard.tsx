@@ -26,7 +26,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                     <span className="font-bold 2xl:text-2xl mb-2 text-gray-900 md:text-center text-lg">{user.name}</span>
 
                     <div className="flex flex-wrap justify-center 2xl:justify-start gap-x-1 gap-y-2 mb-2 text-sm font-medium text-gray-600">
-                        <span className="text-gray-700">{user.designation}</span>
+                        <span className="text-gray-700">{user.role}</span>
                         <span className="hidden sm:inline-block">|</span>
                         <span>{user.projects}+ projects</span>
                         <span className="hidden sm:inline-block">|</span>

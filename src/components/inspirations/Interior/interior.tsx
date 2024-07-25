@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getImages } from '../../../api/fetchImages';
 import ImageList from '../imageList';
+import Topber from '../topbar';
 
 
 interface ImageData {
@@ -16,8 +17,13 @@ const InteriorPage: React.FC = () => {
         staleTime: 60000, // Example: Set stale time to 60 seconds (1 minute)
     });
 
- 
-    return <><ImageList isLoading={isLoading} error={error} images={images}/></>
+
+    return <>
+        <div >
+            <Topber />
+            <ImageList isLoading={isLoading} error={error} images={images} />
+        </div>
+    </>
 };
 
 export default InteriorPage;

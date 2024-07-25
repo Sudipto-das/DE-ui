@@ -16,6 +16,7 @@ const ProfilePage: React.FC = () => {
         state="California, USA"
         postalCode="ERT 62574"
         taxId="AS564178969"
+        category='Premium'
       />
     </div>
   );

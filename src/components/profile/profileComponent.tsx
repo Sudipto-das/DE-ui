@@ -14,6 +14,7 @@ interface ProfileProps {
     state: string;
     postalCode: string;
     taxId: string;
+    category:"Premium" | "Standard" | "Ultimate"
 }
 
 const Profile: React.FC<ProfileProps> = ({
@@ -26,13 +27,14 @@ const Profile: React.FC<ProfileProps> = ({
     country,
     state,
     postalCode,
-    taxId
+    taxId,
+    category
 }) => {
 
 
     return (
         <div className="w-full mx-auto p-6 bg-white rounded-lg shadow-md">
-            <PersonalDetails name={name} location={location} role={role} />
+            <PersonalDetails name={name} location={location} role={role} category={category}/>
 
             <PersonalInformation name={name} email={email} phone={phone} bio={bio} />
 

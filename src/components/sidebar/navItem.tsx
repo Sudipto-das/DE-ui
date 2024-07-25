@@ -22,7 +22,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon, name, onClick }) => {
                     }`}
             >
                 <img src={`/${icon}`} alt={name} className="w-6 h-6 mr-4" />
-                <span>{name}</span>
+                <span className='font-inter'>{name}</span>
             </Link>
         </li>
     );

@@ -45,7 +45,7 @@ const Sidebar: React.FC = () => {
                         alt="Design Elementary"
                         className="h-8 mr-3"
                     />
-                    <span className="font-semibold text-lg">Design Elementary</span>
+                    <span className="font-bold text-lg font-inter">Design Elementary</span>
                 </div>
                 {/* User Profile Section */}
                 <UserProfile/>
