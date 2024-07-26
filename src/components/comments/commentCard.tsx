@@ -15,7 +15,7 @@ const CommentCard: React.FC<CommentCardProps> = ({ userImage, userName, designer
         <div className="flex items-center mb-2 justify-between">
           <span className="font-semibold mr-2 text-sm ">{userName}</span>
           <div className='flex items-center '>
-            <img src="user.png" alt="" className="w-3 h-3 mr-4" />
+            <img src="/user-shield.png" alt="" className="w-3 h-3 mr-2" />
           <span className="text-gray-500 text-xs">Designer: {designer}</span>
           </div>
         </div>

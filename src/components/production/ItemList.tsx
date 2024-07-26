@@ -4,9 +4,10 @@ import ItemCard from './ItemCard';
 import { useRecoilValue } from 'recoil';
 import { selectedCategoryState } from '../../store/selectCatagoryState';
 import { FactoriesData } from '../../store/factoriesDataState';
+import { PaintingData } from '../../types/paintingData';
 
 interface ItemListProps {
-  data:FactoriesData[]
+  data:FactoriesData[]|PaintingData[]
 }
 
 const ItemList: React.FC<ItemListProps> = ({data}) => {

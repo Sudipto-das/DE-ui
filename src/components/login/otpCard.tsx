@@ -1,11 +1,13 @@
+import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { verifyOtp } from "../../api/varifyOtp";
 
 const OtpCard: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const value = e.target.value;
-    if (/^[0-9]?$/.test(value)) { // Allow only single digit
+    if (/^[0-9]?$/.test(value)) { 
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
@@ -19,9 +21,25 @@ const OtpCard: React.FC = () => {
       }
     }
   };
+  const mutation = useMutation({
+    mutationFn: verifyOtp,
+    onSuccess: (data) => {
+      console.log("OTP verified successfully:", data);
+      // Handle success (e.g., navigate to another page, show a success message)
+    },
+    onError: (error) => {
+      console.error("Error verifying OTP:", error);
+      // Handle error (e.g., show an error message)
+    },
+  });
 
+  const handleVerify = () => {
+    const otpString = otp.join('');
+    mutation.mutate(otpString);
+  };
+  
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 font-inter">
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-gray-800">Verify</h1>
@@ -40,7 +58,8 @@ const OtpCard: React.FC = () => {
             />
           ))}
         </div>
-        <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          onClick={ handleVerify}>
           Verify
         </button>
         <div className="mt-4 text-center">
