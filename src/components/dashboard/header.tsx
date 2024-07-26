@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import './dashboard.css';
 import HeaderBox from "../ui/headerBox";
+
 const HeaderData = [
     {
         title: 'Shortlisted Inspiration',
@@ -17,20 +18,34 @@ const HeaderData = [
         subtitle: '5672',
         icon: 'Frame3.png'
     },
-    
-]
+];
+
 const DashboardHeader: React.FC = () => {
+    const [text, setText] = useState("");
+    const [spinCompleted, setSpinCompleted] = useState(false);
 
     useEffect(() => {
-
         const projectStatusIcon = document.getElementById('project-status-icon');
         if (projectStatusIcon) {
-            projectStatusIcon.classList.add('spin');
+            projectStatusIcon.classList.add('spin-scale');
             setTimeout(() => {
-                projectStatusIcon.classList.remove('spin');
+                projectStatusIcon.classList.remove('spin-scale');
+                setSpinCompleted(true);
             }, 2000);
         }
     }, []);
+
+    useEffect(() => {
+        if (spinCompleted) {
+            const statusText = "Pending";
+            statusText.split("").forEach((char, index) => {
+                setTimeout(() => {
+                    setText(prev => prev + char);
+                }, index * 100);
+            });
+        }
+    }, [spinCompleted]);
+
     const handleMouseEnter = () => {
         const projectStatusIcon = document.getElementById('project-status-icon');
         if (projectStatusIcon) {
@@ -40,7 +55,8 @@ const DashboardHeader: React.FC = () => {
             }, 1000);
         }
     };
-    return <>
+
+    return (
         <div className="flex gap-2 flex-col md:flex-row font-inter">
             {HeaderData.map((item, index) => (
                 <HeaderBox
@@ -53,11 +69,23 @@ const DashboardHeader: React.FC = () => {
             <div className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] hover:cursor-pointer">
                 <div>
                     <p className="text-sm font-medium">Project Status</p>
-                    <h1 className="text-2xl text-[#EF466F]">Pending</h1>
+                    <h1 className="text-2xl text-[#EF466F]">
+                        {text.split("").map((char, index) => (
+                            <span key={index} className="text-animate font-semibold" style={{ animationDelay: `${index * 0.1}s` }}>
+                                {char}
+                            </span>
+                        ))}
+                    </h1>
                 </div>
-                <img id='project-status-icon' src='Frame4.png' className="w-10 h-10 hover-spin" onMouseEnter={handleMouseEnter} />
+                <img 
+                    id='project-status-icon' 
+                    src='Frame4.png' 
+                    className="w-10 h-10 icon-hover" 
+                    onMouseEnter={handleMouseEnter} 
+                />
             </div>
         </div>
-    </>
-}
+    );
+};
+
 export default DashboardHeader;
