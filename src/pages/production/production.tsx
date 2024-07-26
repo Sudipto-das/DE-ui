@@ -6,6 +6,7 @@ import { selectedCategoryState } from '../../store/selectCatagoryState';
 import DetailsPage from '../../components/production/DetailsPage';
 import FactoriesComponent from '../../components/production/Factories/FectoriesComponent';
 import FalseCeilingComponent from '../../components/production/FalseCeiling/FalseCeilingComponent';
+import PaintingComponent from '../../components/production/Painting/painting';
 
 
 
@@ -25,7 +26,7 @@ const ProductionPage: React.FC = () => {
             renderComponent = <FalseCeilingComponent/>;
             break;
         case 'Painting':
-            renderComponent = null;
+            renderComponent = <PaintingComponent/>;
             break;
         case 'Loose Furniture':
             renderComponent = null;

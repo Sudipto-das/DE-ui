@@ -23,27 +23,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ id, image, title, description
       <img src={image} alt={title} className="w-32 h-32 object-cover pt-2 md:pt-0" />
       <div className="p-6 flex flex-col justify-between">
         <div>
-          <h2 className="text-lg font-semibold mb-1 text-[#353945]">{title}</h2>
+          <h2 className="text-xl font-semibold mb-1 text-[#353945]">{title}</h2>
           <p className="text-sm text-gray-600 mb-2">{description}</p>
         </div>
         <div className="text-sm text-[#777E90] flex justify-between flex-col md:flex-row">
           <div>
             <div className='flex items-center'>
-              <img src='user.png' className="w-3 h-3 mr-4" />
+              <img src='/user-shield.png' className="w-4 h-4 mr-3" />
               <h3>Designer: {designer}</h3>
             </div>
             <div className='flex items-center'>
-              <img src='calendar.png' className="w-3 h-3 mr-4" />
+              <img src='/calendar-blue.png' className="w-4 h-4 mr-3" />
               <h3>Duration: {duration}</h3>
             </div>
           </div>
           <div>
             <div className='flex items-center'>
-              <img src='moneys.png' className="w-3 h-3 mr-4" />
+              <img src='/coin-blue.png' className="w-4 h-4 mr-3" />
               <h3>Budget: {budget}</h3>
             </div>
             <div className='flex items-center'>
-              <img src='size.png' className="w-3 h-3 mr-4" />
+              <img src='square-blue.png' className="w-4 h-4 mr-3" />
               <h3>Size: {size}</h3> </div>
           </div>
         </div>

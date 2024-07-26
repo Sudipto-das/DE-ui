@@ -5,7 +5,7 @@ import Rating from '../../common/rating';
 
 
 
-interface FactoryCardProps {
+interface ItemCardProps {
     image: string;
     title: string;
     discount: string;
@@ -13,11 +13,12 @@ interface FactoryCardProps {
     budget: string;
     duration: string;
     size: string;
+    companyLogo?: string
 }
 
-const ItemCard: React.FC<FactoryCardProps> = ({ image, title, discount, rating, budget, duration, size }) => {
+const ItemCard: React.FC<ItemCardProps> = ({ image, title, discount, rating, budget, duration, size, companyLogo }) => {
     const setSelectedCatagory = useSetRecoilState(selectedCategoryState)
-    const handleClick = () =>{
+    const handleClick = () => {
         setSelectedCatagory('book-button')
     }
     return (
@@ -30,9 +31,12 @@ const ItemCard: React.FC<FactoryCardProps> = ({ image, title, discount, rating, 
             </div>
             <div className="p-4 flex flex-col justify-between flex-grow">
                 <div>
-                    <h3 className="text-lg font-semibold mb-1">{title}</h3>
+                    <div className='flex items-center gap-3'>
+                        <h3 className="text-lg font-semibold mb-1">{title} </h3>
+                        {companyLogo && <img src={companyLogo} className='w-17 h-5 ' />}
+                    </div>
                     <div className="flex justify-between items-center mb-2">
-                        <Rating rating={rating}/>
+                        <Rating rating={rating} />
                         <div className="flex gap-2">
                             <button className="text-[#005B3E] px-3 py-1 rounded-lg border border-[#005B3E] hover:bg-green-200">View Quote</button>
                             <button className="bg-[#005B3E] text-white px-4 py-1 rounded-lg hover:bg-green-600" onClick={handleClick}>Book</button>
