@@ -32,7 +32,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ image, title, discount, rating, bud
             <div className="p-4 flex flex-col justify-between flex-grow">
                 <div>
                     <div className='flex items-center gap-3'>
-                        <h3 className="text-lg font-semibold mb-1">{title} </h3>
+                        <h3 className="text-xl font-bold mb-1">{title} </h3>
                         {companyLogo && <img src={companyLogo} className='w-17 h-5 ' />}
                     </div>
                     <div className="flex justify-between items-center mb-2">
