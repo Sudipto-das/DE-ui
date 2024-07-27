@@ -17,6 +17,7 @@ const ProfilePage: React.FC = () => {
         postalCode="ERT 62574"
         taxId="AS564178969"
         category='Premium'
+        referralCode='ABC15T'
       />
     </div>
   );

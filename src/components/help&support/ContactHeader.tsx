@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { copyToClipboard } from '../../utils/clipboardUtils';
 
 const ContactHeader = () => {
     const [copied, setCopied] = useState(false);
@@ -14,13 +15,11 @@ const ContactHeader = () => {
         }
     }, []);
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText('care@designelementary.com');
-        setCopied(true);
-        setTimeout(() => {
-            setCopied(false);
-        }, 2000);
-    };
+    
+        const handleCopy = () => {
+            copyToClipboard('care@designelementary.com', setCopied);
+        };
+    
 
     return (
         <div className="w-full bg-white mb-4 p-4">
@@ -46,7 +45,7 @@ const ContactHeader = () => {
                     </a>
                     <div className="text-sm text-slate-600 font-semibold mt-2 md:mt-0 md:absolute md:bottom-0 md:translate-y-full flex items-center space-x-2">
                         <span>care@designelementary.com</span>
-                        <button onClick={copyToClipboard} className="p-1 rounded hover:bg-gray-200">
+                        <button onClick={handleCopy} className="p-1 rounded hover:bg-gray-200">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail-check"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/><path d="m16 19 2 2 4-4"/></svg>
                         </button>
                     </div>
@@ -65,3 +64,4 @@ const ContactHeader = () => {
 }
 
 export default ContactHeader;
+
