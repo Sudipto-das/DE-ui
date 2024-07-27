@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import OtpCard from './otpCard';
-import { fetchCountryCodes } from '../../api/fetchCountryCode';
+import { fetchCountryCodes } from '../../functions/api/fetchCountryCode';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { CountryCode } from '../../types/countryCode';
-import { sentOtp } from '../../api/sentOtp';
-
+import { sendOtp } from '../../functions/api/login/sendOtp';
 
 const Login: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +17,7 @@ const Login: React.FC = () => {
         mutation.mutate({ phone: phoneNumber, countryCode: selectedCountryCode })   
     };
     const mutation = useMutation({
-        mutationFn: sentOtp,
+        mutationFn: sendOtp,
         onSuccess: (data) => {
             console.log(data)
             setIsOpen(true);
@@ -83,7 +82,7 @@ const Login: React.FC = () => {
                     <span className="text-sm text-gray-600">Not registered yet? <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Create an account</a></span>
                 </div>
             </div>
-            {isOpen && <OtpCard />}
+            {isOpen && <OtpCard phone={phoneNumber} countryCode={selectedCountryCode}/>}
         </div>
     );
 }

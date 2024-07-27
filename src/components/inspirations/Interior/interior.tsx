@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getImages } from '../../../api/fetchImages';
+import { getImages } from '../../../functions/api/fetchImages';
 import ImageList from '../imageList';
 import Topber from '../topbar';
 
