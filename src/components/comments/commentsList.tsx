@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CommentCard from './commentCard';
 import CommentInput from './commentInput';
+import getAllRemarks from '../../functions/api/dashboard/fetchRemarks';
+import { AppContext } from '../../context/Context';
 
 
-const comments = [
+const dummyComments = [
     {
         userImage: 'https://via.placeholder.com/40',  // Replace with actual image URL
         userName: 'Jane S',
@@ -43,12 +45,44 @@ const comments = [
     // Add more comments as needed
 ];
 
-const CommentsList: React.FC = () => {
+const CommentsList = ({ProjectRecId} : {ProjectRecId : number} ) => {
+
+    const [comments, setComments] = useState([]);
+    const {
+        setLoading,
+        raiseToast,
+        user: CurrentUser,
+    } = React.useContext(AppContext);
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+
+            setLoading(true);
+            if (!CurrentUser?.Id) {
+                return;
+            }
+            try {
+                const response = await getAllRemarks(CurrentUser,ProjectRecId,"ProjTable");
+                setComments(response.data);
+            } catch (error) {
+                raiseToast('Error fetching projects');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, [CurrentUser]);
+
+    console.log(comments);
+    
+
     return (
         <div className='p-4 border rounded-lg mt-4' style={{ height: 'calc(88vh - 90px)' }}>
             <h1 className='text-xl font-bold mb-4 text-slate-600 font-inter'>Project Comments</h1>
             <div className="overflow-y-auto h-[69%] 2xl:h-[80%]">
-                {comments.map((comment, index) => (
+                {dummyComments.map((comment, index) => (
                     <CommentCard key={index} {...comment} />
                 ))}
             </div>

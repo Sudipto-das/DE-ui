@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
                 <ProjectsList />
             </div>
             <div className="w-full md:w-[35%]">
-                <CommentsList />
+                <CommentsList ProjectRecId={123456789}/>
             </div>
         </div>
     </>
