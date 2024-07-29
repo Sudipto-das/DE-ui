@@ -1,17 +1,15 @@
 import { apiClient } from "../../../api";
 
-async function getAllRemarks(user: { Id: string, Session: string, Token: string },RefRecId: number, RefTableName: string) {
+async function getAllProjects(user: { Id: string, Session: string, Token: string }) {
 
     const data = new URLSearchParams({
         Id: user.Id,
         Session: user.Session,
         Token: user.Token,
-        RefRecId: RefRecId.toString(),
-        RefTableName: RefTableName
     })
 
     try {
-        const response = await apiClient.get("/remarks/?"+ data)
+        const response = await apiClient.get("/projTable/all?"+ data)
             .then((response) => response.data)
             .catch((error) => error.response.data);
 
@@ -23,4 +21,4 @@ async function getAllRemarks(user: { Id: string, Session: string, Token: string 
 }
 
 
-export default getAllRemarks;
+export default getAllProjects;
