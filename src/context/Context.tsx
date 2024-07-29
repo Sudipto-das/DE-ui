@@ -13,9 +13,7 @@ export const AppProvider = ({ children }: any) => {
 
     const toast = useToast();
 
-
     function setData(data: any) {
-
         setDataForUser({
             Id: data.Id,
             Token: data.Token,
@@ -31,7 +29,6 @@ export const AppProvider = ({ children }: any) => {
 
 
     const setDataForUser = React.useMemo(() => (data: any) => {
-        console.log(data);
         setUser({
             Id: data.Id,
             Token: data.Token,
@@ -66,7 +63,6 @@ export const AppProvider = ({ children }: any) => {
         document.cookie = `Name=${JSON.stringify(
             data.Name
         )}; expires=${date.toUTCString()}; path=/`;
-
     }
 
     const fetchUserDetails = React.useCallback(async () => {
@@ -153,16 +149,16 @@ export const AppProvider = ({ children }: any) => {
     }
 
     function Logout() {
-        document.cookie = "ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie =
-            "Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "Email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie =
-            "Session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = "Name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        localStorage.clear();
-        sessionStorage.clear();
-        setUser({});
+        // document.cookie = "ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // document.cookie =
+        //     "Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // document.cookie = "Email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // document.cookie =
+        //     "Session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // document.cookie = "Name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // localStorage.clear();
+        // sessionStorage.clear();
+        // setUser({});
     }
 
 

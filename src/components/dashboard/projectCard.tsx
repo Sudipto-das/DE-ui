@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-interface ProjectCardProps {
+export interface ProjectCardProps {
   id: string;
   image: string;
   title: string;
