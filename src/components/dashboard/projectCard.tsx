@@ -5,7 +5,7 @@ import { calculateDuration } from '../../functions/durationCalc';
 
 
 
-const ProjectCard: React.FC<ProjectsInterface> = ({ ProjId, Name, Description, DesignManager,StartDate, EndDate , Budget,  Type, RecId }) => {
+const ProjectCard: React.FC<ProjectsInterface> = ({ Name, Description, DesignManager,StartDate, EndDate , Budget,  Type, RecId }) => {
   const navigate = useNavigate()
   const handleClick = (id: string) => {
     navigate(`/projects/${id}`)
