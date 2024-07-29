@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { verifyOtp } from "../../functions/api/login/verifyOtp";
 import { AppContext } from "../../context/Context";
 import { useNavigate } from "react-router-dom";
+import { handleLogin,} from "../../functions/api/login/verifyOtp";
 
 interface OtpCardProps {
   phone: string;
@@ -37,52 +37,32 @@ const OtpCard: React.FC<OtpCardProps> = ({ phone, countryCode }) => {
     }
   };
 
-  const handleLogin = async ({ otp, countryCode, phone }: { otp: string, countryCode: string, phone: string }) => {
-
-    setLoading(true);
-
-    try {
-      const response = await verifyOtp({ otp, countryCode, phone })
-
-      if (response.status === 200) {
-        console.log(response.data);
-
-        setLoggedInUser(response.data);
-        raiseToast("Login successful!", "success");
-        navigate("/dashboard/");
-      } else {
-        raiseToast("Error", "error", response.message);
-      }
-    } catch (error: any) {
-      console.log(error);
-      
-      raiseToast(
-        "Error",
-        "error",
-        error.response?.message || "Server error"
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
-
   const mutation = useMutation({
-    mutationFn: handleLogin,
+    mutationFn: () => handleLogin({
+      otp: otp.join(''),
+      countryCode: countryCode,
+      phone: phone
+    }),
+    onMutate: () => {
+      setLoading(true); // Start loading
+    },
     onSuccess: (data) => {
       console.log("OTP verified successfully:", data);
-      // Handle success (e.g., navigate to another page, show a success message)
+      setLoggedInUser(data);
+      raiseToast("Login successful!", "success");
+      navigate("/dashboard/");
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Error verifying OTP:", error);
-      // Handle error (e.g., show an error message)
+      raiseToast("Error", "error", error.message || "Server error");
+    },
+    onSettled: () => {
+      setLoading(false); // Stop loading regardless of success or error
     },
   });
 
   const handleVerify = () => {
-    const otpString = otp.join('');
-    mutation.mutate({ otp: otpString, countryCode: countryCode, phone: phone });
+    mutation.mutate();
   };
 
   return (
