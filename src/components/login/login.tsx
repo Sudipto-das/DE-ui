@@ -4,11 +4,13 @@ import { fetchCountryCodes } from '../../functions/api/fetchCountryCode';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { CountryCode } from '../../types/countryCode';
 import { sendOtp } from '../../functions/api/login/sendOtp';
+import Loader from '../../common/loader';
 
 const Login: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('')
+    const [loading,setLoading] = useState(false);
 
     const { data: countryCodes } = useQuery<CountryCode[]>({ queryKey: ['countryCodes'], queryFn: fetchCountryCodes });
 
@@ -18,9 +20,12 @@ const Login: React.FC = () => {
     };
     const mutation = useMutation({
         mutationFn: sendOtp,
-        onSuccess: (data) => {
-            console.log(data)
+        onSuccess: () => {
+            setLoading(false);
             setIsOpen(true);
+        },
+        onMutate: () => {
+            setLoading(true);
         },
         onError: (error) => {
             console.log(error)
@@ -72,15 +77,17 @@ const Login: React.FC = () => {
 
                     <button
                         onClick={handleSendOtp}
+                        disabled={loading || !phoneNumber || !countryCodes}
                         type="submit"
                         className="w-full bg-green-800 text-white py-2 rounded-md hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Login
+                      Login
                     </button>
                 </form>
                 <div className="mt-4 text-center">
                     <span className="text-sm text-gray-600">Not registered yet? <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Create an account</a></span>
                 </div>
+                {loading && <Loader /> }
             </div>
             {isOpen && <OtpCard phone={phoneNumber} countryCode={selectedCountryCode}/>}
         </div>
