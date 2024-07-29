@@ -5,14 +5,14 @@ import { calculateDuration } from '../../functions/durationCalc';
 
 
 
-const ProjectCard: React.FC<ProjectsInterface> = ({ ProjId, Name, Description, DesignManager,StartDate, EndDate , Budget,  Type }) => {
+const ProjectCard: React.FC<ProjectsInterface> = ({ ProjId, Name, Description, DesignManager,StartDate, EndDate , Budget,  Type, RecId }) => {
   const navigate = useNavigate()
   const handleClick = (id: string) => {
     navigate(`/projects/${id}`)
   }
   return (
     <div className="flex flex-col bg-white border shadow-sm rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer font-inter"
-      onClick={() => { handleClick(ProjId) }}>
+      onClick={() => { handleClick(RecId+"") }}>
       <img src={"https://atlassianblog.wpengine.com/wp-content/uploads/Projectmanagement-1361x760.png"} alt={Name} className="w-32 h-32 object-cover pt-2 md:pt-0" />
       <div className="p-6 flex flex-col justify-between">
         <div>
