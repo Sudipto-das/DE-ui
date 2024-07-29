@@ -34,8 +34,8 @@ const Layout = () => {
         )}
         <div className={!isLoginPage ? "md:pt-16 p-4 md:mt-6" : "p-0"}>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<ContextProvider children={<LoginPage />} />}/>
+            <Route path="/dashboard" element={<ContextProvider children={<Dashboard />} />}/>
             <Route path="/production-Installation" element={<ProductionPage />} />
             <Route path="/raw-materials" element={<RawMaterials />} />
             <Route path="/inspirations" element={<InspirationsPage />} />
