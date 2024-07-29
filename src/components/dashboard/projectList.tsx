@@ -4,7 +4,7 @@ import { AppContext } from '../../context/Context';
 import getAllProjects from '../../functions/api/dashboard/fetchAllProjects';
 
 const ProjectsList: React.FC = () => {
-    const [projects, setProjects] = useState<>([]);
+    const [projects, setProjects] = useState([]);
     const {
         setLoading,
         raiseToast,
@@ -39,9 +39,9 @@ const ProjectsList: React.FC = () => {
                 <button className='text-blue-500 hover:underline text-sm font-semibold'>SEE MORE</button>
             </div>
             <div className="overflow-y-auto h-[92%]">
-                {/* {projects.map((project, index) => (
+                {projects.map((project, index) => (
                     <ProjectCard key={index} {...project} />
-                ))} */}
+                ))}
             </div>
         </div>
     )
