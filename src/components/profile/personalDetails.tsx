@@ -48,7 +48,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, location,
                 <div className="ml-4">
                     <div className="relative inline-flex items-center justify-center p-1 overflow-hidden text-sm font-medium text-white rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300">
                         <span className="relative px-3 py-2 transition-all ease-in duration-75 bg-opacity-0">
-                            Referral Code: {referralCode}
+                            Referral Code: <span className='font-bold text-lg'>{referralCode}</span>
                         </span>
                         <div onClick={handleCopy} className='hover:cursor-pointer'>{copied ?
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-copy-check"><path d="m12 15 2 2 4-4" /><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg> :

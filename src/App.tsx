@@ -14,6 +14,7 @@ import ProjectDetailsPage from './pages/project/projectDetailsPage';
 import ProfilePage from './pages/profile/profilePage';
 import LoginPage from './pages/login/loginPage';
 import ContextProvider from './context/ContextProvider';
+import { RecoilRoot } from 'recoil';
 
 const Layout = () => {
   const location = useLocation();
@@ -34,8 +35,10 @@ const Layout = () => {
         )}
         <div className={!isLoginPage ? "md:pt-16 p-4 md:mt-6" : "p-0"}>
           <Routes>
-            <Route path="/" element={<ContextProvider children={<LoginPage />} />}/>
-            <Route path="/dashboard" element={<ContextProvider children={<Dashboard />} />}/>
+            {/* <Route path="/" element={<ContextProvider children={<LoginPage />} />}/>
+            <Route path="/dashboard" element={<ContextProvider children={<Dashboard />} />}/> */}
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/production-Installation" element={<ProductionPage />} />
             <Route path="/raw-materials" element={<RawMaterials />} />
             <Route path="/inspirations" element={<InspirationsPage />} />
@@ -63,9 +66,11 @@ const App = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <Layout />
-      </Router>
+      <RecoilRoot>
+        <Router>
+          <Layout />
+        </Router>
+      </RecoilRoot>
     </QueryClientProvider>
   );
 };
