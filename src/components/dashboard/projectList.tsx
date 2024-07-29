@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProjectCard from './projectCard';
 import { AppContext } from '../../context/Context';
 import getAllProjects from '../../functions/api/dashboard/fetchAllProjects';
+import ProjectsInterface from '../../interface/Project';
 
 const ProjectsList: React.FC = () => {
     const [projects, setProjects] = useState([]);
@@ -39,7 +40,7 @@ const ProjectsList: React.FC = () => {
                 <button className='text-blue-500 hover:underline text-sm font-semibold'>SEE MORE</button>
             </div>
             <div className="overflow-y-auto h-[92%]">
-                {projects.map((project, index) => (
+                {projects.map((project : ProjectsInterface, index) => (
                     <ProjectCard key={index} {...project} />
                 ))}
             </div>
