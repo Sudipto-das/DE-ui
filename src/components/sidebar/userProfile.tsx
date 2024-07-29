@@ -1,5 +1,7 @@
 import React from 'react';
 import Rating from "../../common/rating";
+
+import { motion } from 'framer-motion';
 import UserCard from './userCard';
 
 export interface User {
@@ -23,15 +25,13 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
     };
 
     return (
-        <div className={`${badgeColors[category]} text-white flex items-center justify-center w-6 2xl:w-8`}>
+        <div className={`${badgeColors[category]} text-white flex items-center justify-center w-6 2xl:w-8 font-sans`}>
             <span className="transform -rotate-90 text-sm font-semibold tracking-wider">
                 {category.toUpperCase()}
             </span>
         </div>
     );
 };
-
-
 
 const UserProfile: React.FC = () => {
     const user: User = {
@@ -51,23 +51,42 @@ const UserProfile: React.FC = () => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-           {!isHovered &&  <div className="flex-grow pl-4 py-4 flex items-center gap-3">
-                <img
-                    src="/Avatar.png"
-                    alt="User Avatar"
-                    className="w-16 h-16 rounded-full mb-2"
-                />
-                <div className="flex flex-col">
-                    <span className="font-bold text-sm font-inter ">{user.name}</span>
-                    <span className="text-gray-500 text-xs font-inter font-medium">{user.role}</span>
-                    <div className="mt-2">
-                        <Rating rating={user.rating} />
+            {!isHovered && (
+                <>
+                <div className="flex-grow pl-4 py-4 flex items-center gap-3">
+                    <img
+                        src="/Avatar.png"
+                        alt="User Avatar"
+                        className="w-16 h-16 rounded-full mb-2"
+                    />
+                    <div className="flex flex-col">
+                        <span className="font-bold text-sm font-inter">{user.name}</span>
+                        <span className="text-gray-500 text-xs font-inter font-medium">{user.role}</span>
+                        <div className="mt-2">
+                            <Rating rating={user.rating} />
+                        </div>
                     </div>
                 </div>
-            </div>}
-            <StatusBadge category={user.category} />
+                <StatusBadge category={user.category} />
+                </>
+            )}
+            
 
-            {isHovered && <UserCard user={user} />}
+            {isHovered && (
+                <>
+                
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4}}
+                    className="flex min-w-full"
+                >
+                    <StatusBadge category={user.category} />
+                    <UserCard user={user} />
+                </motion.div>
+                </>
+            )}
         </div>
     );
 };
