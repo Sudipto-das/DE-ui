@@ -14,6 +14,7 @@ import ProjectDetailsPage from './pages/project/projectDetailsPage';
 import ProfilePage from './pages/profile/profilePage';
 import LoginPage from './pages/login/loginPage';
 import ContextProvider from './context/ContextProvider';
+import { RecoilRoot } from 'recoil';
 
 const Layout = () => {
   const location = useLocation();
@@ -63,9 +64,11 @@ const App = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <Layout />
-      </Router>
+      <RecoilRoot>
+        <Router>
+          <Layout />
+        </Router>
+      </RecoilRoot>
     </QueryClientProvider>
   );
 };

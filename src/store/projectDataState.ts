@@ -1,18 +1,10 @@
 import { atom } from "recoil";
+import ProjectsInterface from "../interface/Project";
 
 
-export type projectData = {
-    id:string,
-    image: string
-    title: string
-    description: string
-    designer: string
-    duration: string
-    budget: string
-    size: string
-}
 
-export const projectDataState = atom<projectData[] | null>({
+
+export const projectDataState = atom<ProjectsInterface[]>({
     key: 'projectDataState',
-    default: null, 
+    default: [], 
 });
