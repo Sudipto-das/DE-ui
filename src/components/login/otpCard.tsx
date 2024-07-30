@@ -75,6 +75,7 @@ const OtpCard: React.FC<OtpCardProps> = ({ phone, countryCode }) => {
         <div className="flex justify-center mb-4">
           {otp.map((data, index) => (
             <input
+              autoComplete="off"
               key={index}
               id={`otp-${index}`}
               type="text"
@@ -86,7 +87,7 @@ const OtpCard: React.FC<OtpCardProps> = ({ phone, countryCode }) => {
           ))}
         </div>
         <button
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="w-full bg-green-700 text-white py-2 rounded-md hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600"
           onClick={handleVerify}
         >
           Verify
