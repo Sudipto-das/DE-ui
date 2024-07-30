@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ProjectCard from './projectCard';
 import { AppContext } from '../../context/Context';
 import getAllProjects from '../../functions/api/dashboard/fetchAllProjects';
+import { projects } from '../../common/projects';
 
 const ProjectsList: React.FC = () => {
     const [projects, setProjects] = useState([]);
