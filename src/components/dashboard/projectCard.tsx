@@ -2,17 +2,30 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProjectsInterface from '../../interface/Project';
 import { calculateDuration } from '../../functions/durationCalc';
+import { useSetRecoilState } from 'recoil';
+import { projectRecIdState } from '../../store/projectRecId';
 
 
 
-const ProjectCard: React.FC<ProjectsInterface> = ({ Name, Description, DesignManager,StartDate, EndDate , Budget,  Type, RecId }) => {
+const ProjectCard: React.FC<ProjectsInterface> = ({ Name, Description, DesignManager, StartDate, EndDate, Budget, Type, RecId }) => {
   const navigate = useNavigate()
+  const setProjectRecId = useSetRecoilState(projectRecIdState)
   const handleClick = (id: string) => {
     navigate(`/projects/${id}`)
   }
+  const handleCommentChange = () => {
+    setProjectRecId(RecId as number)
+  }
+  const handleCardClick = () => {
+    if (location.pathname === '/dashboard') {
+      handleCommentChange();
+    } else if (location.pathname === '/projects') {
+      handleClick(RecId + "");
+    }
+  };
   return (
     <div className="flex flex-col bg-white border shadow-sm rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer font-inter"
-      onClick={() => { handleClick(RecId+"") }}>
+      onClick={handleCardClick}>
       <img src={"https://atlassianblog.wpengine.com/wp-content/uploads/Projectmanagement-1361x760.png"} alt={Name} className="w-32 h-32 object-cover pt-2 md:pt-0" />
       <div className="p-6 flex flex-col justify-between">
         <div>
@@ -27,7 +40,7 @@ const ProjectCard: React.FC<ProjectsInterface> = ({ Name, Description, DesignMan
             </div>
             <div className='flex items-center'>
               <img src='/calendar-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3>Duration: {calculateDuration(StartDate,EndDate) + " days"}</h3>
+              <h3>Duration: {calculateDuration(StartDate, EndDate) + " days"}</h3>
             </div>
           </div>
           <div>

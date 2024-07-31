@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, } from 'react';
 import ProjectCard from './projectCard';
 import { AppContext } from '../../context/Context';
 import getAllProjects from '../../functions/api/dashboard/fetchAllProjects';
 import ProjectsInterface from '../../interface/Project';
+import { useRecoilState } from 'recoil';
+import { projectDataState } from '../../store/projectDataState';
 
 const ProjectsList: React.FC = () => {
-    const [projects, setProjects] = useState<ProjectsInterface[]>([]);
+    const [projects, setProjects] = useRecoilState(projectDataState);
     const { setLoading, raiseToast, user: CurrentUser } = React.useContext(AppContext);
 
     useEffect(() => {

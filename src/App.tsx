@@ -37,6 +37,8 @@ const Layout = () => {
           <Routes>
             <Route path="/" element={<ContextProvider children={<LoginPage />} />}/>
             <Route path="/dashboard" element={<ContextProvider children={<Dashboard />} />}/>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/production-Installation" element={<ProductionPage />} />
             <Route path="/raw-materials" element={<RawMaterials />} />
             <Route path="/inspirations" element={<InspirationsPage />} />
