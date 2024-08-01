@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from "../../common/rating";
+import Rating from "../ui/rating";
 
 import { motion } from 'framer-motion';
 import UserCard from './userCard';

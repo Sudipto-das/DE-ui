@@ -1,5 +1,5 @@
 import React from 'react';
-import Loader from '../../common/loader';
+import Loader from '../ui/loader';
 
 interface ImageData {
     image: string;

@@ -3,52 +3,59 @@ import CommentCard from './commentCard';
 import CommentInput from './commentInput';
 import getAllRemarks from '../../functions/api/dashboard/fetchRemarks';
 import { AppContext } from '../../context/Context';
+import CommentsInterface from '../../interface/Comments';
+import { useRecoilValue } from 'recoil';
+import { projectRecIdState } from '../../store/projectRecId';
+import { projectDataState } from '../../store/projectDataState';
+import Loader from '../ui/loader';
 
 
-const dummyComments = [
-    {
-        
-        userImage: 'https://via.placeholder.com/40',  // Replace with actual image URL
-        userName: 'Jane S',
-        designer: 'Maria Gomez',
-        comment: "I recently used your interior design services for my living room and I couldn't be happier! The team really listened to my needs and...",
-    },
-    {
-        userImage: 'https://via.placeholder.com/40',  // Replace with actual image URL
-        userName: 'John D',
-        designer: 'Maria Gomez',
-        comment: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
-    },
-    {
-        userImage: 'https://via.placeholder.com/40',  // Replace with actual image URL
-        userName: 'Tom H',
-        designer: 'Maria Gomez',
-        comment: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
-    },
-    {
-        userImage: 'https://via.placeholder.com/40',  // Replace with actual image URL
-        userName: 'John D',
-        designer: 'Maria Gomez',
-        comment: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
-    },
-    {
-        userImage: 'https://via.placeholder.com/40',  // Replace with actual image URL
-        userName: 'Tom H',
-        designer: 'Maria Gomez',
-        comment: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
-    },
-    // Add more comments as needed
-];
+// const dummyComments = [
+//     {
 
-const CommentsList = ({ProjectRecId} : {ProjectRecId : number} ) => {
+//         Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+//         Title: 'Jane S',
+//         CreatedBy: 'Maria Gomez',
+//         Description: "I recently used your interior design services for my living room and I couldn't be happier! The team really listened to my needs and...",
+//     },
+//     {
+//         Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+//         Title: 'John D',
+//         CreatedBy: 'Maria Gomez',
+//         Description: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
+//     },
+//     {
+//         Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+//         Title: 'Tom H',
+//         CreatedBy: 'Maria Gomez',
+//         Description: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
+//     },
+//     {
+//         Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+//         Title: 'John D',
+//         CreatedBy: 'Maria Gomez',
+//         Description: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
+//     },
+//     {
+//         Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+//         Title: 'Tom H',
+//         CreatedBy: 'Maria Gomez',
+//         Description: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
+//     },
+//     // Add more comments as needed
+// ];
 
-    const [comments, setComments] = useState([]);
+const CommentsList = () => {
+    const ProjectRecIdState = useRecoilValue(projectRecIdState)
+    const projects = useRecoilValue(projectDataState)
+    const [comments, setComments] = useState<CommentsInterface[]>([]);
+    const [isLoading, setLoading] = useState(false)
     const {
-        setLoading,
+
         raiseToast,
         user: CurrentUser,
     } = React.useContext(AppContext);
-
+    let ProjectRecId = ProjectRecIdState === 0 ? projects[0]?.RecId ?? 0 : ProjectRecIdState;
     useEffect(() => {
         const fetchData = async () => {
 
@@ -58,7 +65,7 @@ const CommentsList = ({ProjectRecId} : {ProjectRecId : number} ) => {
                 return;
             }
             try {
-                const response = await getAllRemarks(CurrentUser,ProjectRecId,"ProjTable");
+                const response = await getAllRemarks(CurrentUser, ProjectRecId, "ProjTable");
                 setComments(response.data);
             } catch (error) {
                 raiseToast('Error fetching projects');
@@ -68,18 +75,37 @@ const CommentsList = ({ProjectRecId} : {ProjectRecId : number} ) => {
         };
 
         fetchData();
-    }, [CurrentUser,ProjectRecId]);
+    }, [CurrentUser, ProjectRecId]);
 
-    console.log(comments);
-    
 
+    // if (isLoading) {
+    //     return <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)] flex items-center justify-center'>
+    //         <Loader />
+    //     </div>
+    // }
     return (
         <div className='p-4 border rounded-lg mt-4' style={{ height: 'calc(88vh - 90px)' }}>
             <h1 className='text-xl font-bold mb-4 text-slate-600 font-inter'>Project Comments</h1>
             <div className="h-[69%] 2xl:h-[80%] flex flex-col">
-                {dummyComments.length > 0 ? (
+                {isLoading ? (<div className='h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)] flex items-center justify-center'><Loader /></div>)
+                    : (
+                        <>
+                            {comments.length === 0 ? (
+                                <div className='flex items-center justify-center flex-grow'>
+                                    <p className='text-center text-slate-500'>No comments yet</p>
+                                </div>
+                            ) : (
+                                <div className='overflow-y-auto flex-grow'>
+                                    {comments.map((comment, index) => (
+                                        <CommentCard key={index} {...comment} />
+                                    ))}
+                                </div>
+                            )}
+                        </>
+                    )}
+                {/* {comments.length === 0 && !isLoading ? (
                     <div className="overflow-y-auto flex-grow">
-                        {dummyComments.map((comment, index) => (
+                        {comments.map((comment, index) => (
                             <CommentCard key={index} {...comment} />
                         ))}
                     </div>
@@ -87,7 +113,7 @@ const CommentsList = ({ProjectRecId} : {ProjectRecId : number} ) => {
                     <div className='flex items-center justify-center flex-grow'>
                         <p className='text-center text-slate-500'>No comments yet</p>
                     </div>
-                )}
+                )} */}
             </div>
             <CommentInput />
         </div>

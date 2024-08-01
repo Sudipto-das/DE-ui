@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
-import Loader from "../common/loader";
+import Loader from "../components/ui/loader";
 
 export const AppContext = React.createContext<any>({});
 
@@ -123,9 +123,9 @@ export const AppProvider = ({ children }: any) => {
                 return;
             }
             else {
-                const currentUrl = window.location.pathname;
-                if (currentUrl === "/" || currentUrl === "/") navigate("/dashboard");
-                else navigate(currentUrl);
+                // const currentUrl = window.location.pathname;
+                // // if (currentUrl === "/" || currentUrl === "/") navigate("/dashboard");
+                // // else navigate(currentUrl);
             }
 
             setDataForUser(user);
