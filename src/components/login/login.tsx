@@ -4,7 +4,7 @@ import { fetchCountryCodes } from '../../functions/api/fetchCountryCode';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { CountryCode } from '../../types/countryCode';
 import { sendOtp } from '../../functions/api/login/sendOtp';
-import Loader from '../../common/loader';
+import Loader from '../ui/loader';
 
 const Login: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);

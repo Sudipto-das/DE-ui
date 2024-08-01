@@ -14,7 +14,7 @@ import ProjectDetailsPage from './pages/project/projectDetailsPage';
 import ProfilePage from './pages/profile/profilePage';
 import LoginPage from './pages/login/loginPage';
 import ContextProvider from './context/ContextProvider';
-import { RecoilRoot } from 'recoil';
+
 
 const Layout = () => {
   const location = useLocation();
@@ -37,14 +37,16 @@ const Layout = () => {
           <Routes>
             <Route path="/" element={<ContextProvider children={<LoginPage />} />}/>
             <Route path="/dashboard" element={<ContextProvider children={<Dashboard />} />}/>
+            {/* <Route path="/" element={<LoginPage />} />
+            <Route path="/dashboard" element={<Dashboard />} /> */}
             <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/production-Installation" element={<ProductionPage />} />
             <Route path="/raw-materials" element={<RawMaterials />} />
             <Route path="/inspirations" element={<InspirationsPage />} />
             <Route path="/help-support" element={<HelpAndSupport />} />
-            <Route path="/finance-your-project" element={<FinancePage />} />
-            <Route path="/projects/*" element={<ProjectLayout />} />
+            <Route path="/finance-your-project" element={<ContextProvider children={<FinancePage/>} />} />
+            <Route path="/projects/*" element={<ContextProvider children={<ProjectLayout/>} />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
@@ -66,11 +68,9 @@ const App = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
         <Router>
           <Layout />
-        </Router>
-      </RecoilRoot>
+        </Router> 
     </QueryClientProvider>
   );
 };

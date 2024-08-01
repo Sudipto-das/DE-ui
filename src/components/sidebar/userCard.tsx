@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from "../../common/rating";
+import Rating from "../ui/rating";
 import { User } from "./userProfile";
 
 interface UserCardProps {

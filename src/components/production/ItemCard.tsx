@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSetRecoilState } from 'recoil';
 import { selectedCategoryState } from '../../store/selectCatagoryState';
-import Rating from '../../common/rating';
+import Rating from '../ui/rating';
 
 
 

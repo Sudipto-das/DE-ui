@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBox from '../../common/search';
+import SearchBox from '../ui/search';
 import AiIcon from './aiIcon';
 
 const Navbar: React.FC = () => {

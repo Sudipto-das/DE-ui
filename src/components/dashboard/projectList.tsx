@@ -1,48 +1,41 @@
-import React, { useEffect, } from 'react';
+import React from 'react';
 import ProjectCard from './projectCard';
-import { AppContext } from '../../context/Context';
-import getAllProjects from '../../functions/api/dashboard/fetchAllProjects';
+
+import Loader from '../ui/loader';
 import ProjectsInterface from '../../interface/Project';
-import { useRecoilState } from 'recoil';
-import { projectDataState } from '../../store/projectDataState';
+interface ProjectsListProps {
+    projects: ProjectsInterface[];
+    isLoading: boolean;
+}
 
-const ProjectsList: React.FC = () => {
-    const [projects, setProjects] = useRecoilState(projectDataState);
-    const { setLoading, raiseToast, user: CurrentUser } = React.useContext(AppContext);
+const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            if (!CurrentUser?.Id) {
-                return;
-            }
-            try {
-                const response = await getAllProjects(CurrentUser);
-                setProjects(response.data);
-            } catch (error) {
-                raiseToast('Error fetching projects');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, [CurrentUser, setLoading, raiseToast]);
-
+    console.log(isLoading)
     return (
-        <div className='p-4 border rounded-lg mt-4 font-inter' style={{ height: 'calc(88vh - 90px)' }}>
-            <div className='flex justify-between items-center mb-4'>
+        <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)]'>
+            <div className='flex justify-between items-center mb-1'>
                 <h1 className='text-xl font-bold text-slate-600'>Projects</h1>
                 <button className='text-blue-500 hover:underline text-sm font-semibold'>SEE MORE</button>
             </div>
-            <div className="overflow-y-auto h-[92%] flex justify-center items-center">
-                {projects.length === 0 ? (
-                    <div className="text-center text-gray-500">No projects yet</div>
+            <div className="w-full h-[95%] flex flex-col overflow-y-auto">
+                {isLoading ? (
+                    <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)] flex items-center justify-center'>
+                        <Loader />
+                    </div>
+                ):(
+                    <>
+                    {projects.length === 0 ? (
+                    <div className="flex justify-center items-center w-full h-full text-center text-gray-500">
+                        No projects yet
+                    </div>
                 ) : (
-                    <div className="w-full">
+                    <div className="w-full space-y-4">
                         {projects.map((project: ProjectsInterface, index) => (
                             <ProjectCard key={index} {...project} />
                         ))}
                     </div>
+                )} 
+                    </>
                 )}
             </div>
         </div>
