@@ -47,7 +47,7 @@ const ProductionPage: React.FC = () => {
                     {renderComponent}
                 </div>
                 <div className="md:w-[35%]">
-                    <CommentsList ProjectRecId={123456789}/>
+                    <CommentsList />
                 </div>
             </div>
         </>
