@@ -1,8 +1,13 @@
 import React from 'react';
 import SearchBox from '../ui/search';
 import AiIcon from './aiIcon';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+    const navigate = useNavigate()
+    const handleClick = ()=>{
+        navigate('/updates')
+    }
     return (
         <div className="p-4 flex justify-between items-center w-full flex-col md:flex-row font-inter">
             <div className="w-[85%] flex ml-10 md:w-3/5">
@@ -21,7 +26,7 @@ const Navbar: React.FC = () => {
                     <AiIcon />
                     <div className="relative">
                         <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full"></span>
-                        <button className="text-gray-600 hover:text-gray-800">
+                        <button className="text-gray-600 hover:text-gray-800 " onClick={handleClick}>
                             <img
                                 src="/notification.png"
                                 alt="Vector"
