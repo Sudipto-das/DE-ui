@@ -16,13 +16,14 @@ import LoginPage from './pages/login/loginPage';
 import ContextProvider from './context/ContextProvider';
 import React from 'react';
 import { AppContext } from './context/Context';
+import UpdatePage from './pages/updates/updatePage';
 
 
 const Layout = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
   const { user: CurrentUser } = React.useContext(AppContext);
-  
+  console.log(CurrentUser)
   if (!CurrentUser.Id && !isLoginPage) {
     return <Navigate to="/" replace />;
   }
@@ -44,8 +45,8 @@ const Layout = () => {
         )}
         <div className={!isLoginPage ? "md:pt-16 p-4 md:mt-6" : "p-0"}>
           <Routes>
-            <Route path="/" element={<ContextProvider children={<LoginPage />} />} />
-            <Route path="/dashboard" element={<ContextProvider children={<Dashboard />} />} />
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/dashboard" element={<Dashboard />}  />
             {/* <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} /> */}
             <Route path="/" element={<LoginPage />} />
@@ -54,9 +55,10 @@ const Layout = () => {
             <Route path="/raw-materials" element={<RawMaterials />} />
             <Route path="/inspirations" element={<InspirationsPage />} />
             <Route path="/help-support" element={<HelpAndSupport />} />
-            <Route path="/finance-your-project" element={<ContextProvider children={<FinancePage />} />} />
-            <Route path="/projects/*" element={<ContextProvider children={<ProjectLayout />} />} />
+            <Route path="/finance-your-project" element={<FinancePage />} />
+            <Route path="/projects/*" element={<ProjectLayout />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/updates" element={<UpdatePage />} />
           </Routes>
         </div>
       </div>
