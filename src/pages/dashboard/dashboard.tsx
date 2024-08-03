@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
     const [projects, setProjects] = useRecoilState(projectDataState);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     const [isLoading, setIsLoading] = useState(false)
-
+    console.log(projects)
     useEffect(() => {
         
         const fetchData = async () => {
