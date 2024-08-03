@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 
 import Sidebar from "./components/sidebar/sidebar";
 import Dashboard from "./pages/dashboard/dashboard";
@@ -13,23 +13,23 @@ import ProjectPage from './pages/project/projectPage';
 import ProjectDetailsPage from './pages/project/projectDetailsPage';
 import ProfilePage from './pages/profile/profilePage';
 import LoginPage from './pages/login/loginPage';
-import ContextProvider from './context/ContextProvider';
-import React from 'react';
-import { AppContext } from './context/Context';
+// import ContextProvider from './context/ContextProvider';
+// import React from 'react';
+// import { AppContext } from './context/Context';
 import UpdatePage from './pages/updates/updatePage';
 
 
 const Layout = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
-  const { user: CurrentUser } = React.useContext(AppContext);
-  console.log(CurrentUser)
-  if (!CurrentUser.Id && !isLoginPage) {
-    return <Navigate to="/" replace />;
-  }
-  if (CurrentUser.Id && isLoginPage) {
-    return <Navigate to="/dashboard" replace />;
-  }
+  // const { user: CurrentUser } = React.useContext(AppContext);
+  // console.log(CurrentUser)
+  // if (!CurrentUser.Id && !isLoginPage) {
+  //   return <Navigate to="/" replace />;
+  // }
+  // if (CurrentUser.Id && isLoginPage) {
+  //   return <Navigate to="/dashboard" replace />;
+  // }
   return (
     <div className="flex">
       {!isLoginPage && (
@@ -80,9 +80,9 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <ContextProvider>
+        
           <Layout />
-        </ContextProvider>
+        
       </Router>
     </QueryClientProvider>
   );
