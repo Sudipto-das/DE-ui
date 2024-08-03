@@ -2,9 +2,9 @@ import React from 'react';
 import ProjectCard from './projectCard';
 
 import Loader from '../ui/loader';
-import ProjectsInterface from '../../interface/Project';
+import { Projecttype } from '../../common/projects';
 interface ProjectsListProps {
-    projects: ProjectsInterface[];
+    projects: Projecttype[];
     isLoading: boolean;
 }
 
@@ -30,7 +30,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
                     </div>
                 ) : (
                     <div className="w-full space-y-4">
-                        {projects.map((project: ProjectsInterface, index) => (
+                        {projects.map((project, index) => (
                             <ProjectCard key={index} {...project} />
                         ))}
                     </div>
