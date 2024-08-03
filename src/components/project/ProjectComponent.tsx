@@ -1,4 +1,5 @@
 import ProjectsList from "../dashboard/projectList";
+import { projects } from "../../common/projects";
 // import { useRecoilState } from "recoil";
 // import { projectDataState } from "../../store/projectDataState";
 // import { AppContext } from "../../context/Context";
@@ -7,7 +8,7 @@ import React from "react";
 // import Loader from "../ui/loader";
 
 const ProjectComponent: React.FC = () => {
-    const projects: string | any[] = []
+    
     // const [projects, setProjects] = useRecoilState(projectDataState);
     // const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     // const [isLoading, setIsLoading] = useState(false);
