@@ -36,8 +36,8 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, location,
                         <div>
                             <div className="flex gap-3 items-center">
                                 <h3 className="text-lg font-bold font-inter">{name}</h3>
-                                <div className={`${badgeColors[category]} text-white text-xs font-semibold px-2 py-1 text-center`}>
-                                    <h1>{category.toUpperCase()}</h1>
+                                <div className={`${badgeColors[category]} text-white text-xs font-semibold px-2 py-1 text-center `}>
+                                    <h1 className='flex justify-center items-center font-sans'>{category.toUpperCase()}</h1>
                                 </div>
                             </div>
                             <p className="text-gray-600 font-inter">{role}</p>
