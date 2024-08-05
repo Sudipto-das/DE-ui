@@ -7,8 +7,9 @@ import { projectDataState } from '../../store/projectDataState';
 const ProjectDetailsPage = () => {
   const { id } = useParams();
   const projects = useRecoilValue(projectDataState)
+  console.log(projects)
   // Find the project by ID
-  const project = projects.find((project) => project.ProjId === id);
+  const project = projects.find((project) => project.RecId === id);
 
   if (!project) {
     return <div>Project not found</div>;

@@ -23,7 +23,8 @@ export const AppProvider = ({ children }: any) => {
             Roles: data.result.Roles,
             Currency: data.result.Currency,
             Phone: data.result.Phone,
-            PCode: data.result.PCode
+            PCode: data.result.PCode,
+            RecId:data.result.RecId
         });
     }
 
@@ -38,7 +39,8 @@ export const AppProvider = ({ children }: any) => {
             Roles: data.Roles,
             Currency: data.Currency,
             Phone: data.Phone,
-            PCode: data.PCode
+            PCode: data.PCode,
+            RecId:data.RecId
         });
         localStorage.setItem("user", JSON.stringify(data));
         setUserCookie(data);
@@ -62,6 +64,9 @@ export const AppProvider = ({ children }: any) => {
         )}; expires=${date.toUTCString()}; path=/`;
         document.cookie = `Name=${JSON.stringify(
             data.Name
+        )}; expires=${date.toUTCString()}; path=/`;
+        document.cookie = `Name=${JSON.stringify(
+            data.RecId
         )}; expires=${date.toUTCString()}; path=/`;
     }
 
@@ -99,6 +104,12 @@ export const AppProvider = ({ children }: any) => {
                     Name: JSON.parse(
                         document.cookie.replace(
                             /(?:(?:^|.*;\s*)Name\s*=\s*([^;]*).*$)|^.*$/,
+                            "$1"
+                        )
+                    ),
+                    RecId: JSON.parse(
+                        document.cookie.replace(
+                            /(?:(?:^|.*;\s*)RecId\s*=\s*([^;]*).*$)|^.*$/,
                             "$1"
                         )
                     ),

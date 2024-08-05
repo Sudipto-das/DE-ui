@@ -8,11 +8,8 @@ import { useRecoilValue } from 'recoil';
 import { projectRecIdState } from '../../store/projectRecId';
 import { projectDataState } from '../../store/projectDataState';
 import Loader from '../ui/loader';
-
-
 // const dummyComments = [
 //     {
-
 //         Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
 //         Title: 'Jane S',
 //         CreatedBy: 'Maria Gomez',
@@ -46,10 +43,9 @@ import Loader from '../ui/loader';
 // ];
 
 const CommentsList = () => {
-    let comments: any[] = []
     const ProjectRecIdState = useRecoilValue(projectRecIdState)
     const projects = useRecoilValue(projectDataState)
-    const [commentss, setComments] = useState<CommentsInterface[]>([]);
+    const [comments, setComments] = useState<CommentsInterface[]>([]);
     const [isLoading, setLoading] = useState(false)
     const {
 
@@ -61,7 +57,7 @@ const CommentsList = () => {
         const fetchData = async () => {
 
 
-            setLoading(false);
+            setLoading(true);
             if (!CurrentUser?.Id) {
                 return;
             }
@@ -77,7 +73,7 @@ const CommentsList = () => {
 
         fetchData();
     }, [CurrentUser, ProjectRecId]);
-console.log(commentss)
+
 
     // if (isLoading) {
     //     return <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)] flex items-center justify-center'>
@@ -120,5 +116,4 @@ console.log(commentss)
         </div>
     );
 };
-
 export default CommentsList;

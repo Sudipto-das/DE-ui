@@ -1,15 +1,13 @@
-import React from 'react';
 import ProjectCard from './projectCard';
 
 import Loader from '../ui/loader';
-import { Projecttype } from '../../common/projects';
+import ProjectsInterface from '../../interface/Project';
 interface ProjectsListProps {
-    projects: Projecttype[];
+    projects: ProjectsInterface[];
     isLoading: boolean;
 }
 
 const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
-
     console.log(isLoading)
     return (
         <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)]'>
@@ -30,7 +28,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
                     </div>
                 ) : (
                     <div className="w-full space-y-4">
-                        {projects.map((project, index) => (
+                        {projects && projects.map((project: ProjectsInterface, index) => (
                             <ProjectCard key={index} {...project} />
                         ))}
                     </div>
@@ -41,5 +39,4 @@ const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
         </div>
     );
 };
-
 export default ProjectsList;
