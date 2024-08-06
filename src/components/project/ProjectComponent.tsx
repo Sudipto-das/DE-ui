@@ -1,10 +1,11 @@
 import ProjectsList from "../dashboard/projectList";
 import { useRecoilState } from "recoil";
-import { projectDataState } from "../../store/projectDataState";
+
 import { AppContext } from "../../context/Context";
 import React, { useEffect, useState } from "react";
 import getAllProjects from "../../functions/api/dashboard/fetchAllProjects";
 import Loader from "../ui/loader";
+import { projectDataState } from "../../store/projectsState/projectDataState";
 
 const ProjectComponent: React.FC = () => {
     const [projects, setProjects] = useRecoilState(projectDataState);

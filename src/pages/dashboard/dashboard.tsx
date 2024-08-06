@@ -3,16 +3,19 @@ import DashboardHeader from "../../components/dashboard/header";
 import ProjectsList from "../../components/dashboard/projectList";
 import CommentsList from "../../components/comments/commentsList";
 import { AppContext } from "../../context/Context";
-import { useRecoilState } from "recoil";
-import { projectDataState } from "../../store/projectDataState";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import getAllProjects from "../../functions/api/dashboard/fetchAllProjects";
 import { transformApiResponse } from "../../interface/Project";
+import { projectStatusAtom } from "../../store/projectStatus/porjectStatusAtom";
+import { projectDataState } from "../../store/projectsState/projectDataState";
+import { activeProjectAtom } from "../../store/projectsState/activeProjectState";
 
 const Dashboard: React.FC = () => {
+    const setActiveProject = useSetRecoilState(activeProjectAtom)
     const [projects, setProjects] = useRecoilState(projectDataState);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     const [isLoading, setIsLoading] = useState(false)
-
+    const setStatus = useSetRecoilState(projectStatusAtom);
     useEffect(() => {
 
         const fetchData = async () => {
@@ -26,6 +29,8 @@ const Dashboard: React.FC = () => {
                 const response = await getAllProjects(CurrentUser);
                 const transformedData = transformApiResponse(response.data);
                 setProjects(transformedData);
+                setStatus(transformedData.projDetails[0].STATUS)
+                setActiveProject(transformedData.projDetails[0].RECID)
                 setIsLoading(false)
             } catch (error) {
                 raiseToast('Error fetching projects');
@@ -46,9 +51,11 @@ const Dashboard: React.FC = () => {
                 <ProjectsList projects={projects} isLoading={isLoading} />
             </div>
             <div className="w-full md:w-[35%]">
-                <CommentsList/>
+                <CommentsList />
             </div>
         </div>
     </>
 }
 export default Dashboard
+
+

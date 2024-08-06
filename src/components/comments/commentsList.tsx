@@ -5,9 +5,9 @@ import getAllRemarks from '../../functions/api/dashboard/fetchRemarks';
 import { AppContext } from '../../context/Context';
 import CommentsInterface from '../../interface/Comments';
 import { useRecoilValue } from 'recoil';
-import { projectRecIdState } from '../../store/projectRecId';
-import { projectDataState } from '../../store/projectDataState';
+import { projectRecIdState } from '../../store/projectsState/projectRecId';
 import Loader from '../ui/loader';
+import { projectDataState } from '../../store/projectsState/projectDataState';
 // const dummyComments = [
 //     {
 //         Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
