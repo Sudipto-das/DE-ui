@@ -1,36 +1,73 @@
 import React, { useEffect, useState } from 'react';
 import CommentCard from './commentCard';
 import CommentInput from './commentInput';
-import getAllComments from '../../functions/api/comment/fetchComments';
+import getAllRemarks from '../../functions/api/dashboard/fetchRemarks';
 import { AppContext } from '../../context/Context';
 import CommentsInterface from '../../interface/Comments';
 import { useRecoilValue } from 'recoil';
-import { projectRecIdState } from '../../store/projectsState/projectRecId';
+import { projectRecIdState } from '../../store/projectRecId';
+import { projectDataState } from '../../store/projectDataState';
 import Loader from '../ui/loader';
-import { projectDataState } from '../../store/projectsState/projectDataState';
+
+
+const dummyComments = [
+    {
+
+        Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+        Title: 'Jane S',
+        CreatedBy: 'Maria Gomez',
+        Description: "I recently used your interior design services for my living room and I couldn't be happier! The team really listened to my needs and...",
+    },
+    {
+        Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+        Title: 'John D',
+        CreatedBy: 'Maria Gomez',
+        Description: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
+    },
+    {
+        Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+        Title: 'Tom H',
+        CreatedBy: 'Maria Gomez',
+        Description: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
+    },
+    {
+        Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+        Title: 'John D',
+        CreatedBy: 'Maria Gomez',
+        Description: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
+    },
+    {
+        Image: 'https://via.placeholder.com/40',  // Replace with actual image URL
+        Title: 'Tom H',
+        CreatedBy: 'Maria Gomez',
+        Description: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
+    },
+    // Add more comments as needed
+];
 
 const CommentsList = () => {
+    let comments: any[] = dummyComments
     const ProjectRecIdState = useRecoilValue(projectRecIdState)
     const projects = useRecoilValue(projectDataState)
-    const [comments, setComments] = useState<CommentsInterface[]>([]);
+    const [commentss, setComments] = useState<CommentsInterface[]>([]);
     const [isLoading, setLoading] = useState(false)
     const {
 
         raiseToast,
         user: CurrentUser,
     } = React.useContext(AppContext);
-    let ProjectRecId = ProjectRecIdState === '' ? projects.projDetails[0]?.RECID ?? 0 : ProjectRecIdState;
+    let ProjectRecId = ProjectRecIdState === 0 ? projects[0]?.RecId ?? 0 : ProjectRecIdState;
     useEffect(() => {
         const fetchData = async () => {
 
 
-            setLoading(true);
+            setLoading(false);
             if (!CurrentUser?.Id) {
                 return;
             }
             try {
-                const response = await getAllComments(CurrentUser, ProjectRecId, "ProjTable");
-                setComments(response.data);
+                // const response = await getAllRemarks(CurrentUser, ProjectRecId, "ProjTable");
+                // setComments(response.data);
             } catch (error) {
                 raiseToast('Error fetching projects');
             } finally {
@@ -40,7 +77,7 @@ const CommentsList = () => {
 
         fetchData();
     }, [CurrentUser, ProjectRecId]);
-
+console.log(commentss)
 
     // if (isLoading) {
     //     return <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)] flex items-center justify-center'>
@@ -83,4 +120,5 @@ const CommentsList = () => {
         </div>
     );
 };
+
 export default CommentsList;
