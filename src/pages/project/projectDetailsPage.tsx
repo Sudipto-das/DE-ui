@@ -1,14 +1,16 @@
 import { useParams } from 'react-router-dom';
 import ProjectDetailsComponent from '../../components/project/ProjectDetailsComponent';
 import { useRecoilValue } from 'recoil';
-import { projectDataState } from '../../store/projectDataState';
+import { projectDataState } from '../../store/projectsState/projectDataState';
+
 
 
 const ProjectDetailsPage = () => {
   const { id } = useParams();
   const projects = useRecoilValue(projectDataState)
+  console.log(projects)
   // Find the project by ID
-  const project = projects.find((project) => project.ProjId === id);
+  const project = projects.projDetails.find((project: { RECID: string | undefined; }) => project.RECID === id);
 
   if (!project) {
     return <div>Project not found</div>;

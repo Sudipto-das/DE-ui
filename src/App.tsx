@@ -1,35 +1,35 @@
-import { HashRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 
 import Sidebar from "./components/sidebar/sidebar";
 import Dashboard from "./pages/dashboard/dashboard";
-import ProductionPage from './pages/production/production';
-import RawMaterials from './pages/rawMaterials/rawmaterials';
-import InspirationsPage from './pages/inspiration/inspirations';
-import Navbar from './components/navbar/navber';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import HelpAndSupport from './pages/help&support/supportPage';
-import FinancePage from './pages/finance/financePage';
 import ProjectPage from './pages/project/projectPage';
 import ProjectDetailsPage from './pages/project/projectDetailsPage';
 import ProfilePage from './pages/profile/profilePage';
 import LoginPage from './pages/login/loginPage';
-// import ContextProvider from './context/ContextProvider';
-// import React from 'react';
-// import { AppContext } from './context/Context';
+import ContextProvider from './context/ContextProvider';
+import React from 'react';
+import { AppContext } from './context/Context';
 import UpdatePage from './pages/updates/updatePage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Navbar from './components/navbar/navber';
+import ProductionPage from './pages/production/production';
+import RawMaterials from './pages/rawMaterials/rawmaterials';
+import InspirationsPage from './pages/inspiration/inspirations';
+import HelpAndSupport from './pages/help&support/supportPage';
+import FinancePage from './pages/finance/financePage';
 
 
 const Layout = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
-  // const { user: CurrentUser } = React.useContext(AppContext);
-  // console.log(CurrentUser)
-  // if (!CurrentUser.Id && !isLoginPage) {
-  //   return <Navigate to="/" replace />;
-  // }
-  // if (CurrentUser.Id && isLoginPage) {
-  //   return <Navigate to="/dashboard" replace />;
-  // }
+  const { user: CurrentUser } = React.useContext(AppContext);
+  console.log(CurrentUser)
+  if (!CurrentUser.Id && !isLoginPage) {
+    return <Navigate to="/" replace />;
+  }
+  if (CurrentUser.Id && isLoginPage) {
+    return <Navigate to="/dashboard" replace />;
+  }
   return (
     <div className="flex">
       {!isLoginPage && (
@@ -65,7 +65,6 @@ const Layout = () => {
     </div>
   );
 };
-
 const ProjectLayout = () => {
   return (
     <Routes>
@@ -74,18 +73,16 @@ const ProjectLayout = () => {
     </Routes>
   );
 };
-
 const App = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        
+        <ContextProvider>
           <Layout />
-        
+        </ContextProvider>
       </Router>
     </QueryClientProvider>
   );
 };
-
 export default App;

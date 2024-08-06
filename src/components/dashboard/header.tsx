@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import './dashboard.css';
 import HeaderBox from "../ui/headerBox";
+import { useRecoilValue } from "recoil";
+import { projectStatusStringSelector } from "../../store/projectStatus/projectStatusSelector";
 
 const HeaderData = [
     {
@@ -22,8 +24,8 @@ const HeaderData = [
 
 const DashboardHeader: React.FC = () => {
     const [text, setText] = useState("");
+    const statusString = useRecoilValue(projectStatusStringSelector)
     const [spinCompleted, setSpinCompleted] = useState(false);
-
     useEffect(() => {
         const projectStatusIcon = document.getElementById('project-status-icon');
         if (projectStatusIcon) {
@@ -37,14 +39,14 @@ const DashboardHeader: React.FC = () => {
 
     useEffect(() => {
         if (spinCompleted) {
-            const statusText = "Pending";
+            const statusText = statusString;
             statusText.split("").forEach((char, index) => {
                 setTimeout(() => {
                     setText(prev => prev + char);
                 }, index * 100);
             });
         }
-    }, [spinCompleted]);
+    }, [spinCompleted,statusString]);
 
     const handleMouseEnter = () => {
         const projectStatusIcon = document.getElementById('project-status-icon');
