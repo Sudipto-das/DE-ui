@@ -1,40 +1,66 @@
-interface ProjectsInterface {
+export interface ProjectDetail {
+    PROJID: string;
+    NAME: string;
+    DESCRIPTION: string;
+    STARTDATE: string;
+    ENDDATE: string;
+    STATUS: number;
+    BUDGET: number;
+    CATEGORY: number;
+    TYPE: number;
+    DLVLOCATION: string;
+    PROJMANAGER: string;
+    MODIFIEDDATETIME: string;
+    RECID: string;
+    ASSIGNEDMANAGER: AssignedDesignerDetail|undefined;
+  }
+  
+ export interface AssignedDesignerDetail {
     ProjId: string;
     Name: string;
     Description: string;
+    CustName: string;
+    AccountNum: string;
+    CustAccount: string;
     StartDate: string;
     EndDate: string;
     Status: number;
-    Budget: number;
-    CustAccount: number;
-    ProjManager: number;
-    DesignManager: number;
+    ProjManager: string;
+    ProjManagerId: string;
+    ProjManagerRecId: string;
+    DesignManager: string;
+    DesignManagerId: string;
+    DesignManagerRecId: string;
     Type: number;
     Category: number;
-    DlvLocation: number;
-    CreatedBy?: string;
-    CreatedDateTime?: string;
-    ModifiedBy?: string;
-    ModifiedDateTime?: string;
-    RecId?: number;
-}
-
-
-export default ProjectsInterface
-
-
-export const EmptyProjTable:ProjectsInterface = {
-    ProjId: "",
-    Name: "",
-    Description: "",
-    StartDate: "",
-    EndDate: "",
-    Status: 0,
-    Budget: 0,
-    CustAccount: 0,
-    ProjManager: 0,
-    DesignManager: 0,
-    Type: 0,
-    Category: 0,
-    DlvLocation: 0,
+    ExtendedDate: string;
+    CreatedBy: string;
+    ModifiedBy: string;
+    ModifiedDateTime: string;
+    CreatedDateTime: string;
+    RecId: string;
+    Id: string;
   }
+  
+ export interface ProjectsInterface {
+    projDetails: ProjectDetail[];
+  }
+  
+export const transformApiResponse = (data: { projDetails: ProjectDetail[], assignedDesignersDetails: AssignedDesignerDetail[] }): ProjectsInterface => {
+    const { projDetails, assignedDesignersDetails } = data;
+  
+    // Map assigned designers to each project
+    const projectsWithDesigners = projDetails.map(project => {
+      const assignedDesigners = assignedDesignersDetails.find(designer => designer.ProjId === project.PROJID);
+      
+      return {
+        ...project,
+        ASSIGNEDMANAGER: assignedDesigners,
+      };
+    });
+  
+    return {
+      projDetails: projectsWithDesigners,
+    };
+  };
+  

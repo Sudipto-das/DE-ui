@@ -1,14 +1,15 @@
 import ProjectCard from './projectCard';
 
 import Loader from '../ui/loader';
-import ProjectsInterface from '../../interface/Project';
+import { ProjectsInterface } from '../../interface/Project';
+
 interface ProjectsListProps {
-    projects: ProjectsInterface[];
+    projects: ProjectsInterface;
     isLoading: boolean;
 }
 
 const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
-    console.log(isLoading)
+    console.log(projects)
     return (
         <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)]'>
             <div className='flex justify-between items-center mb-1'>
@@ -22,13 +23,13 @@ const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
                     </div>
                 ):(
                     <>
-                    {projects.length === 0 ? (
+                    {projects.projDetails.length === 0 ? (
                     <div className="flex justify-center items-center w-full h-full text-center text-gray-500">
                         No projects yet
                     </div>
                 ) : (
                     <div className="w-full space-y-4">
-                        {projects && projects.map((project: ProjectsInterface, index) => (
+                        {projects && projects.projDetails.map((project, index) => (
                             <ProjectCard key={index} {...project} />
                         ))}
                     </div>
