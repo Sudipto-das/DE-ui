@@ -6,6 +6,7 @@ import { AppContext } from "../../context/Context";
 import { useRecoilState } from "recoil";
 import { projectDataState } from "../../store/projectDataState";
 import getAllProjects from "../../functions/api/dashboard/fetchAllProjects";
+import { transformApiResponse } from "../../interface/Project";
 
 const Dashboard: React.FC = () => {
     const [projects, setProjects] = useRecoilState(projectDataState);
@@ -23,7 +24,8 @@ const Dashboard: React.FC = () => {
             }
             try {
                 const response = await getAllProjects(CurrentUser);
-                setProjects(response.data);
+                const transformedData = transformApiResponse(response.data);
+                setProjects(transformedData);
                 setIsLoading(false)
             } catch (error) {
                 raiseToast('Error fetching projects');
@@ -31,7 +33,7 @@ const Dashboard: React.FC = () => {
                 setIsLoading(false)
             }
         };
-        if (projects.length === 0) {
+        if (projects.projDetails.length === 0) {
             fetchData();
         }
     }, [CurrentUser]);
