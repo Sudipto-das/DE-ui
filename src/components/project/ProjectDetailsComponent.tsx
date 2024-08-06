@@ -11,7 +11,7 @@ interface ProjectDetailsComponentProps {
 
 const ProjectDetailsComponent: React.FC<ProjectDetailsComponentProps> = ({ project }) => {
   const projectDetails = [
-    { title: 'Designer', subtitle: project.NAME, icon: '/Avatar.png' },
+    { title: 'Designer', subtitle: project.ASSIGNEDMANAGER?.DesignManager, icon: '/Avatar.png' },
     { title: 'Duration', subtitle: calculateDuration(project.STARTDATE,project.ENDDATE) + " days", icon: '/date.png' },
     { title: 'Budget', subtitle: project.BUDGET, icon: '/budget-breakdown.png' },
     { title: 'Size', subtitle: project.TYPE, icon: '/measurement.png' },
