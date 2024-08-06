@@ -2,7 +2,7 @@ import React from "react";
 
 interface HeaderBoxProps {
     title: string;
-    subtitle: string|number;
+    subtitle: string|number|undefined;
     icon: string;
 }
 
