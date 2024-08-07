@@ -3,6 +3,7 @@ import addComment from '../../functions/api/comment/addComment';
 import { AppContext } from '../../context/Context';
 import { useRecoilValue } from 'recoil';
 import { projectRecIdState } from '../../store/projectsState/projectRecId';
+import Loader from '../ui/loader';
 
 const CommentInput: React.FC = () => {
     const [textInput, setTextInput] = useState<string>('');
@@ -11,6 +12,7 @@ const CommentInput: React.FC = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     const projectRecId = useRecoilValue(projectRecIdState);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleImageClick = () => {
         fileInputRef.current?.click();
@@ -50,28 +52,33 @@ const CommentInput: React.FC = () => {
         }
 
         try {
+            setLoading(true);
             const response = await addComment({
-                Title: textInput,
+                Title: "Remark by " + CurrentUser.Name,
                 Type: commentType,
-                Description : "",
-                Image : "",
-                Video : "",
-                ModifiedBy : CurrentUser.Id,
+                Description: textInput,
+                Image: "",
+                Video: "",
+                ModifiedBy: CurrentUser.Id,
                 CreatedBy: CurrentUser.Id
-            }, CurrentUser, {
-                TableName: "ProjTable",
-                RecId: projectRecId
-            });
+            },
+                CurrentUser,
+                {
+                    TableName: "ProjTable",
+                    RecId: projectRecId
+                });
 
             if (response.status === 200) {
                 raiseToast('Comment added successfully', 'success');
                 setTextInput('');
                 setSelectedFile(null);
-            }else{
+            } else {
                 throw new Error();
             }
         } catch (error) {
             raiseToast('Error adding comment', 'error');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -98,11 +105,12 @@ const CommentInput: React.FC = () => {
                     onChange={handleInputChange}
                     className="flex-grow p-2 border-none rounded-lg mr-4 focus:outline-none"
                 />
+
                 <button
                     onClick={handleSubmit}
                     className="bg-[#E6E8EC] text-[#23262F] px-4 py-2 rounded-lg hover:none"
                 >
-                    Send
+                   {loading ? <Loader height={30} width={30}  /> :  'Send'}
                 </button>
             </div>
             {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}

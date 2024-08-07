@@ -4,8 +4,8 @@ export default interface CommentsInterface {
     Description?: string;
     Image?: string;
     Video?: string;
-    CreatedBy: string;
-    ModifiedBy: string;
+    CreatedBy?: string;
+    ModifiedBy?: string;
     CreatedDateTime?: string;
     ModifiedDateTime?: string;
     RecId?: number;
