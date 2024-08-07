@@ -1,10 +1,10 @@
-import CommentsInterface from "../../../interface/Comments";
 import { apiClient } from "../../../api";
+import CommentsInterface from "../../../interface/Comments";
 
-export default async function addComment(remarks:CommentsInterface, user: { Id: string, Session: string, Token: string },ref: { TableName: string, RecId: number }) {
+export default async function addComment(comment: CommentsInterface, user: { Id: string, Session: string, Token: string },ref: { TableName: string, RecId: string }) {
 
     const data = {
-        remarks: remarks,
+        remarks: comment,
         Id: user.Id,
         Session: user.Session,
         Token: user.Token,
@@ -12,7 +12,7 @@ export default async function addComment(remarks:CommentsInterface, user: { Id: 
     }
 
     try {
-        const response = await apiClient.post("/remarks/?"+ data)
+        const response = await apiClient.post("/remarks/add",data)
             .then((response) => response.data)
             .catch((error) => error.response.data);
 

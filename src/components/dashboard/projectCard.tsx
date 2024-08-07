@@ -36,7 +36,7 @@ const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET
   const isActive = location.pathname === '/dashboard' && activeProject === RECID;
 
   return (
-    <div className={`flex flex-col border ${isActive ? 'border-[#259fb7]' : 'border-gray-300'} shadow-sm rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer font-inter`}
+    <div className={`flex flex-col border ${isActive && 'border-2 '} shadow-sm border-gray-300 rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer font-inter`}
       onClick={handleCardClick}>
       <img src={"/Rectangle 1.png"} alt={NAME} className="w-32 h-32 object-cover pt-2 md:pt-0" />
       <div className="p-6 flex flex-col justify-between">
