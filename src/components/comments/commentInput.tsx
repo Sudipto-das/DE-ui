@@ -51,6 +51,9 @@ const CommentInput: React.FC = () => {
             }
         }
 
+        console.log(fileField);
+        
+
         try {
             setLoading(true);
             const response = await addComment({
