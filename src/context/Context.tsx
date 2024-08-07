@@ -65,7 +65,7 @@ export const AppProvider = ({ children }: any) => {
         document.cookie = `Name=${JSON.stringify(
             data.Name
         )}; expires=${date.toUTCString()}; path=/`;
-        document.cookie = `Name=${JSON.stringify(
+        document.cookie = `RecId=${JSON.stringify(
             data.RecId
         )}; expires=${date.toUTCString()}; path=/`;
     }
