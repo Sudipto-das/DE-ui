@@ -1,8 +1,18 @@
 import React from 'react';
 import Profile from '../../components/profile/profileComponent';
+import { useQuery } from '@tanstack/react-query';
+import getProfileData from '../../functions/api/profile/fetchProfile';
+import { AppContext } from '../../context/Context';
 
 
 const ProfilePage: React.FC = () => {
+  const { user: CurrentUser } = React.useContext(AppContext);
+
+  const { data: profileData } = useQuery({
+    queryKey: ['profile', CurrentUser.RecId],
+    queryFn: () => getProfileData(CurrentUser)
+  });
+  console.log(profileData)
   return (
     <div className="min-h-screen py-10">
       <Profile
