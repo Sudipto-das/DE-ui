@@ -9,7 +9,7 @@ interface ProjectsListProps {
 }
 
 const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
-    console.log(projects)
+
     return (
         <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)]'>
             <div className='flex justify-between items-center mb-1'>
