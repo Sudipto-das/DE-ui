@@ -1,6 +1,6 @@
 import { apiClient } from "../../../api";
 
-async function getAllRemarks(user: { Id: string, Session: string, Token: string },RefRecId: string, RefTableName: string) {
+async function getAllComments(user: { Id: string, Session: string, Token: string },RefRecId: string, RefTableName: string) {
 
     const data = new URLSearchParams({
         Id: user.Id,
@@ -23,4 +23,4 @@ async function getAllRemarks(user: { Id: string, Session: string, Token: string 
 }
 
 
-export default getAllRemarks;
+export default getAllComments;

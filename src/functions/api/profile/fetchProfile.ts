@@ -6,7 +6,8 @@ async function getProfileData(user: { RecId: string, Session: string, Token: str
         Id: user.RecId,
         Session: user.Session,
         Token: user.Token,
-        RefRecId:user.RecId
+        RefRecId:user.RecId,
+        RefTableName: "CustTable"
     })
 
     try {

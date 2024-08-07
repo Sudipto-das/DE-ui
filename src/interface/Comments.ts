@@ -1,11 +1,11 @@
 export default interface CommentsInterface {
     Title: string;
-    Description?: string;
     Type: number; 
+    Description?: string;
     Image?: string;
     Video?: string;
-    CreatedBy: string;
-    ModifiedBy: string;
+    CreatedBy?: string;
+    ModifiedBy?: string;
     CreatedDateTime?: string;
     ModifiedDateTime?: string;
     RecId?: number;
@@ -15,7 +15,7 @@ export default interface CommentsInterface {
 
 
 
-export const EmptyRemarks: CommentsInterface = {
+export const EmptyComment: CommentsInterface = {
     Title: "",
     Description: "",
     Type: 0,

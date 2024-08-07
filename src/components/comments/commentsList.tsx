@@ -1,47 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import CommentCard from './commentCard';
 import CommentInput from './commentInput';
-import getAllRemarks from '../../functions/api/dashboard/fetchRemarks';
 import { AppContext } from '../../context/Context';
 import CommentsInterface from '../../interface/Comments';
 import { useRecoilValue } from 'recoil';
-import { projectRecIdState } from '../../store/projectsState/projectRecId';
 import Loader from '../ui/loader';
+import { projectRecIdState } from '../../store/projectsState/projectRecId';
 import { projectDataState } from '../../store/projectsState/projectDataState';
+import getAllComments from '../../functions/api/comment/fetchComments';
 
-// const dummyComments = [
-//     {
-//         Image: 'https://via.placeholder.com/40', // Replace with actual image URL
-//         Title: 'Jane S',
-//         CreatedBy: 'Maria Gomez',
-//         Description: "I recently used your interior design services for my living room and I couldn't be happier! The team really listened to my needs and...",
-//     },
-//     {
-//         Image: 'https://via.placeholder.com/40', // Replace with actual image URL
-//         Title: 'John D',
-//         CreatedBy: 'Maria Gomez',
-//         Description: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
-//     },
-//     {
-//         Image: 'https://via.placeholder.com/40', // Replace with actual image URL
-//         Title: 'Tom H',
-//         CreatedBy: 'Maria Gomez',
-//         Description: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
-//     },
-//     {
-//         Image: 'https://via.placeholder.com/40', // Replace with actual image URL
-//         Title: 'John D',
-//         CreatedBy: 'Maria Gomez',
-//         Description: 'Working with your team was a breeze. They were professional, attentive, and really knew how to bring my vision to life. My home office...',
-//     },
-//     {
-//         Image: 'https://via.placeholder.com/40', // Replace with actual image URL
-//         Title: 'Tom H',
-//         CreatedBy: 'Maria Gomez',
-//         Description: "I've always struggled with making my small apartment feel cozy and inviting, but your interior design services completely transformed...",
-//     },
-//     // Add more comments as needed
-// ];
 
 const CommentsList = () => {
     const ProjectRecIdState = useRecoilValue(projectRecIdState);
@@ -58,7 +25,7 @@ const CommentsList = () => {
                 return;
             }
             try {
-                const response = await getAllRemarks(CurrentUser, ProjectRecId, "ProjTable");
+                const response = await getAllComments(CurrentUser, ProjectRecId, "ProjTable");
                 setComments(response.data);
             } catch (error) {
                 raiseToast('Error fetching projects');
