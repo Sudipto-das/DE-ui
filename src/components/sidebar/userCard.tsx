@@ -1,12 +1,15 @@
 import React from 'react';
 import Rating from "../ui/rating";
 import { User } from "./userProfile";
+import { useRecoilValue } from 'recoil';
+import { profileDataState } from '../../store/userProfileState';
 
 interface UserCardProps {
     user: User;
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
+    const profileData = useRecoilValue(profileDataState)
     const cardColors: Record<User['category'], string> = {
         Premium: 'bg-green-100',
         Standard: 'bg-yellow-100',
@@ -23,7 +26,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                         className="w-20 h-20 rounded-full mb-2 border-4 border-white"
                     />
 
-                    <span className="font-bold 2xl:text-2xl mb-2 text-gray-900 md:text-center text-lg">{user.name}</span>
+                    <span className="font-bold 2xl:text-2xl mb-2 text-gray-900 md:text-center text-lg">{profileData?.Name}</span>
 
                     <div className="flex flex-wrap justify-center 2xl:justify-start gap-x-1 gap-y-2 mb-2 text-sm font-medium text-gray-600">
                         <span className="text-gray-700">{user.role}</span>

@@ -1,34 +1,59 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Profile from '../../components/profile/profileComponent';
-import { useQuery } from '@tanstack/react-query';
 import getProfileData from '../../functions/api/profile/fetchProfile';
 import { AppContext } from '../../context/Context';
-
+import { useRecoilState } from 'recoil';
+import { profileDataState } from '../../store/userProfileState';
 
 const ProfilePage: React.FC = () => {
-  const { user: CurrentUser } = React.useContext(AppContext);
+  const { user: CurrentUser, raiseToast } = useContext(AppContext);
+  const [profileData, setProfileData] = useRecoilState(profileDataState);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data: profileData } = useQuery({
-    queryKey: ['profile', CurrentUser.RecId],
-    queryFn: () => getProfileData(CurrentUser)
-  });
+
+  useEffect(() => {
+    if (CurrentUser?.RecId && !profileData) {
+      getProfileData(CurrentUser)
+        .then((data) => {
+          setProfileData(data.data.user);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          raiseToast(err);
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
+    }
+  }, [CurrentUser]);
+
+  if (!CurrentUser?.RecId) {
+    return <div>Loading user data...</div>;
+  }
+
+  if (isLoading) return <div>Loading profile data...</div>;
+
   console.log(profileData)
   return (
     <div className="min-h-screen py-10">
-      <Profile
-        name="Nguyen Duy Phuoc"
-        role="Product Designer"
-        location="Los Angeles, California, USA"
-        email="jackadams@gmail.com"
-        phone="(213) 555-1234"
-        bio="Product Designer"
-        country="United States of America"
-        state="California, USA"
-        postalCode="ERT 62574"
-        taxId="AS564178969"
-        category='Premium'
-        referralCode='ABC15T'
-      />
+      {profileData ? (
+        <Profile
+          name={profileData.Name}
+          role="Product Designer"
+          location="Los Angeles, California, USA"
+          email={profileData.Email}
+          phone={profileData.Phone}
+          bio="Product Designer"
+          country="United States of America"
+          state="California, USA"
+          postalCode="ERT 62574"
+          taxId="AS564178969"
+          category="Premium"
+          referralCode="ABC15T"
+        />
+      ) : (
+        <div>Fetching Profile data ...</div>
+      )}
     </div>
   );
 };

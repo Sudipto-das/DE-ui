@@ -3,6 +3,8 @@ import Rating from "../ui/rating";
 
 import { motion } from 'framer-motion';
 import UserCard from './userCard';
+import { useRecoilValue } from 'recoil';
+import { profileDataState } from '../../store/userProfileState';
 
 export interface User {
     name: string;
@@ -34,6 +36,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
 };
 
 const UserProfile: React.FC = () => {
+    const profileData = useRecoilValue(profileDataState)
     const user: User = {
         name: 'Nguyen Duy Phuoc',
         experience: '5 years',
@@ -60,7 +63,7 @@ const UserProfile: React.FC = () => {
                         className="w-16 h-16 rounded-full mb-2"
                     />
                     <div className="flex flex-col">
-                        <span className="font-bold text-sm font-inter">{user.name}</span>
+                        <span className="font-bold text-sm font-inter">{profileData?.Name}</span>
                         <span className="text-gray-500 text-xs font-inter font-medium">{user.role}</span>
                         <div className="mt-2">
                             <Rating rating={user.rating} />
