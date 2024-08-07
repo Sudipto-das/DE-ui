@@ -23,13 +23,7 @@ const Layout = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
   const { user: CurrentUser } = React.useContext(AppContext);
-  console.log(CurrentUser)
-  if (!CurrentUser.Id && !isLoginPage) {
-    return <Navigate to="/" replace />;
-  }
-  if (CurrentUser.Id && isLoginPage) {
-    return <Navigate to="/dashboard" replace />;
-  }
+
   return (
     <div className="flex">
       {!isLoginPage && (
@@ -45,10 +39,7 @@ const Layout = () => {
         )}
         <div className={!isLoginPage ? "md:pt-16 p-4 md:mt-6" : "p-0"}>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<Dashboard />}  />
-            {/* <Route path="/" element={<LoginPage />} />
-            <Route path="/dashboard" element={<Dashboard />} /> */}
+            <Route path="/" element={CurrentUser.Id ? <Navigate to="/dashboard" /> : <LoginPage />} />
             <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/production-Installation" element={<ProductionPage />} />
