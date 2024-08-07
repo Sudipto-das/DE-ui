@@ -53,7 +53,9 @@ const CommentInput: React.FC = () => {
             const response = await addComment({
                 Title: textInput,
                 Type: commentType,
-                ...fileField,
+                Description : "",
+                Image : "",
+                Video : "",
                 ModifiedBy : CurrentUser.Id,
                 CreatedBy: CurrentUser.Id
             }, CurrentUser, {
@@ -61,10 +63,12 @@ const CommentInput: React.FC = () => {
                 RecId: projectRecId
             });
 
-            if (response) {
+            if (response.status === 200) {
                 raiseToast('Comment added successfully', 'success');
                 setTextInput('');
                 setSelectedFile(null);
+            }else{
+                throw new Error();
             }
         } catch (error) {
             raiseToast('Error adding comment', 'error');
