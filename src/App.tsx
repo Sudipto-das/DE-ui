@@ -23,7 +23,6 @@ const Layout = () => {
   const location = useLocation();
   const isLoginPage = location.pathname === '/';
   const { user: CurrentUser } = React.useContext(AppContext);
-
   return (
     <div className="flex">
       {!isLoginPage && (

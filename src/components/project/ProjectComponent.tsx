@@ -4,14 +4,12 @@ import { useRecoilState } from "recoil";
 import { AppContext } from "../../context/Context";
 import React, { useEffect, useState } from "react";
 import getAllProjects from "../../functions/api/dashboard/fetchAllProjects";
-import Loader from "../ui/loader";
 import { projectDataState } from "../../store/projectsState/projectDataState";
 
 const ProjectComponent: React.FC = () => {
     const [projects, setProjects] = useRecoilState(projectDataState);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [isFetched, setIsFetched] = useState(false); // New state to check if data fetching is complete
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,7 +20,6 @@ const ProjectComponent: React.FC = () => {
             try {
                 const response = await getAllProjects(CurrentUser);
                 setProjects(response.data);
-                setIsFetched(true); // Data fetching complete
             } catch (error) {
                 raiseToast('Error fetching projects');
             } finally {
@@ -35,17 +32,9 @@ const ProjectComponent: React.FC = () => {
         }
     }, [CurrentUser, setProjects, raiseToast]);
 
-    if (isLoading) {
-        return (
-            <div className="flex items-center justify-center border rounded-lg" style={{ height: 'calc(94vh - 88px)' }}>
-                <div className="flex items-center justify-center">
-                    <div className="loader"><Loader/></div>
-                </div>
-            </div>
-        );
-    }
 
-    if (isFetched && projects.projDetails.length === 0) {
+
+    if (!isLoading && projects.projDetails.length === 0) {
         return (
             <div className="flex items-center justify-center border rounded-lg" style={{ height: 'calc(94vh - 88px)' }}>
                 <div className="flex flex-col justify-center items-center gap-5">
