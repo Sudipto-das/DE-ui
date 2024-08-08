@@ -62,7 +62,7 @@ export const AppProvider = ({ children }: any) => {
   }
 
   const fetchUserDetails = React.useCallback(async () => {
-   
+
     try {
       let user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -98,8 +98,12 @@ export const AppProvider = ({ children }: any) => {
 
       // Fetch profile data
       const profileResponse = await getProfileData(user);
-      setProfileData(profileResponse.data.user);
+      setProfileData({
+        user: profileResponse.data.user,
+        isLoading: false,
+      });
     } catch (err) {
+      setProfileData(prevState => ({ ...prevState, isLoading: false }));
       Logout();
       navigate("/");
     }
