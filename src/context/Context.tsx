@@ -121,14 +121,15 @@ export const AppProvider = ({ children }: any) => {
   }
 
   function Logout() {
-    // document.cookie = "ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    // document.cookie = "Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    // document.cookie = "Email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    // document.cookie = "Session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    // document.cookie = "Name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    // localStorage.clear();
-    // sessionStorage.clear();
-    // setUser({});
+    document.cookie = "ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "Email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "Session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "Name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    localStorage.clear();
+    sessionStorage.clear();
+    setUser({});
+    navigate("/");
   }
 
   React.useEffect(() => {

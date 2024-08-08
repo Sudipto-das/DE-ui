@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBox from '../ui/search';
 import AiIcon from './aiIcon';
 import { useNavigate } from 'react-router-dom';
+import ProfileModal from './profileModal';
+
 
 const Navbar: React.FC = () => {
+    
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const navigate = useNavigate()
-    const handleClick = ()=>{
+    const toggleProfileModal = () => {
+        setIsProfileModalOpen(prevState => !prevState);
+    };
+    const handleClick = () => {
         navigate('/updates')
     }
     return (
@@ -34,11 +41,37 @@ const Navbar: React.FC = () => {
                             />
                         </button>
                     </div>
-                    <img
-                        src="/Avatar.png"
-                        alt="User Avatar"
-                        className="w-10 h-10 rounded-full ml-4"
-                    />
+                    <div className='flex gap-2 items-center rounded-md justify-between bg-slate-100 p-1'>
+                        <img
+                            src="/Avatar.png"
+                            alt="User Avatar"
+                            className="w-8 h-8 rounded-full "
+                        />
+                        <button onClick={toggleProfileModal}>
+                            {!isProfileModalOpen ? <svg xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-chevron-down">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg> : <svg xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-chevron-up">
+                                <path d="m18 15-6-6-6 6" />
+                            </svg>}
+                            {isProfileModalOpen && <ProfileModal />}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
