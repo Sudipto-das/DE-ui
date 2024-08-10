@@ -10,10 +10,6 @@ interface ProfileProps {
     email: string;
     phone: string;
     bio: string;
-    country: string;
-    state: string;
-    postalCode: string;
-    taxId: string;
     category:"Premium" | "Standard" | "Ultimate",
     referralCode:string
 }
@@ -25,10 +21,6 @@ const Profile: React.FC<ProfileProps> = ({
     email,
     phone,
     bio,
-    country,
-    state,
-    postalCode,
-    taxId,
     category,
     referralCode
 }) => {
@@ -40,7 +32,7 @@ const Profile: React.FC<ProfileProps> = ({
 
             <PersonalInformation name={name} email={email} phone={phone} bio={bio} />
 
-            <Address country={country} state={state} postalCode={postalCode} taxId={taxId} />
+            <Address />
         </div>
     );
 };

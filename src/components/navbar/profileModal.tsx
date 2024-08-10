@@ -1,12 +1,14 @@
 import React from 'react';
 import { AppContext } from '../../context/Context';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileModal: React.FC = () => {
     const { Logout } = React.useContext(AppContext);
+    const navigate = useNavigate()
     return (
         <div className="absolute right-5 mt-5 w-48 bg-slate-50 rounded-lg shadow-lg z-50">
             <ul className="py-2">
-                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2" onClick={()=>navigate('/profile')}>
                     <img
                         src="/Avatar.png"
                         alt="Profile Icon"

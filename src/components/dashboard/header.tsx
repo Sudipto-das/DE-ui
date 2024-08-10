@@ -68,7 +68,7 @@ const DashboardHeader: React.FC = () => {
                     icon={item.icon}
                 />
             ))}
-            <div className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] hover:cursor-pointer">
+            <div className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] hover:cursor-pointer transition-all duration-300 bg-gradient-to-r from-gray-100 to-gray-300">
                 <div>
                     <p className="text-sm font-medium">Project Status</p>
                     <h1 className="text-2xl text-[#EF466F]">

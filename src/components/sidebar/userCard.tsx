@@ -2,7 +2,7 @@ import React from 'react';
 import Rating from "../ui/rating";
 import { User } from "./userProfile";
 import { useRecoilValue } from 'recoil';
-import { profileDataState } from '../../store/userProfileState';
+import { profileDataState } from '../../store/profileState/userProfileState';
 
 interface UserCardProps {
     user: User;

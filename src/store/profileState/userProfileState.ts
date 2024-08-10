@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { User } from "../interface/User";
+import { User } from "../../interface/User";
 
 interface ProfileDataState {
   user: User|null ;

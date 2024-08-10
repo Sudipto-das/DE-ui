@@ -4,7 +4,7 @@ import Rating from "../ui/rating";
 import { motion } from 'framer-motion';
 import UserCard from './userCard';
 import { useRecoilValue } from 'recoil';
-import { profileDataState } from '../../store/userProfileState';
+import { profileDataState } from '../../store/profileState/userProfileState';
 
 export interface User {
     name: string;
