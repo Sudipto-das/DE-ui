@@ -1,13 +1,17 @@
-export interface Addresses {
-    Address: Address[];
-    IsPrimary: number;
-    RecId: string;
-  }
-
-export interface Address{
-    country:string,
-    city:string,
-    state:string,
-    pin:string
+export interface LocationInterface {
+  RefRecId: number;
+  RefTableId: number;
+  IsPrimary: number;
+  Address: string;
+  ZipCode: string;
+  City: string;
+  State: string;
+  Country: string;
+  Street: string;
+  District: string;
+  ModifiedBy: string;
+  ModifiedDateTime?: string;
+  RecId?: number;
+  CreatedBy: string;
+  CreatedDateTime?: string;
 }
-  

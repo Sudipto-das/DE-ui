@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import Loader from "../components/ui/loader";
 import getProfileData from "../functions/api/profile/fetchProfile";
-import { profileDataState } from "../store/userProfileState";
+import { profileDataState } from "../store/profileState/userProfileState";
 import { useSetRecoilState } from "recoil";
+import { AddressState } from "../store/profileState/AddressState";
 
 export const AppContext = React.createContext<any>({});
 
@@ -14,7 +15,7 @@ export const AppProvider = ({ children }: any) => {
   const [user, setUser] = React.useState<any>({});
   const [Notifications, setNotifications] = React.useState<any>([]);
   const setProfileData = useSetRecoilState(profileDataState);
-
+  const setAddress = useSetRecoilState(AddressState)
   const toast = useToast();
 
   function setData(data: any) {
@@ -102,6 +103,7 @@ export const AppProvider = ({ children }: any) => {
         user: profileResponse.data.user,
         isLoading: false,
       });
+      setAddress(profileResponse.data.address)
     } catch (err) {
       setProfileData(prevState => ({ ...prevState, isLoading: false }));
       Logout();
