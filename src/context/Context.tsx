@@ -103,7 +103,8 @@ export const AppProvider = ({ children }: any) => {
         user: profileResponse.data.user,
         isLoading: false,
       });
-      setAddress(profileResponse.data.address)
+      const primaryAddress = profileResponse.data.address.find((addr: any) => addr.IsPrimary === 1);
+      setAddress(primaryAddress)
     } catch (err) {
       setProfileData(prevState => ({ ...prevState, isLoading: false }));
       Logout();

@@ -9,7 +9,7 @@ const Address: React.FC= () => {
     const address = useRecoilValue(AddressState)
     const [isEditing, setIsEditing] = useState(false);
 
-
+    console.log(address)
     const toggleEdit = () => setIsEditing(!isEditing);
 
     const saveChanges = () => {
@@ -29,11 +29,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={address?.Country || 'NA'}
+                                value={address?.COUNTRY || 'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{address?.Country || 'NA'}</p>
+                            <p className="font-medium font-inter">{address?.COUNTRY || 'NA'}</p>
                         )}
                     </div>
                     <div>
@@ -42,11 +42,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={`${address?.City || ''}, ${address?.State || 'NA'}`}
+                                value={`${address?.CITY || ''}, ${address?.STATE || 'NA'}`}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{`${address?.City || 'NA'}, ${address?.State || 'NA'}`}</p>
+                            <p className="font-medium font-inter">{`${address?.CITY || 'NA'}, ${address?.STATE|| 'NA'}`}</p>
                         )}
                     </div>
                     <div>
@@ -55,11 +55,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={address?.ZipCode||'NA'}
+                                value={address?.ZIPCODE||'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{address?.ZipCode||'NA'}</p>
+                            <p className="font-medium font-inter">{address?.ZIPCODE||'NA'}</p>
                         )}
                     </div>
                     <div>
@@ -68,11 +68,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={address?.City || 'NA'}
+                                value={address?.DISTRICT || 'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{address?.District || 'NA'}</p>
+                            <p className="font-medium font-inter">{address?.DISTRICT || 'NA'}</p>
                         )}
                     </div>
                 </div>

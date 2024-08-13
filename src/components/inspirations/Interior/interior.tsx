@@ -5,7 +5,7 @@ import ImageList from '../imageList';
 import Topber from '../topbar';
 
 
-interface ImageData {
+export interface ImageData {
     image: string;
     name: string;
 }
