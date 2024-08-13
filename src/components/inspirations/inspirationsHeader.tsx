@@ -29,7 +29,7 @@ const InspirationsHeader: React.FC<{ renderComponent: React.ReactNode }> = ({ re
                         className={`flex justify-between items-center border rounded-lg px-4 py-5 cursor-pointer
                         transition-all duration-300
                         ${selectedCategory === category.name
-                            ? 'bg-gradient-to-r from-green-600 to-[#d7f85e] text-white'
+                            ? 'bg-gradient-to-r from-[#2d9468] to-[#1ae38b] text-white'
                             : 'bg-gradient-to-r from-gray-100 to-gray-300'
                         }`}
                         onClick={() => handleCategoryClick(category.name)}
