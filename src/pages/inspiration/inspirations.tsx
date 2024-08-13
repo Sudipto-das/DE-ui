@@ -3,6 +3,7 @@ import InspirationsHeader from "../../components/inspirations/inspirationsHeader
 import { selectedCategoryState } from "../../store/selectCatagoryState";
 import { useEffect } from "react";
 import InteriorPage from "../../components/inspirations/Interior/interior";
+import SavedDesigns from "../../components/inspirations/savedDesigns/saved";
 
 const InspirationsPage = () => {
     const [selectedCategory, setSelectedCatagory] = useRecoilState(selectedCategoryState);
@@ -18,7 +19,7 @@ const InspirationsPage = () => {
             renderComponent = null;
             break;
         case 'Saved Designs':
-            renderComponent = null;
+            renderComponent = <SavedDesigns/>;
             break;
 
 

@@ -3,12 +3,12 @@ export interface LocationInterface {
   RefTableId: number;
   IsPrimary: number;
   Address: string;
-  ZipCode: string;
-  City: string;
-  State: string;
-  Country: string;
-  Street: string;
-  District: string;
+  ZIPCODE: string;
+  CITY: string;
+  STATE: string;
+  COUNTRY: string;
+  STREET: string;
+  DISTRICT: string;
   ModifiedBy: string;
   ModifiedDateTime?: string;
   RecId?: number;
