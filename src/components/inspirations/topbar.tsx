@@ -7,7 +7,7 @@ const Topber: React.FC = () => {
     return (
         <div className="w-full bg-[#26535b] text-white p-4 flex justify-between items-center mt-5 rounded-lg">
             <div className="flex flex-col">
-                <h1 className="text-3xl font-bold font-inter bg-gradient-to-r from-purple-500 to-yellow-400 bg-clip-text text-transparent">
+                <h1 className="text-3xl font-bold font-inter bg-gradient-to-r from-purple-400 to-yellow-400 bg-clip-text text-transparent">
                     Choose the rooms that make you swoon
                 </h1>
                 <p className="text-md font-inter bg-gradient-to-r from-purple-200 to-yellow-400 bg-clip-text text-transparent">

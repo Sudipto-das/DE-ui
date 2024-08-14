@@ -5,7 +5,7 @@ import { ImageData } from './Interior/interior';
 
 interface ImageListProps {
     isLoading: boolean;
-    error: any; // You can specify the exact type based on your error structure
+    error?: any; // You can specify the exact type based on your error structure
     images: ImageData[] | undefined;
 }
 
@@ -40,7 +40,7 @@ const ImageList: React.FC<ImageListProps> = ({ isLoading, error, images }) => {
     };
 
     if (isLoading) {
-        return <Loader />;
+        return <div className='flex items-center justify-center h-96'><Loader /></div>;
     }
 
     if (error) {

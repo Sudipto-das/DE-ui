@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { copyToClipboard } from '../../utils/clipboardUtils';
+import { useRecoilValue } from 'recoil';
+import { AddressState } from '../../store/profileState/AddressState';
 
 
 interface PersonalDetailsProps {
     name: string;
     role: string;
-    location: string;
+    
     category: "Premium" | "Standard" | "Ultimate";
     referralCode: string;
 }
 
-const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, location, category, referralCode }) => {
+const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, category, referralCode }) => {
+    const address = useRecoilValue(AddressState)
     const [copied, setCopied] = useState(false);
     const badgeColors: Record<PersonalDetailsProps['category'], string> = {
         Premium: 'bg-green-500',
@@ -41,7 +44,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, location,
                                 </div>
                             </div>
                             <p className="text-gray-600 font-inter">{role}</p>
-                            <p className="text-gray-600 font-inter">{location}</p>
+                            <p className="text-gray-600 font-inter">{address?.Address}</p>
                         </div>
                     </div>
                 </div>

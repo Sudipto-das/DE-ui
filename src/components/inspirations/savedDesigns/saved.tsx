@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getSavedImages } from '../../../functions/api/fetchSavedImages';
 import { AppContext } from '../../../context/Context';
 import ImageList from '../imageList';
-import Loader from '../../ui/loader';
+
 
 interface ImageSavedData {
     userId:string
@@ -20,9 +20,7 @@ const SavedDesigns: React.FC = () => {
     });
 
 
-    if (isLoading) {
-        return <Loader/>;
-    }
+
 
     if (error) {
         return <div>Error: {error.message}</div>;
