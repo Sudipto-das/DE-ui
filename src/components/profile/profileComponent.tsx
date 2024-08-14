@@ -6,7 +6,6 @@ import Address from './address';
 interface ProfileProps {
     name: string;
     role: string;
-    location: string;
     email: string;
     phone: string;
     bio: string;
@@ -17,7 +16,6 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({
     name,
     role,
-    location,
     email,
     phone,
     bio,
@@ -28,7 +26,7 @@ const Profile: React.FC<ProfileProps> = ({
 
     return (
         <div className="w-full mx-auto p-6 bg-white rounded-lg shadow-md">
-            <PersonalDetails name={name} location={location} role={role} category={category} referralCode={referralCode}/>
+            <PersonalDetails name={name}  role={role} category={category} referralCode={referralCode}/>
 
             <PersonalInformation name={name} email={email} phone={phone} bio={bio} />
 
