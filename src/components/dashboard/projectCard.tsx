@@ -48,21 +48,21 @@ const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET
           <div>
             <div className='flex items-center '>
               <img src='/user-shield.png' className="w-3.5 h-3.5 mr-3" />
-              <h3>Designer: {ASSIGNEDMANAGER?.DesignManager || "NA"}</h3>
+              <h3><span className='font-semibold'>Designer</span>: {ASSIGNEDMANAGER?.DesignManager || "NA"}</h3>
             </div>
             <div className='flex items-center'>
               <img src='/calendar-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3>Duration: {calculateDuration(STARTDATE, ENDDATE) || "NA"}</h3>
+              <h3><span className='font-semibold'>Duration</span>: {calculateDuration(STARTDATE, ENDDATE) || "NA"}</h3>
             </div>
           </div>
           <div>
             <div className='flex items-center'>
               <img src='/coin-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3>Project Budget: {BUDGET || "NA"} $</h3>
+              <h3><span className='font-semibold'>Project Budget</span>: {BUDGET || "NA"} $</h3>
             </div>
             <div className='flex items-center'>
               <img src='square-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3>Size: {TYPE || "NA"}</h3>
+              <h3><span className='font-semibold'>Size</span>: {TYPE || "NA"}</h3>
             </div>
           </div>
         </div>

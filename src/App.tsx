@@ -17,6 +17,9 @@ import RawMaterials from './pages/rawMaterials/rawmaterials';
 import InspirationsPage from './pages/inspiration/inspirations';
 import HelpAndSupport from './pages/help&support/supportPage';
 import FinancePage from './pages/finance/financePage';
+import Quiz from './pages/Quiz/quiz';
+import ChooseRooms from './pages/Quiz/ChooseRoom';
+import Consolation from './pages/consolation/Consolation';
 
 
 const Layout = () => {
@@ -49,6 +52,9 @@ const Layout = () => {
             <Route path="/projects/*" element={<ProjectLayout />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/updates" element={<UpdatePage />} />
+            <Route path='/shortlisted inspiration' element={<Quiz/>}/>
+            <Route path='/choose-room' element={<ChooseRooms/>}/>
+            <Route path='/consolation' element={<Consolation/>}/>
           </Routes>
         </div>
       </div>

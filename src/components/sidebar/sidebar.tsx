@@ -6,15 +6,15 @@ const Sidebar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     const navItems = [
-        { icon: 'sidebar/dashboards.png', name: 'Dashboard' },
-        { icon: 'sidebar/account.png', name: 'Profile' },
-        { icon: 'sidebar/briefcase.png', name: `Projects` },
-        { icon: 'sidebar/dashboards.png', name: 'Inspirations' },
-        { icon: 'sidebar/customer-support.png', name: 'Production & Installation' },
-        { icon: 'sidebar/steel.png', name: 'Raw materials' },
-        { icon: 'sidebar/dollar.png', name: 'Finance your project' },
-        { icon: 'sidebar/attachment.png', name: 'Updates' },
-        { icon: 'sidebar/communications.png', name: 'Help & Support' },
+        { icon: '/dashboards.png ', name: 'Dashboard' },
+        { icon: '/account.png', name: 'Profile' },
+        { icon: '/briefcase.png', name: `Projects` },
+        { icon: '/dashboards.png', name: 'Inspirations' },
+        { icon: '/customer-support.png', name: 'Production & Installation' },
+        { icon: '/steel.png', name: 'Raw materials' },
+        { icon: '/dollar.png', name: 'Finance your project' },
+        { icon: '/attachment.png', name: 'Updates' },
+        { icon: '/communications.png', name: 'Help & Support' },
     ];
 
     const handleToggle = () => {

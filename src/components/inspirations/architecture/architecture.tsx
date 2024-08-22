@@ -11,7 +11,6 @@ export interface ImageData {
 const ArchitecturePage: React.FC = () => {
    
 
-
     return <>
         <div >
             <Topber />

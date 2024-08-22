@@ -77,6 +77,7 @@ const DashboardHeader: React.FC = () => {
                                 {char}
                             </span>
                         ))}
+                        
                     </h1>
                 </div>
                 <img 
