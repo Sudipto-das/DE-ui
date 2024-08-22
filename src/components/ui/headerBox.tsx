@@ -13,7 +13,7 @@ const HeaderBox: React.FC<HeaderBoxProps> = ({ title, subtitle, icon }) => {
         navigate(`/${title}`)
     }
     return (
-        <div onClick={() => handleClick(title.toLowerCase())} className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] transition-all duration-300 bg-gradient-to-r from-gray-100 to-gray-300
+        <div onClick={() => handleClick(title.toLowerCase().replace(/\s+/g, ''))} className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] transition-all duration-300 bg-gradient-to-r from-gray-100 to-gray-300
         hover:cursor-pointer ">
             <div>
                 <p className="text-sm font-medium">{title}</p>
