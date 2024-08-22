@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 export enum ProjStatus {
-    Pending=-1,
+    NoProject=-1,
     Created = 0,
     InDiscussion = 1,
     InProgress = 2,
@@ -12,5 +12,5 @@ export enum ProjStatus {
 }
 export const projectStatusAtom = atom<number>({
     key: 'projectStatusAtom',
-    default: ProjStatus.Pending,
+    default: ProjStatus.NoProject,
 });

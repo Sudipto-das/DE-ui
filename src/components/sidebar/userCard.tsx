@@ -10,14 +10,10 @@ interface UserCardProps {
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
     const profileData = useRecoilValue(profileDataState)
-    const cardColors: Record<User['category'], string> = {
-        Premium: 'bg-green-100',
-        Standard: 'bg-yellow-100',
-        Ultimate: 'bg-orange-100',
-    };
+  
 
     return (
-        <div className={`transition-opacity duration-300 relative w-full max-w-sm mx-auto rounded-lg shadow-lg overflow-hidden ${cardColors[user.category]}`}>
+        <div className={`transition-opacity duration-300 relative w-full max-w-sm mx-auto rounded-lg shadow-lg overflow-hidden bg-slate-100`}>
             <div className="p-4">
                 <div className="flex flex-col items-center">
                     <img

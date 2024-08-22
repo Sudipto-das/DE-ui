@@ -21,7 +21,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon, name, onClick }) => {
                 className={`flex items-center p-2.5  2xl:p-4 rounded-lg m-1.5 2xl:m-2 ${isActive ? 'bg-[#1B454D] text-white' : 'text-gray-700 hover:bg-gray-200'
                     }`}
             >
-                <img src={`/${icon}`} alt={name} className="w-6 h-6 mr-4" />
+                <img src={isActive ? `/sidebar/${icon}` : `/navicon/${icon}`}  alt={name} className="w-6 h-6 mr-4" />
                 <span className='font-inter'>{name}</span>
             </Link>
         </li>
