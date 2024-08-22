@@ -20,6 +20,7 @@ import FinancePage from './pages/finance/financePage';
 import Quiz from './pages/Quiz/quiz';
 import ChooseRooms from './pages/Quiz/ChooseRoom';
 import Consolation from './pages/consolation/Consolation';
+import MyDesigns from './pages/mydesigns/MyDesign';
 
 
 const Layout = () => {
@@ -52,9 +53,10 @@ const Layout = () => {
             <Route path="/projects/*" element={<ProjectLayout />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/updates" element={<UpdatePage />} />
-            <Route path='/shortlisted inspiration' element={<Quiz/>}/>
+            <Route path='/shortlistedinspiration' element={<Quiz/>}/>
             <Route path='/choose-room' element={<ChooseRooms/>}/>
             <Route path='/consolation' element={<Consolation/>}/>
+            <Route path='/mydesign' element={<MyDesigns/>}/>
           </Routes>
         </div>
       </div>
