@@ -93,11 +93,11 @@ const Consolation: React.FC = () => {
       <div className="flex justify-center mt-8">
         <button className="bg-green-700  px-6 py-3 rounded-full shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 flex items-center space-x-2 transition ease-in-out duration-150">
           <span className='font-bold text-white'>Send to us</span>
-          <svg xmlns="http://www.w3.org/2000/svg" 
-          width="24" height="24" viewBox="0 0 24 24" 
-          fill="none" stroke="#ffffff" strokeWidth="2" 
-          strokeLinecap="round" strokeLinejoin="round" 
-          className="lucide lucide-circle-chevron-right"><circle cx="12" cy="12" r="10"/><path d="m10 8 4 4-4 4"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24"
+            fill="none" stroke="#ffffff" strokeWidth="2"
+            strokeLinecap="round" strokeLinejoin="round"
+            className="lucide lucide-circle-chevron-right"><circle cx="12" cy="12" r="10" /><path d="m10 8 4 4-4 4" /></svg>
         </button>
       </div>
     </div>
