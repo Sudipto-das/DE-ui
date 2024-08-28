@@ -3,7 +3,7 @@ import './dashboard.css';
 import HeaderBox from "../ui/headerBox";
 import { useRecoilValue } from "recoil";
 import { projectStatusStringSelector } from "../../store/projectStatus/projectStatusSelector";
-
+import StatusModal from './statusModal'
 const HeaderData = [
     {
         title: 'Shortlisted Inspiration',
@@ -26,6 +26,7 @@ const DashboardHeader: React.FC = () => {
     const [text, setText] = useState("");
     const statusString = useRecoilValue(projectStatusStringSelector)
     const [spinCompleted, setSpinCompleted] = useState(false);
+    const [isModalOpen,setIsModalOpen] = useState (false)
     useEffect(() => {
         const projectStatusIcon = document.getElementById('project-status-icon');
         if (projectStatusIcon) {
@@ -57,6 +58,9 @@ const DashboardHeader: React.FC = () => {
             }, 1000);
         }
     };
+    const handleModalOpen = () =>{
+        setIsModalOpen(prev => !prev);
+    }
 
     return (
         <div className="flex gap-2 flex-col md:flex-row font-inter">
@@ -68,7 +72,8 @@ const DashboardHeader: React.FC = () => {
                     icon={item.icon}
                 />
             ))}
-            <div className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] hover:cursor-pointer transition-all duration-300 bg-gradient-to-r from-gray-100 to-gray-300">
+            <div className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] hover:cursor-pointer transition-all duration-300 bg-gradient-to-r from-gray-100 to-gray-300"
+             onClick={handleModalOpen}>
                 <div>
                     <p className="text-sm font-medium">Project Status</p>
                     <h1 className="text-2xl text-[#EF466F]">
@@ -87,6 +92,7 @@ const DashboardHeader: React.FC = () => {
                     onMouseEnter={handleMouseEnter} 
                 />
             </div>
+            {isModalOpen && <StatusModal onClose={handleModalOpen}/>}
         </div>
     );
 };

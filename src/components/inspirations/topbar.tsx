@@ -15,16 +15,16 @@ const Topber: React.FC = () => {
                 </p>
             </div>
             <button
-                className="flex items-center bg-white text-black px-3 py-1 rounded-full shadow-md"
+                className="flex items-center px-4 py-2 rounded-full shadow-md bg-[#f3f35f] text-black font-semibold "
                 onClick={() => navigate(-1)}
             >
                 <span className="mr-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3584e4" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-left">
                         <path d="m12 19-7-7 7-7"/>
                         <path d="M19 12H5"/>
                     </svg>
                 </span> 
-                <span className='text-[#3584e4] font-inter'>Go Back</span>
+                <span className=' font-inter'>Go Back</span>
             </button>
         </div>
     );
