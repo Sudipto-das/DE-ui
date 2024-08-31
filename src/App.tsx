@@ -22,6 +22,7 @@ import ChooseRooms from './pages/Quiz/ChooseRoom';
 import Consolation from './pages/consolation/Consolation';
 import MyDesigns from './pages/mydesigns/MyDesign';
 import UploadDocuments from './pages/upload/UploadDocument';
+import MyOrders from './pages/MyOrders/myOrders';
 
 
 const Layout = () => {
@@ -59,6 +60,7 @@ const Layout = () => {
             <Route path='/consolation' element={<Consolation />} />
             <Route path='/mydesign' element={<MyDesigns />} />
             <Route path='/uploaddesign&document' element={<UploadDocuments />} />
+            <Route path='/myorders' element={<MyOrders />} />
           </Routes>
         </div>
       </div>
