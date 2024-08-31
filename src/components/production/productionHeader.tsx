@@ -8,7 +8,7 @@ const ProductionHeader: React.FC<{ renderComponent: React.ReactNode }> = ({ rend
     const [isOpen, setIsOpen] = useState(false);
 
     const categories = [
-        { name: 'Factories', img: 'Frame 919.png' },
+        { name: 'Execution', img: 'industry.png' },
         { name: 'False ceiling', img: 'Frame 920.png' },
         { name: 'Painting', img: 'Frame 918.png' },
         { name: 'Loose Furniture', img: 'Frame 917.png' },

@@ -14,12 +14,12 @@ import PaintingComponent from '../../components/production/Painting/painting';
 const ProductionPage: React.FC = () => {
     const [selectedCategory, setSelectedCatagory] = useRecoilState(selectedCategoryState);
     useEffect(()=>{
-        setSelectedCatagory('Factories')
+        setSelectedCatagory('Execution')
     },[])
 
     let renderComponent;
     switch (selectedCategory) {
-        case 'Factories':
+        case 'Execution':
             renderComponent = <FactoriesComponent/>;
             break;
         case 'False ceiling':

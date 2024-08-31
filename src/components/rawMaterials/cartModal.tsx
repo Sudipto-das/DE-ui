@@ -41,7 +41,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => 
                                     <div key={item.id} className="flex items-center mb-4 p-4 bg-white rounded-lg shadow">
                                         <img src={item.image} alt={item.title} className="w-24 h-24 object-cover mr-4 md:mr-6" />
                                         <div>
-                                            <h2 className="text-lg md:text-xl font-semibold mb-1 md:mb-2">{item.title}</h2>
+                                            <h2 className="text-lg md:text-xl font-semibold mb-1 md:mb-2">{item.name}</h2>
                                             <p className="text-gray-600 text-sm md:text-base mb-1 md:mb-2">{item.description}</p>
                                             <div className="flex items-center gap-2 md:gap-3">
                                                 <p className="text-gray-800 font-semibold">Price: ${item.price}</p>

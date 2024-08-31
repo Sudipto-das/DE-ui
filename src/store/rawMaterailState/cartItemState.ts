@@ -2,7 +2,7 @@ import { atom } from "recoil"
 
  export interface cartItem {
     id: string,
-    title: string,
+    name: string,
     description: string,
     price: number,
     category:string,
