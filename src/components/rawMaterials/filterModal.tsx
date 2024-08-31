@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { products } from '../../common/product';
+import { product } from '../../store/rawMaterailState/productState';
 
 interface FilterModalProps {
     isOpen: boolean;
     onClose: (selectedFilters: { categories: string[]; priceRange: string[] }) => void;
+    products:product[]
 }
-
-const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose }) => {
+const FilterModal: React.FC<FilterModalProps> = ({ isOpen, onClose,products }) => {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedPriceRange, setSelectedPriceRange] = useState<string[]>([]);
 

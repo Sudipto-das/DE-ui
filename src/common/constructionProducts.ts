@@ -1,13 +1,5 @@
-export type product = {
-    id:string
-    name:string;
-    description:string;
-    price:number;
-    rating:number;
-    image:string;
-    category:string
-}
-export const products = [
+
+export const constructionProducts = [
     {
         id:'1',
         name: 'Steel Rod',
