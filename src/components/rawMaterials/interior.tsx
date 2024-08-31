@@ -1,5 +1,4 @@
 import ProductList from "./productList"
-import { interiorProducts } from "../../common/interiorProducts"
 import { product } from "../../store/rawMaterailState/productState"
 interface InteriorComponentProps {
     products:product[]
