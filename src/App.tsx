@@ -24,6 +24,7 @@ import MyDesigns from './pages/mydesigns/MyDesign';
 import UploadDocuments from './pages/upload/UploadDocument';
 import MyOrders from './pages/MyOrders/myOrders';
 import CartPage from './components/rawMaterials/cartModal';
+import CheckoutComponent from './components/rawMaterials/checkout/chcekout';
 
 
 const Layout = () => {
@@ -49,7 +50,7 @@ const Layout = () => {
             <Route path="/" element={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/production-Installation" element={<ProductionPage />} />
-            <Route path="/raw-materials" element={<RawMaterials />} />
+            <Route path="/raw-materials/*" element={<RawMaterialsLayout />} />
             <Route path="/inspirations" element={<InspirationsPage />} />
             <Route path="/help-support" element={<HelpAndSupport />} />
             <Route path="/finance-your-project" element={<FinancePage />} />
@@ -77,6 +78,14 @@ const ProjectLayout = () => {
     </Routes>
   );
 };
+const RawMaterialsLayout = () => {
+  return (
+    <Routes>
+      <Route path='/' element={<RawMaterials />} />
+      <Route path='/checkout' element={<CheckoutComponent />} />
+    </Routes>
+  )
+}
 const App = () => {
   const queryClient = new QueryClient();
   return (
