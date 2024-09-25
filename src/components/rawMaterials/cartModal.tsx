@@ -1,85 +1,98 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { cartItemState } from '../../store/rawMaterailState/cartItemState';
 
-interface CartModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    cartItems: any[];
-}
-
-const CartModal: React.FC<CartModalProps> = ({ isOpen, onClose, cartItems }) => {
-    if (!isOpen) return null;
+const CartPage: React.FC = () => {
+    const cartItems = useRecoilValue(cartItemState);
+    const navigate = useNavigate();
 
     const cartData = {
         totalItems: cartItems.reduce((acc, item) => acc + (item.quantity ?? 1), 0),
         subtotal: cartItems.reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0),
         shippingCost: 10, // example value
         tax: 5, // example value
-        total: cartItems.reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0) + 15, // example calculation
+        total: cartItems.reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0) + 10 + 5, // example calculation
         promotionCode: 'SAVE20',
         promotionDiscount: 20,
-        grandTotal: cartItems.reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0) - 20 + 15, // example calculation
+        grandTotal: cartItems.reduce((acc, item) => acc + item.price * (item.quantity ?? 1), 0) - 20 + 10 + 5, // example calculation
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center md:justify-end items-center top-14">
-            <div className="bg-white p-4 rounded-lg shadow-lg w-full md:w-[75%] md:mr-12 2xl:max-h-full overflow-y-auto max-h-[88%]">
-                <div className="container mx-auto p-2 md:p-3 relative">
-                    <button
-                        onClick={onClose}
-                        className="absolute top-5 right-4 "
-                    >
-                        <img src="close.png" width={24} alt="close" />
-                    </button>
-                    <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-8 text-center md:text-start">Shopping Cart</h1>
-                    {cartItems.length === 0 && (
-                        <div className="flex items-center justify-center font-bold text-lg">Cart is Empty</div>
-                    )}
-                    {cartItems.length > 0 && (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
-                            <div className="overflow-y-auto h-96 md:h-[30rem] 2xl:h-[38rem]">
-                                {cartItems.map((item) => (
-                                    <div key={item.id} className="flex items-center mb-4 p-4 bg-white rounded-lg shadow">
-                                        <img src={item.image} alt={item.title} className="w-24 h-24 object-cover mr-4 md:mr-6" />
-                                        <div>
-                                            <h2 className="text-lg md:text-xl font-semibold mb-1 md:mb-2">{item.name}</h2>
-                                            <p className="text-gray-600 text-sm md:text-base mb-1 md:mb-2">{item.description}</p>
-                                            <div className="flex items-center gap-2 md:gap-3">
-                                                <p className="text-gray-800 font-semibold">Price: ${item.price}</p>
-                                                <p className="text-gray-800 font-semibold">Quantity: {item.quantity}</p>
-                                                <button className="text-red-500 hover:text-red-700">
-                                                    <img src="delete.png" width={18} alt="Delete" />
-                                                </button>
-                                            </div>
+        <div className="w-full  bg-gray-50 p-6 md:p-8 lg:p-10">
+            <div className="">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-800">Shopping Cart</h1>
+
+                {cartItems.length === 0 ? (
+                    <div className="flex items-center justify-center text-xl font-semibold text-gray-600 h-64">
+                        Your Cart is Empty
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div className="overflow-y-auto h-[30rem] md:h-[35rem]">
+                            {cartItems.map((item) => (
+                                <div key={item.id} className="flex items-start mb-6 p-4 bg-gray-100 rounded-lg shadow-md">
+                                    <img src={item.image} alt={item.name} className="w-24 h-24 object-cover mr-4" />
+                                    <div className="flex-1">
+                                        <h2 className="text-xl font-semibold mb-2 text-gray-800">{item.name}</h2>
+                                        <p className="text-gray-600 mb-3">{item.description}</p>
+                                        <div className="flex items-center justify-between">
+                                            <p className="text-lg font-semibold text-gray-800">Price: ${item.price.toFixed(2)}</p>
+                                            <p className="text-lg font-semibold text-gray-800">Qty: {item.quantity}</p>
+                                            <button className="text-red-500 hover:text-red-700">
+                                                <img src="delete.png" width={20} alt="Delete" />
+                                            </button>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                            <div className="bg-white p-2 md:p-6 rounded-lg shadow">
-                                <h2 className="text-xl md:text-2xl font-bold mb-2 md:mb-4">Order Summary</h2>
-                                <div className="space-y-1 md:space-y-2">
-                                    <p className="text-gray-700">Total Items: {cartData.totalItems}</p>
-                                    <p className="text-gray-700">Subtotal: ${cartData.subtotal.toFixed(2)}</p>
-                                    <p className="text-gray-700">Shipping Cost: ${cartData.shippingCost.toFixed(2)}</p>
-                                    <p className="text-gray-700">Tax: ${cartData.tax.toFixed(2)}</p>
-                                    <p className="text-gray-700 font-semibold">Total: ${cartData.total.toFixed(2)}</p>
-                                    {cartData.promotionCode && (
-                                        <p className="text-gray-700">Promotion Code: {cartData.promotionCode}</p>
-                                    )}
-                                    {cartData.promotionDiscount > 0 && (
-                                        <p className="text-green-600 font-semibold">Promotion Discount: -${cartData.promotionDiscount.toFixed(2)}</p>
-                                    )}
-                                    <p className="text-xl md:text-2xl font-bold">Grand Total: ${cartData.grandTotal.toFixed(2)}</p>
                                 </div>
-                                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-4 w-full">
-                                    Proceed to Checkout
-                                </button>
-                            </div>
+                            ))}
                         </div>
-                    )}
-                </div>
+                        <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+                            <h2 className="text-2xl font-bold mb-4 text-gray-800">Order Summary</h2>
+                            <div className="space-y-2">
+                                <div className="flex justify-between text-lg text-gray-700">
+                                    <span>Total Items:</span>
+                                    <span>{cartData.totalItems}</span>
+                                </div>
+                                <div className="flex justify-between text-lg text-gray-700">
+                                    <span>Subtotal:</span>
+                                    <span>${cartData.subtotal.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between text-lg text-gray-700">
+                                    <span>Shipping Cost:</span>
+                                    <span>${cartData.shippingCost.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between text-lg text-gray-700">
+                                    <span>Tax:</span>
+                                    <span>${cartData.tax.toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between text-lg text-gray-800 font-semibold">
+                                    <span>Total:</span>
+                                    <span>${cartData.total.toFixed(2)}</span>
+                                </div>
+                                {cartData.promotionCode && (
+                                    <div className="flex justify-between text-lg text-green-600 font-semibold">
+                                        <span>Promo ({cartData.promotionCode}):</span>
+                                        <span>- ${cartData.promotionDiscount.toFixed(2)}</span>
+                                    </div>
+                                )}
+                                <div className="flex justify-between text-xl text-gray-800 font-bold">
+                                    <span>Grand Total:</span>
+                                    <span>${cartData.grandTotal.toFixed(2)}</span>
+                                </div>
+                            </div>
+                            <button
+                                className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold py-3 px-6 rounded-lg mt-6 w-full transition-colors duration-300"
+                                onClick={() => navigate('/raw-materials/checkout')}
+                            >
+                                Proceed to Checkout
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
 };
 
-export default CartModal;
+export default CartPage;

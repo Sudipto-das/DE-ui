@@ -11,7 +11,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
     name,
     email,
     phone,
-    bio,
+    
 }) => {
     const [isEditing, setIsEditing] = useState(false);
 
@@ -28,7 +28,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                 <h3 className="text-lg font-semibold font-inter">Personal information</h3>
                 <EditButton isEditing={isEditing} onClick={isEditing ? saveChanges : toggleEdit} />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <p className="text-sm text-gray-500">First Name</p>
                     {isEditing ? (
@@ -81,19 +81,7 @@ const PersonalInformation: React.FC<PersonalInformationProps> = ({
                         <p className="font-medium font-inter">{phone}</p>
                     )}
                 </div>
-                <div>
-                    <p className="text-sm text-gray-500 font-inter">Bio</p>
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            className="block w-full p-2 border rounded"
-                            value={bio}
-
-                        />
-                    ) : (
-                        <p className="font-medium font-inter">{bio}</p>
-                    )}
-                </div>
+               
             </div>
         </div>
     )

@@ -23,6 +23,7 @@ import Consolation from './pages/consolation/Consolation';
 import MyDesigns from './pages/mydesigns/MyDesign';
 import UploadDocuments from './pages/upload/UploadDocument';
 import MyOrders from './pages/MyOrders/myOrders';
+import CartPage from './components/rawMaterials/cartModal';
 
 
 const Layout = () => {
@@ -61,6 +62,7 @@ const Layout = () => {
             <Route path='/mydesign' element={<MyDesigns />} />
             <Route path='/uploaddesign&document' element={<UploadDocuments />} />
             <Route path='/myorders' element={<MyOrders />} />
+            <Route path='/cart' element={<CartPage />} />
           </Routes>
         </div>
       </div>

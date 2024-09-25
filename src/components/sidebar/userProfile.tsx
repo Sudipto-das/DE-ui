@@ -40,7 +40,7 @@ const UserProfile: React.FC = () => {
     const user: User = {
         name: 'Nguyen Duy Phuoc',
         experience: '5 years',
-        role: 'Designer',
+        role: 'Relationship Manager',
         rating: 4,
         category: 'Premium',
         projects: 10,
@@ -63,7 +63,7 @@ const UserProfile: React.FC = () => {
                         className="w-16 h-16 rounded-full mb-2"
                     />
                     <div className="flex flex-col">
-                        <span className="font-bold text-sm font-inter">{profileData?.user?.Name}</span>
+                        <span className="font-bold text-sm font-inter">{profileData?.user?.Manager}</span>
                         <span className="text-gray-500 text-xs font-inter font-medium">{user.role}</span>
                         <div className="mt-2">
                             <Rating rating={user.rating} />

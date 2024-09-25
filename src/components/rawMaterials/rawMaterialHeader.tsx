@@ -2,19 +2,21 @@ import React from 'react';
 import FilterButton from './filterButton';
 import { useRecoilValue } from 'recoil';
 import { cartItemState } from '../../store/rawMaterailState/cartItemState';
+import { useNavigate } from 'react-router-dom';
 
 interface RawMaterialHeaderProps {
     onOpenFilterModal: () => void;
-    onOpenCartModal: () => void;
     onSelectTab: (tab: 'construction' | 'interior') => void;
     selectedTab: 'construction' | 'interior';
 }
 
-const RawMaterialHeader: React.FC<RawMaterialHeaderProps> = ({ onOpenFilterModal, onOpenCartModal, onSelectTab, selectedTab }) => {
-    const cartItems = useRecoilValue(cartItemState)
+const RawMaterialHeader: React.FC<RawMaterialHeaderProps> = ({ onOpenFilterModal, onSelectTab, selectedTab }) => {
+    const cartItems = useRecoilValue(cartItemState);
+    const navigate = useNavigate();
+
     return (
-        <div className='flex justify-between items-center mb-5 border px-5 py-4 bg-white shadow-md rounded-lg'>
-            <div className='flex gap-8'>
+        <div className='flex flex-col sm:flex-row justify-between items-center mb-5 border px-5 py-4 bg-white shadow-lg rounded-lg'>
+            <div className='flex gap-4 sm:gap-8 mb-3 sm:mb-0'>
                 <button
                     className={`uppercase text-sm font-bold cursor-pointer transition-colors duration-200 ${
                         selectedTab === 'construction'
@@ -36,7 +38,7 @@ const RawMaterialHeader: React.FC<RawMaterialHeaderProps> = ({ onOpenFilterModal
                     Interior
                 </button>
             </div>
-            <div className='flex gap-6 items-center'>
+            <div className='flex gap-4 sm:gap-6 items-center'>
                 <FilterButton onClick={onOpenFilterModal} />
                 <div className='relative cursor-pointer'>
                     <img
@@ -44,11 +46,13 @@ const RawMaterialHeader: React.FC<RawMaterialHeaderProps> = ({ onOpenFilterModal
                         alt="Cart"
                         width={32}
                         className="hover:scale-110 transition-transform duration-200"
-                        onClick={onOpenCartModal}
+                        onClick={() => navigate('/cart')}
                     />
-                    <span className='absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2'>
-                        {cartItems.length}
-                    </span>
+                    {cartItems.length > 0 && (
+                        <span className='absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2'>
+                            {cartItems.length}
+                        </span>
+                    )}
                 </div>
             </div>
         </div>

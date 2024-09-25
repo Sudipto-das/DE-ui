@@ -28,7 +28,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, category,
     return (
         <div>
             <h2 className="text-xl font-semibold mb-4 font-inter">My Profile</h2>
-            <div className="flex  items-center justify-between mb-6 p-4 border rounded-lg ">
+            <div className="flex  flex-col gap-3 md:flex-row items-center justify-between mb-6 p-4 border rounded-lg ">
                 <div className="flex">
                     <img
                         src="/Avatar.png"

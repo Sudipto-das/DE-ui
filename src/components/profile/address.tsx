@@ -22,7 +22,7 @@ const Address: React.FC= () => {
                     <h3 className="text-lg font-semibold font-inter">Address</h3>
                     <EditButton isEditing={isEditing} onClick={isEditing ? saveChanges : toggleEdit} />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                         <p className="text-sm text-gray-500 font-inter">Country</p>
                         {isEditing ? (
