@@ -48,7 +48,7 @@ const ProfilePage: React.FC = () => {
       {profileData.user ? (
         <Profile
           name={profileData.user?.Name}
-          role="Product Designer"
+          role={profileData.user.AccountNum}
           email={profileData.user?.Email}
           phone={profileData.user?.Phone}
           bio="Product Designer"

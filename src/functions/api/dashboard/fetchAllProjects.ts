@@ -1,24 +1,18 @@
 import { apiClient } from "../../../api";
 
 async function getAllProjects(user: { RecId: string, Session: string, Token: string }) {
-
     const data = new URLSearchParams({
-        Id: user.RecId,
+        Id: user.RecId,  // Yeh Id correct hai?
         Session: user.Session,
         Token: user.Token,
-    })
+    });
 
     try {
-        const response = await apiClient.get("/custTable/details?"+ data)
-            .then((response) => response.data)
-            .catch((error) => error.response.data);
-
-        return response;
-
+        const response = await apiClient.get("/custTable/details?" + data.toString());
+        console.log(response.data)
+        return response.data;  // Sirf response.data ko return karein
     } catch (error: any) {
-        return error;
-    }    
+        throw new Error(error.response?.data || "Error fetching projects");
+    }
 }
-
-
-export default getAllProjects;
+export default getAllProjects

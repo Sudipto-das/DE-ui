@@ -17,31 +17,42 @@ const Dashboard: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false)
     const setStatus = useSetRecoilState(projectStatusAtom);
     useEffect(() => {
-
         const fetchData = async () => {
-
-            setIsLoading(true)
-            console.log(CurrentUser?.Id)
+            setIsLoading(true);
+            
+            
             if (!CurrentUser?.Id) {
+                console.error('RecId missing in CurrentUser');
                 return;
             }
+    
             try {
                 const response = await getAllProjects(CurrentUser);
+                console.log(response)
                 const transformedData = transformApiResponse(response.data);
                 setProjects(transformedData);
-                setStatus(transformedData.projDetails[0].STATUS)
-                setActiveProject(transformedData.projDetails[0].RECID)
-                setIsLoading(false)
-            } catch (error) {
-                raiseToast('Error fetching projects');
+    
+                if (transformedData.projDetails.length > 0) {
+                    setStatus(transformedData.projDetails[0].STATUS);
+                    setActiveProject(transformedData.projDetails[0].RECID);
+                }
+    
+                setIsLoading(false);
+            } catch (error: any) {
+                
+                raiseToast(error.message || 'Error fetching projects');
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
         };
+    
         if (projects.projDetails.length === 0) {
             fetchData();
         }
     }, [CurrentUser]);
+    
+    
+    
 
 
     return <>

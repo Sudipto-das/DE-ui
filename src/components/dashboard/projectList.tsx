@@ -14,7 +14,7 @@ const ProjectsList: React.FC<ProjectsListProps> = ({projects,isLoading}) => {
         <div className='p-4 border rounded-lg mt-4 font-inter h-[calc(100vh-8rem)] md:h-[calc(100vh-13rem)]'>
             <div className='flex justify-between items-center mb-1'>
                 <h1 className='text-xl font-bold text-slate-600'>Projects</h1>
-                <button className='text-blue-500 hover:underline text-sm font-semibold'>SEE MORE</button>
+                
             </div>
             <div className="w-full h-[95%] flex flex-col overflow-y-auto">
                 {isLoading ? (

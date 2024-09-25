@@ -3,18 +3,22 @@ import SearchBox from '../ui/search';
 import AiIcon from './aiIcon';
 import { useNavigate } from 'react-router-dom';
 import ProfileModal from './profileModal';
+import CreateProjectComponent from '../project/createProject';
 
 
 const Navbar: React.FC = () => {
-    
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-    const navigate = useNavigate()
+    const [isCreateProjectModalOpen, setIsCreateProjectModalOpen] = useState(false); // State for the create project modal
+    const navigate = useNavigate();
+
     const toggleProfileModal = () => {
         setIsProfileModalOpen(prevState => !prevState);
     };
+
     const handleClick = () => {
-        navigate('/updates')
-    }
+        navigate('/updates');
+    };
+
     return (
         <div className="p-4 flex justify-between items-center w-full flex-col md:flex-row font-inter">
             <div className="w-[85%] flex ml-10 md:w-3/5">
@@ -22,6 +26,7 @@ const Navbar: React.FC = () => {
             </div>
             <div className="flex items-center gap-4 mt-2 ">
                 <button
+                    onClick={() => setIsCreateProjectModalOpen(true)} // Open modal on click
                     className="text-white px-4 py-2 rounded-[0.7rem] font-semibold text-xs md:text-sm"
                     style={{
                         background: 'linear-gradient(to right,  #113ea5,#479E82)',
@@ -33,7 +38,7 @@ const Navbar: React.FC = () => {
                     <AiIcon />
                     <div className="relative">
                         <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full"></span>
-                        <button className="text-gray-600 hover:text-gray-800 " onClick={handleClick}>
+                        <button className="text-gray-600 hover:text-gray-800" onClick={handleClick}>
                             <img
                                 src="/notification.png"
                                 alt="Vector"
@@ -48,32 +53,40 @@ const Navbar: React.FC = () => {
                             className="w-8 h-8 rounded-full "
                         />
                         <button onClick={toggleProfileModal}>
-                            {!isProfileModalOpen ? <svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="lucide lucide-chevron-down">
-                                <path d="m6 9 6 6 6-6" />
-                            </svg> : <svg xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="lucide lucide-chevron-up">
-                                <path d="m18 15-6-6-6 6" />
-                            </svg>}
+                            {!isProfileModalOpen ? (
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-chevron-down">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="24" height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="lucide lucide-chevron-up">
+                                    <path d="m18 15-6-6-6 6" />
+                                </svg>
+                            )}
                             {isProfileModalOpen && <ProfileModal />}
                         </button>
                     </div>
                 </div>
             </div>
+
+            {isCreateProjectModalOpen && ( // Render the modal if it's open
+                <CreateProjectComponent isOpen={isCreateProjectModalOpen} setIsOpen={setIsCreateProjectModalOpen} />
+            )}
         </div>
     );
 };
