@@ -72,7 +72,7 @@ const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET
               <h3><span className='font-semibold'>Type</span>: {TYPE || "NA"}</h3>
             </div>
             <div className='flex items-center'>
-              <img src='square-blue.png' className="w-3.5 h-3.5 mr-3" />
+              <img src='status.png' className="w-3.5 h-3.5 mr-3" />
               <h3><span className='font-semibold'>Status</span>: {getStatusString(STATUS) || "NA"}</h3>
             </div>
           </div>
