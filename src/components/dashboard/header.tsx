@@ -12,12 +12,12 @@ const HeaderData = [
     },
     {
         title: 'My design',
-        subtitle: '5568',
+        subtitle: '0',
         icon: 'Frame2.png'
     },
     {
         title: 'Upload design & document',
-        subtitle: '5672',
+        subtitle: '0',
         icon: 'Frame3.png'
     },
 ];

@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import addComment from '../../functions/api/comment/addComment';
 import { AppContext } from '../../context/Context';
 import { useRecoilValue } from 'recoil';
-import { projectRecIdState } from '../../store/projectsState/projectRecId';
 import Loader from '../ui/loader';
+import { activeProjectAtom } from '../../store/projectsState/activeProjectState';
 
 const CommentInput: React.FC = () => {
     const [textInput, setTextInput] = useState<string>('');
@@ -11,7 +11,7 @@ const CommentInput: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
-    const projectRecId = useRecoilValue(projectRecIdState);
+    const projectRecId = useRecoilValue(activeProjectAtom);
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleImageClick = () => {
@@ -84,7 +84,7 @@ const CommentInput: React.FC = () => {
             setLoading(false);
         }
     };
-
+    console.log(projectRecId)
     return (
         <div className="flex items-center border-t p-4 gap-2 justify-center">
             <img

@@ -10,9 +10,12 @@ import { projectStatusAtom } from "../../store/projectStatus/porjectStatusAtom";
 import { projectDataState } from "../../store/projectsState/projectDataState";
 import { activeProjectAtom } from "../../store/projectsState/activeProjectState";
 
+
 const Dashboard: React.FC = () => {
+
     const setActiveProject = useSetRecoilState(activeProjectAtom)
     const [projects, setProjects] = useRecoilState(projectDataState);
+
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     const [isLoading, setIsLoading] = useState(false)
     const setStatus = useSetRecoilState(projectStatusAtom);
@@ -33,6 +36,7 @@ const Dashboard: React.FC = () => {
                 setProjects(transformedData);
     
                 if (transformedData.projDetails.length > 0) {
+                    
                     setStatus(transformedData.projDetails[0].STATUS);
                     setActiveProject(transformedData.projDetails[0].RECID);
                 }
