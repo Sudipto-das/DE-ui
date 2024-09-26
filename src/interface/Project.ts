@@ -4,10 +4,11 @@ export interface ProjectDetail {
   DESCRIPTION: string;
   STARTDATE: string;
   ENDDATE: string;
-  STATUS: number;
+  STAGE: number;
   BUDGET: number;
   CATEGORY: number;
   TYPE: number;
+  SIZE: number
   DLVLOCATION: string;
   PROJMANAGER: string;
   MODIFIEDDATETIME: string;

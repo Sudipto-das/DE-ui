@@ -9,7 +9,7 @@ import { activeProjectAtom } from '../../store/projectsState/activeProjectState'
 import { projectRecIdState } from '../../store/projectsState/projectRecId';
 import { getStatusString } from '../../utils/statusConverter';
 
-const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET, STARTDATE, ENDDATE, TYPE, ASSIGNEDMANAGER, STATUS }) => {
+const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET, STARTDATE, ENDDATE, TYPE, ASSIGNEDMANAGER, STAGE,SIZE }) => {
   const [activeProject, setActiveProject] = useRecoilState(activeProjectAtom);
   const setStatus = useSetRecoilState(projectStatusAtom);
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET
 
   const handleCommentChange = () => {
     setProjectRecId(RECID as string);
-    setStatus(STATUS);
+    setStatus(STAGE);
   };
 
   const handleCardClick = () => {
@@ -63,7 +63,7 @@ const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET
             </div>
             <div className='flex items-center'>
               <img src='square-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Size</span>: {TYPE || "NA"}</h3>
+              <h3><span className='font-semibold'>Size</span>: {SIZE || "NA"}</h3>
             </div>
           </div>
           <div>
@@ -73,7 +73,7 @@ const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET
             </div>
             <div className='flex items-center'>
               <img src='status.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Status</span>: {getStatusString(STATUS) || "NA"}</h3>
+              <h3><span className='font-semibold'>Status</span>: {getStatusString(STAGE) || "NA"}</h3>
             </div>
           </div>
         </div>

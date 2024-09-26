@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
     
                 if (transformedData.projDetails.length > 0) {
                     
-                    setStatus(transformedData.projDetails[0].STATUS);
+                    setStatus(transformedData.projDetails[0].STAGE);
                     setActiveProject(transformedData.projDetails[0].RECID);
                 }
     
