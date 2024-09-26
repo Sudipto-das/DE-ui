@@ -107,7 +107,8 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                                     required
                                 >
                                     <option value="">Select project type</option>
-                                    <option value="G.G+1">G.G+1</option>
+                                    <option value="G">G</option>
+                                    <option value="G+1">G+1</option>
                                     <option value="G+2">G+2</option>
                                 </select>
                             </div>
