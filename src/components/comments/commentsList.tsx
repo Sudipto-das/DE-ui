@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react';
 import CommentCard from './commentCard';
 import CommentInput from './commentInput';
 import { AppContext } from '../../context/Context';
-import CommentsInterface from '../../interface/Comments';
-import { useRecoilValue } from 'recoil';
+
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Loader from '../ui/loader';
 import { projectRecIdState } from '../../store/projectsState/projectRecId';
 import { projectDataState } from '../../store/projectsState/projectDataState';
 import getAllComments from '../../functions/api/comment/fetchComments';
+import { commentState } from '../../store/commentsState';
 
 
 const CommentsList = () => {
     const ProjectRecIdState = useRecoilValue(projectRecIdState);
     const projects = useRecoilValue(projectDataState);
-    const [comments, setComments] = useState<CommentsInterface[]>([]);
+    const [comments, setComments] = useRecoilState(commentState);
     const [isLoading, setLoading] = useState(false);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     let ProjectRecId = ProjectRecIdState === '' ? projects.projDetails[0]?.RECID ?? 0 : ProjectRecIdState;
@@ -53,7 +54,7 @@ const CommentsList = () => {
                             </div>
                         ) : (
                             <div className='overflow-y-auto flex-grow'>
-                                {comments.map((comment, index) => (
+                                {comments.slice().reverse().map((comment, index) => (
                                     <CommentCard key={index} {...comment} />
                                 ))}
                             </div>

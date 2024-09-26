@@ -1,12 +1,14 @@
 import React, { useState, useRef } from 'react';
 import addComment from '../../functions/api/comment/addComment';
 import { AppContext } from '../../context/Context';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Loader from '../ui/loader';
 import { activeProjectAtom } from '../../store/projectsState/activeProjectState';
+import { commentState } from '../../store/commentsState';
 
 const CommentInput: React.FC = () => {
     const [textInput, setTextInput] = useState<string>('');
+    const setComments = useSetRecoilState(commentState)
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -52,7 +54,7 @@ const CommentInput: React.FC = () => {
         }
 
         console.log(fileField);
-        
+
 
         try {
             setLoading(true);
@@ -73,6 +75,7 @@ const CommentInput: React.FC = () => {
 
             if (response.status === 200) {
                 raiseToast('Comment added successfully', 'success');
+                setComments((prevComments) => [...prevComments,response.data]);
                 setTextInput('');
                 setSelectedFile(null);
             } else {
@@ -113,7 +116,7 @@ const CommentInput: React.FC = () => {
                     onClick={handleSubmit}
                     className="bg-[#E6E8EC] text-[#23262F] px-4 py-2 rounded-lg hover:none"
                 >
-                   {loading ? <Loader height={30} width={30}  /> :  'Send'}
+                    {loading ? <Loader height={30} width={30} /> : 'Send'}
                 </button>
             </div>
             {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
