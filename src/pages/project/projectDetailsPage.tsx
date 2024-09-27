@@ -10,7 +10,7 @@ const ProjectDetailsPage = () => {
   const projects = useRecoilValue(projectDataState)
   console.log(projects)
   // Find the project by ID
-  const project = projects.projDetails.find((project: { RECID: string | undefined; }) => project.RECID === id);
+  const project = projects.find((project: { RecId: string | undefined; }) => project.RecId === id);
 
   if (!project) {
     return <div>Project not found</div>;

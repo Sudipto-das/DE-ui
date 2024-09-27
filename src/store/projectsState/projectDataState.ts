@@ -1,10 +1,9 @@
 import { atom } from "recoil";
-import { ProjectsInterface } from "../../interface/Project";
+import { ProjectDetail } from "../../interface/Project";
 
 
-export const projectDataState = atom<ProjectsInterface>({
+
+export const projectDataState = atom<ProjectDetail[]>({
   key: 'projectDataState',
-  default: {
-    projDetails: [],
-  },
+  default: []
 });

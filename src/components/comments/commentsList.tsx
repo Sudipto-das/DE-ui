@@ -17,7 +17,7 @@ const CommentsList = () => {
     const [comments, setComments] = useRecoilState(commentState);
     const [isLoading, setLoading] = useState(false);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
-    let ProjectRecId = ProjectRecIdState === '' ? projects.projDetails[0]?.RECID ?? 0 : ProjectRecIdState;
+    let ProjectRecId = ProjectRecIdState === '' ? projects[0]?.RecId ?? 0 : ProjectRecIdState;
 
     useEffect(() => {
         const fetchData = async () => {

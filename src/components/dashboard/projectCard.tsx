@@ -9,7 +9,7 @@ import { activeProjectAtom } from '../../store/projectsState/activeProjectState'
 import { projectRecIdState } from '../../store/projectsState/projectRecId';
 import { getStatusString } from '../../utils/statusConverter';
 
-const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET, STARTDATE, ENDDATE, TYPE, ASSIGNEDMANAGER, STAGE,SIZE }) => {
+const ProjectCard: React.FC<ProjectDetail> = ({ Name, RecId, Description, Budget, StartDate, EndDate, Type, DesignManager, Stage,Size }) => {
   const [activeProject, setActiveProject] = useRecoilState(activeProjectAtom);
   const setStatus = useSetRecoilState(projectStatusAtom);
   const navigate = useNavigate();
@@ -21,59 +21,59 @@ const ProjectCard: React.FC<ProjectDetail> = ({ NAME, RECID, DESCRIPTION, BUDGET
   };
 
   const handleCommentChange = () => {
-    setProjectRecId(RECID as string);
-    setStatus(STAGE);
+    setProjectRecId(RecId as string);
+    setStatus(Stage);
   };
 
   const handleCardClick = () => {
-    setActiveProject(RECID); // Set the active project
+    setActiveProject(RecId); // Set the active project
     if (location.pathname === '/dashboard') {
       handleCommentChange();
     } else if (location.pathname === '/projects') {
-      handleClick(RECID + '');
+      handleClick(RecId + '');
     }
   };
 
-  const isActive = location.pathname === '/dashboard' && activeProject === RECID;
+  const isActive = location.pathname === '/dashboard' && activeProject === RecId;
 
   return (
     <div className={`flex flex-col border ${isActive && 'border-2 '} shadow-sm border-gray-300 rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer font-inter`}
       onClick={handleCardClick}>
-      <img src={"/Rectangle 1.png"} alt={NAME} className="w-32 h-32 object-cover pt-2 md:pt-0" />
+      <img src={"/Rectangle 1.png"} alt={Name} className="w-32 h-32 object-cover pt-2 md:pt-0" />
       <div className="p-6 flex flex-col justify-between w-full">
         <div>
-          <h2 className="text-xl font-semibold mb-1 text-[#353945]">{NAME || 'NA'}</h2>
-          <p className="text-sm text-gray-600 mb-2">{DESCRIPTION || 'NA'}</p>
+          <h2 className="text-xl font-semibold mb-1 text-[#353945]">{Name || 'NA'}</h2>
+          <p className="text-sm text-gray-600 mb-2">{Description || 'NA'}</p>
         </div>
         <div className="text-sm text-[#777E90] flex justify-between flex-col md:flex-row ">
           <div>
             <div className='flex items-center '>
               <img src='/user-shield.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Designer</span>: {ASSIGNEDMANAGER?.DesignManager || "NA"}</h3>
+              <h3><span className='font-semibold'>Designer</span>: {DesignManager || "NA"}</h3>
             </div>
             <div className='flex items-center'>
               <img src='/calendar-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Duration</span>: {calculateDuration(STARTDATE, ENDDATE) || "NA"}</h3>
+              <h3><span className='font-semibold'>Duration</span>: {calculateDuration(StartDate, EndDate) || "NA"}</h3>
             </div>
           </div>
           <div>
             <div className='flex items-center'>
               <img src='/coin-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Project Budget</span>: {BUDGET || "NA"} $</h3>
+              <h3><span className='font-semibold'>Project Budget</span>: {Budget || "NA"} $</h3>
             </div>
             <div className='flex items-center'>
               <img src='square-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Size</span>: {SIZE || "NA"}</h3>
+              <h3><span className='font-semibold'>Size</span>: {Size || "NA"}</h3>
             </div>
           </div>
           <div>
             <div className='flex items-center'>
               <img src='/coin-blue.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Type</span>: {TYPE || "NA"}</h3>
+              <h3><span className='font-semibold'>Type</span>: {Type || "NA"}</h3>
             </div>
             <div className='flex items-center'>
               <img src='status.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Status</span>: {getStatusString(STAGE) || "NA"}</h3>
+              <h3><span className='font-semibold'>Status</span>: {getStatusString(Stage) || "NA"}</h3>
             </div>
           </div>
         </div>

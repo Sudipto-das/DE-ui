@@ -9,8 +9,8 @@ async function getAllProjects(user: { RecId: string, Session: string, Token: str
 
     try {
         const response = await apiClient.get("/custTable/details?" + data.toString());
-        console.log(response.data)
-        return response.data;  // Sirf response.data ko return karein
+        
+        return response.data.data;  // Sirf response.data ko return karein
     } catch (error: any) {
         throw new Error(error.response?.data || "Error fetching projects");
     }

@@ -11,10 +11,10 @@ interface ProjectDetailsComponentProps {
 
 const ProjectDetailsComponent: React.FC<ProjectDetailsComponentProps> = ({ project }) => {
   const projectDetails = [
-    { title: 'Designer', subtitle: project.ASSIGNEDMANAGER?.DesignManager, icon: '/Avatar.png' },
-    { title: 'Duration', subtitle: calculateDuration(project.STARTDATE,project.ENDDATE) + " days", icon: '/date.png' },
-    { title: 'Budget', subtitle: project.BUDGET, icon: '/budget-breakdown.png' },
-    { title: 'Size', subtitle: project.TYPE, icon: '/measurement.png' },
+    { title: 'Designer', subtitle: project.DesignManager, icon: '/Avatar.png' },
+    { title: 'Duration', subtitle: calculateDuration(project.StartDate,project.EndDate) + " days", icon: '/date.png' },
+    { title: 'Budget', subtitle: project.Budget, icon: '/budget-breakdown.png' },
+    { title: 'Size', subtitle: project.Type, icon: '/measurement.png' },
   ];
   const images = ['/project/1.jpeg', '/project/2.jpg', '/project/3.jpg', '/project/4.jpg']
   
@@ -27,8 +27,8 @@ const ProjectDetailsComponent: React.FC<ProjectDetailsComponentProps> = ({ proje
 
       {/* Project Title and Description */}
       <div className="flex flex-col gap-3">
-        <h1 className="text-2xl font-bold">{project.NAME}</h1>
-        <p className="text-gray-600">{project.DESCRIPTION}</p>
+        <h1 className="text-2xl font-bold">{project.Name}</h1>
+        <p className="text-gray-600">{project.Description}</p>
       </div>
 
       {/* Project Details */}

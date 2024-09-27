@@ -19,7 +19,7 @@ const ProjectComponent: React.FC = () => {
             }
             try {
                 const response = await getAllProjects(CurrentUser);
-                setProjects(response.data);
+                setProjects(response.ProjDetails);
             } catch (error) {
                 raiseToast('Error fetching projects');
             } finally {
@@ -27,14 +27,14 @@ const ProjectComponent: React.FC = () => {
             }
         };
 
-        if (projects.projDetails.length === 0) {
+        if (projects.length === 0) {
             fetchData();
         }
     }, [CurrentUser, setProjects, raiseToast]);
 
 
 
-    if (!isLoading && projects.projDetails.length === 0) {
+    if (!isLoading && projects.length === 0) {
         return (
             <div className="flex items-center justify-center border rounded-lg" style={{ height: 'calc(94vh - 88px)' }}>
                 <div className="flex flex-col justify-center items-center gap-5">
