@@ -16,7 +16,7 @@ interface ProductCardProps {
     rating: number;
     image: string;
     category: string;
-    stock: number;
+    // stock: number;
 }
 
 const products = [...interiorProducts, ...constructionProducts];

@@ -4,8 +4,6 @@ import InteriorComponent from "../../components/rawMaterials/interior";
 import RawMaterialHeader from "../../components/rawMaterials/rawMaterialHeader";
 import FilterModal from "../../components/rawMaterials/filterModal";
 import CartModal from "../../components/rawMaterials/cartModal";
-import { useRecoilValue } from "recoil";
-import { cartItemState } from "../../store/rawMaterailState/cartItemState";
 import { product } from "../../store/rawMaterailState/productState";
 import { interiorProducts } from "../../common/interiorProducts";
 import { constructionProducts } from "../../common/constructionProducts";
@@ -13,9 +11,7 @@ import { constructionProducts } from "../../common/constructionProducts";
 const RawMaterials: React.FC = () => {
     const [selectedTab, setSelectedTab] = useState<'construction' | 'interior'>('construction');
     const [isOpen, setIsOpen] = useState(false);
-    const [isCartOpen, setIsCartOpen] = useState(false);
     const [filteredProducts, setFilteredProducts] = useState<product[]>([]);
-    const cartItems = useRecoilValue(cartItemState);
 
     // Filter modal open/close functions
     const openFilterModal = () => setIsOpen(true);
@@ -38,9 +34,6 @@ const RawMaterials: React.FC = () => {
         setFilteredProducts(filtered);
     };
 
-    // Cart modal open/close functions
-    const openCartModal = () => setIsCartOpen(true);
-    const closeCartModal = () => setIsCartOpen(false);
 
     // Tab selection handler
     const handleSelectTab = (tab: 'construction' | 'interior') => {
@@ -54,7 +47,7 @@ const RawMaterials: React.FC = () => {
         <div>
             <RawMaterialHeader 
                 onOpenFilterModal={openFilterModal} 
-                onOpenCartModal={openCartModal} 
+                 
                 onSelectTab={handleSelectTab} 
                 selectedTab={selectedTab}
             />
@@ -65,7 +58,7 @@ const RawMaterials: React.FC = () => {
 
             {/* Modals */}
             <FilterModal isOpen={isOpen} onClose={closeFilterModal} products={selectedTab === 'construction' ? constructionProducts : interiorProducts} />
-            <CartModal isOpen={isCartOpen} onClose={closeCartModal} cartItems={cartItems} />
+            <CartModal />
         </div>
     );
 };
