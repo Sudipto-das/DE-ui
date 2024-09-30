@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import MakePayment from './makePayment';
 
 interface CreateProjectComponentProps {
     isOpen: boolean;
@@ -15,6 +16,8 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
         Type: '',
     });
 
+    const [showPayment, setShowPayment] = useState(false); // To handle MakePayment visibility
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({
             ...formData,
@@ -25,14 +28,18 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Project created:', formData);
+        // Show the MakePayment component
+        setShowPayment(true);
+    };
+
+    const handleClose = () => {
         setIsOpen(false);
+        setShowPayment(false); // Ensure both modals are closed when needed
     };
 
     return (
         <>
-            
-
-            {isOpen && (
+            {isOpen && !showPayment && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <motion.div
                         className="bg-white rounded-lg shadow-lg w-full max-w-xl p-8"
@@ -100,7 +107,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                             <div>
                                 <label className="block text-gray-700 font-medium">Project Type</label>
                                 <select
-                                    name="projectType"
+                                    name="Type"
                                     value={formData.Type}
                                     onChange={handleInputChange}
                                     className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
@@ -116,7 +123,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                             <div className="flex justify-end">
                                 <button
                                     type="button"
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={handleClose}
                                     className="text-gray-500 px-4 py-2 mr-2 transition duration-150"
                                 >
                                     Cancel
@@ -132,6 +139,9 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                     </motion.div>
                 </div>
             )}
+
+            {/* Display the MakePayment component after form submission */}
+            {showPayment && <MakePayment formData={formData} closePayment={handleClose} />}
         </>
     );
 };

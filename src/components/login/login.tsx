@@ -5,18 +5,19 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { CountryCode } from '../../types/countryCode';
 import { sendOtp } from '../../functions/api/login/sendOtp';
 import Loader from '../ui/loader';
+import { AppContext } from '../../context/Context';
 
 const Login: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [loading,setLoading] = useState(false);
-
+    const [loading, setLoading] = useState(false);
+    const raiseToast = React.useContext(AppContext);
     const { data: countryCodes } = useQuery<CountryCode[]>({ queryKey: ['countryCodes'], queryFn: fetchCountryCodes });
 
     const handleSendOtp = (event: React.FormEvent) => {
         event.preventDefault();
-        mutation.mutate({ phone: phoneNumber, countryCode: selectedCountryCode })   
+        mutation.mutate({ phone: phoneNumber, countryCode: selectedCountryCode })
     };
     const mutation = useMutation({
         mutationFn: sendOtp,
@@ -28,6 +29,8 @@ const Login: React.FC = () => {
             setLoading(true);
         },
         onError: (error) => {
+            setLoading(false)
+            raiseToast("Error", error.message || "Server error");
             console.log(error)
         }
     })
@@ -81,15 +84,15 @@ const Login: React.FC = () => {
                         type="submit"
                         className="w-full bg-green-800 text-white py-2 rounded-md hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                      Login
+                        Login
                     </button>
                 </form>
                 <div className="mt-4 text-center">
                     <span className="text-sm text-gray-600">Not registered yet? <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Create an account</a></span>
                 </div>
-                {loading && <Loader /> }
+                {loading && <Loader />}
             </div>
-            {isOpen && <OtpCard phone={phoneNumber} countryCode={selectedCountryCode}/>}
+            {isOpen && <OtpCard phone={phoneNumber} countryCode={selectedCountryCode} />}
         </div>
     );
 }
