@@ -17,8 +17,11 @@ export interface User {
     Phone: string;
     RecId: string;
     SourcedBy: string;
-    Rating:number;
+    RmRating:number;
     Status:number;
     Experience:string
+    RmPhone:string;
+    RmEmail:string
+    category: 'Premium' | 'Standard' | 'Ultimate';
   }
   

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface RatingProps {
-    rating:number
+    rating:number|undefined
 }
 
 const Rating:React.FC<RatingProps> = ({ rating }) => {
@@ -10,7 +10,7 @@ const Rating:React.FC<RatingProps> = ({ rating }) => {
             {[...Array(5)].map((_, i) => (
                 <svg
                     key={i}
-                    className={`w-4 h-4 fill-current ${i < rating ? 'text-green-500' : 'text-gray-300'}`}
+                    className={`w-4 h-4 fill-current ${rating && i < rating ? 'text-green-500' : 'text-gray-300'}`}
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                 >

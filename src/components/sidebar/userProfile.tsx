@@ -5,18 +5,12 @@ import { motion } from 'framer-motion';
 import UserCard from './userCard';
 import { useRecoilValue } from 'recoil';
 import { profileDataState } from '../../store/profileState/userProfileState';
+import { User } from '../../interface/User';
 
-export interface User {
-    name: string;
-    experience: string;
-    role: string;
-    rating: number;
-    category: 'Premium' | 'Standard' | 'Ultimate';
-    projects: number;
-}
+
 
 interface StatusBadgeProps {
-    category: 'Premium' | 'Standard' | 'Ultimate';
+    category: 'Premium' | 'Standard' | 'Ultimate'|undefined;
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
@@ -27,9 +21,9 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
     };
 
     return (
-        <div className={`${badgeColors[category]} text-white flex items-center justify-center w-6 2xl:w-8 font-sans`}>
+        <div className={`${category && badgeColors[category]} text-white flex items-center justify-center w-6 2xl:w-8 font-sans`}>
             <span className="transform -rotate-90 text-sm font-semibold tracking-wider">
-                {category.toUpperCase()}
+                {category && category.toUpperCase()}
             </span>
         </div>
     );
@@ -37,14 +31,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
 
 const UserProfile: React.FC = () => {
     const profileData = useRecoilValue(profileDataState)
-    const user: User = {
-        name: 'Nguyen Duy Phuoc',
-        experience: '5 years',
-        role: 'Relationship Manager',
-        rating: 4,
-        category: 'Premium',
-        projects: 10,
-    };
+    
 
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -64,13 +51,13 @@ const UserProfile: React.FC = () => {
                     />
                     <div className="flex flex-col">
                         <span className="font-bold text-sm font-inter">{profileData?.user?.Manager}</span>
-                        <span className="text-gray-500 text-xs font-inter font-medium">{user.role}</span>
+                        <span className="text-gray-500 text-xs font-inter font-medium">RelationShip Manager</span>
                         <div className="mt-2">
-                            <Rating rating={user.rating} />
+                            <Rating rating={profileData?.user?.RmRating} />
                         </div>
                     </div>
                 </div>
-                <StatusBadge category={user.category} />
+                <StatusBadge category={profileData?.user?.category} />
                 </>
             )}
             
@@ -85,8 +72,8 @@ const UserProfile: React.FC = () => {
                     transition={{ duration: 0.4}}
                     className="flex min-w-full"
                 >
-                    <StatusBadge category={user.category} />
-                    <UserCard user={user} />
+                    
+                    <UserCard user={profileData?.user} />
                 </motion.div>
                 </>
             )}

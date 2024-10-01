@@ -1,40 +1,69 @@
-import React from 'react';
-import Rating from "../ui/rating";
-import { User } from "./userProfile";
-import { useRecoilValue } from 'recoil';
-import { profileDataState } from '../../store/profileState/userProfileState';
+import React, { useEffect, useState } from 'react';
+
+
+import { FaPhoneAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
+import { MdClose } from 'react-icons/md';
+import { User } from '../../interface/User';
 
 interface UserCardProps {
-    user: User;
+    user: User | null;
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {
-    const profileData = useRecoilValue(profileDataState)
-  
-
+    const [whatsAppLink, setWhatsAppLink] = useState('');
+    useEffect(() => {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            setWhatsAppLink(`whatsapp://send?phone=${user?.RmPhone}`);
+        } else {
+            setWhatsAppLink(`https://web.whatsapp.com/send?phone=${user?.RmPhone}`);
+        }
+    }, []);
     return (
-        <div className={`transition-opacity duration-300 relative w-full max-w-sm mx-auto rounded-lg shadow-lg overflow-hidden bg-slate-100`}>
-            <div className="p-4">
-                <div className="flex flex-col items-center">
-                    <img
-                        src="/Avatar.png"
-                        alt="User Avatar"
-                        className="w-20 h-20 rounded-full mb-2 border-4 border-white"
-                    />
+        <div className="relative w-full max-w-sm mx-auto bg-gray-800 text-white rounded-lg shadow-lg p-4">
+            {/* Close button */}
+            <button className="absolute top-2 right-2 text-gray-400 hover:text-gray-200">
+                <MdClose size={20} />
+            </button>
 
-                    <span className="font-bold 2xl:text-2xl mb-2 text-gray-900 md:text-center text-lg">{profileData.user?.Manager}</span>
+            {/* Content */}
+            <div className="flex flex-col items-start">
+                {/* Header */}
+                <h2 className="font-bold text-xl mb-2">
+                    Hi, I am {user && user.Manager}, Your Account Manager
+                </h2>
 
-                    <div className="flex flex-wrap justify-center 2xl:justify-start gap-x-1 gap-y-2 mb-2 text-sm font-medium text-gray-600">
-                        <span className="text-gray-700">{user.role}</span>
-                        <span className="hidden sm:inline-block">|</span>
-                        <span>{user.projects}+ projects</span>
-                        <span className="hidden sm:inline-block">|</span>
-                        <span>Exp. {user.experience}</span>
+                {/* Description */}
+                <p className="text-sm mb-4">
+                    I've helped 300+ businesses streamline over 20+ countries in the last 20 days.
+                </p>
+
+                {/* Contact Info */}
+                <div className="flex flex-col space-y-2 mb-4">
+                    <div className="flex items-center">
+                        <FaEnvelope className="mr-2" />
+                        <span>{user?.RmPhone || '8240435788'}</span>
                     </div>
-
-                    <div className="mt-2">
-                        <Rating rating={user.rating} />
+                    <div className="flex items-center">
+                        <FaPhoneAlt className="mr-2" />
+                        <span>{user?.RmEmail || 'abc@gmail.com'}</span>
                     </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex space-x-2">
+                    <button className="flex items-center px-4 py-2 bg-pink-600 text-white rounded-lg hover:bg-pink-700 text-xs">
+                        <FaPhoneAlt className="mr-2" />
+                        Call Now
+                    </button>
+                    <a
+                        href={whatsAppLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 text-xs">
+                        <FaWhatsapp className="mr-2" />
+                        WhatsApp
+                    </a>
                 </div>
             </div>
         </div>
