@@ -31,7 +31,6 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
 
 const UserProfile: React.FC = () => {
     const profileData = useRecoilValue(profileDataState)
-    
 
     const [isHovered, setIsHovered] = React.useState(false);
 

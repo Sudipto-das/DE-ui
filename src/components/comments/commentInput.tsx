@@ -52,8 +52,7 @@ const CommentInput: React.FC = () => {
                 fileField = { Video: selectedFile };
             }
         }
-
-        console.log(fileField);
+        console.log(fileField)
 
 
         try {
@@ -75,7 +74,7 @@ const CommentInput: React.FC = () => {
 
             if (response.status === 200) {
                 raiseToast('Comment added successfully', 'success');
-                setComments((prevComments) => [...prevComments,response.data]);
+                setComments((prevComments) => [...prevComments, response.data]);
                 setTextInput('');
                 setSelectedFile(null);
             } else {
@@ -87,7 +86,7 @@ const CommentInput: React.FC = () => {
             setLoading(false);
         }
     };
-    console.log(projectRecId)
+
     return (
         <div className="flex items-center border-t p-4 gap-2 justify-center">
             <img

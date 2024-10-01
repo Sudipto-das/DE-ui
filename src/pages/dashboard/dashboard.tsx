@@ -23,13 +23,11 @@ const Dashboard: React.FC = () => {
             setIsLoading(true);
 
             if (!CurrentUser?.RecId) {
-                console.error('RecId missing in CurrentUser');
                 return;
             }
 
             try {
                 const response = await getAllProjects(CurrentUser);
-                console.log(response);
 
                 if (response?.ProjDetails?.length > 0) {
                     const projectsData = response.ProjDetails;
@@ -56,7 +54,7 @@ const Dashboard: React.FC = () => {
             fetchData();
         }
     }, [CurrentUser, projects.length, setActiveProject, setProjects, setStatus, raiseToast]);
-console.log(projects)
+
     return (
         <>
             <DashboardHeader />

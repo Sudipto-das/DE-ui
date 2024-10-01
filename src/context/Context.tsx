@@ -15,7 +15,7 @@ export const AppProvider = ({ children }: any) => {
   const [user, setUser] = React.useState<any>({});
   const [Notifications, setNotifications] = React.useState<any>([]);
   const setProfileData = useSetRecoilState(profileDataState);
-  const setAddress = useSetRecoilState(AddressState)
+  const setAddress = useSetRecoilState(AddressState);
   const toast = useToast();
 
   function setData(data: any) {
@@ -46,7 +46,6 @@ export const AppProvider = ({ children }: any) => {
       PCode: data.PCode,
       RecId: data.RecId,
     });
-    localStorage.setItem("user", JSON.stringify(data));
     setUserCookie(data);
   }, []);
 
@@ -63,35 +62,25 @@ export const AppProvider = ({ children }: any) => {
   }
 
   const fetchUserDetails = React.useCallback(async () => {
-
     try {
-      let user = JSON.parse(localStorage.getItem("user") || "{}");
+      // Fetch user data from cookies
+      const user = {
+        Id: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Id\s*=\s*([^;]*).*$)|^.*$/, "$1")),
+        Token: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Token\s*=\s*([^;]*).*$)|^.*$/, "$1")),
+        Email: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Email\s*=\s*([^;]*).*$)|^.*$/, "$1")),
+        Session: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Session\s*=\s*([^;]*).*$)|^.*$/, "$1")),
+        Name: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Name\s*=\s*([^;]*).*$)|^.*$/, "$1")),
+        RecId: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)RecId\s*=\s*([^;]*).*$)|^.*$/, "$1")),
+      };
 
-      if (user.Id === undefined) {
-        user = {
-          Id: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Id\s*=\s*([^;]*).*$)|^.*$/, "$1")),
-          Token: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Token\s*=\s*([^;]*).*$)|^.*$/, "$1")),
-          Email: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Email\s*=\s*([^;]*).*$)|^.*$/, "$1")),
-          Session: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Session\s*=\s*([^;]*).*$)|^.*$/, "$1")),
-          Name: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)Name\s*=\s*([^;]*).*$)|^.*$/, "$1")),
-          RecId: JSON.parse(document.cookie.replace(/(?:(?:^|.*;\s*)RecId\s*=\s*([^;]*).*$)|^.*$/, "$1")),
-        };
-      }
-
+      // Check if required user data is present
       if (
-        user.Id === undefined ||
-        user.Id === "" ||
-        user.Id === null ||
-        user.Token === undefined ||
-        user.Token === "" ||
-        user.Token === null ||
-        user.Session === undefined ||
-        user.Session === "" ||
-        user.Session === null
+        !user.Id ||
+        !user.Token ||
+        !user.Session
       ) {
         const currentUrl = window.location.pathname;
         if (currentUrl !== "/") navigate("/");
-        Logout();
         return;
       }
 
@@ -100,14 +89,13 @@ export const AppProvider = ({ children }: any) => {
       // Fetch profile data
       const profileResponse = await getProfileData(user);
       setProfileData({
-        user: profileResponse.data.user,
+        user: profileResponse.data,
         isLoading: false,
       });
       const primaryAddress = profileResponse.data.address.find((addr: any) => addr.IsPrimary === 1);
-      setAddress(primaryAddress)
+      setAddress(primaryAddress);
     } catch (err) {
       setProfileData(prevState => ({ ...prevState, isLoading: false }));
-      Logout();
       navigate("/");
     }
   }, [setDataForUser, navigate]);
@@ -123,21 +111,9 @@ export const AppProvider = ({ children }: any) => {
     });
   }
 
-  function Logout() {
-    document.cookie = "ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "Token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "Email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "Session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "Name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    localStorage.clear();
-    sessionStorage.clear();
-    setUser({});
-    navigate("/");
-  }
-
   React.useEffect(() => {
     fetchUserDetails();
-  }, [fetchUserDetails]);
+  }, []);
 
   return (
     <AppContext.Provider
@@ -145,7 +121,6 @@ export const AppProvider = ({ children }: any) => {
         user,
         setUser,
         setData,
-        Logout,
         setLoading,
         loading,
         fetchUserDetails,
