@@ -57,7 +57,7 @@ const UserProfile: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <StatusBadge category={profileData?.user?.category} />
+                <StatusBadge category={profileData?.user?.category || "Premium"} />
                 </>
             )}
             

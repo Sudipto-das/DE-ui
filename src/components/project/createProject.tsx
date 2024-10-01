@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import MakePayment from './makePayment';
+import { CalculateBudget } from '../../functions/calculateBudget';
 
 interface CreateProjectComponentProps {
     isOpen: boolean;
@@ -11,23 +12,39 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
     const [formData, setFormData] = useState({
         title: '',
         description: '',
-        budget: '',
+        budget: '',  // Budget will be calculated and updated here
         size: '',
         Type: '',
+        configuration: '', // Add a field for configuration
     });
 
     const [showPayment, setShowPayment] = useState(false); // To handle MakePayment visibility
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        const { name, value } = e.target;
+
+        // Reset configuration if project type changes to "interior"
+        if (name === 'Type' && value === 'interior') {
+            setFormData({ ...formData, [name]: value, configuration: '' });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Project created:', formData);
+
+        // Calculate the budget based on the user inputs
+        const calculatedBudget = CalculateBudget(formData.Type, formData.configuration, parseInt(formData.size));
+
+        // Update the formData with the calculated budget
+        setFormData({
+            ...formData,
+            budget: calculatedBudget ? calculatedBudget.toString() : '0', // Convert budget to string for consistency
+        });
+
+        console.log('Project created with budget:', { ...formData, budget: calculatedBudget });
+
         // Show the MakePayment component
         setShowPayment(true);
     };
@@ -78,16 +95,18 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-gray-700 font-medium">Budget (INR)</label>
-                                    <input
-                                        type="number"
-                                        name="budget"
-                                        value={formData.budget}
+                                    <label className="block text-gray-700 font-medium">Project Type</label>
+                                    <select
+                                        name="Type"
+                                        value={formData.Type}
                                         onChange={handleInputChange}
                                         className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
-                                        placeholder="Enter budget"
                                         required
-                                    />
+                                    >
+                                        <option value="">Select project type</option>
+                                        <option value="interior">Interior</option>
+                                        <option value="architecture">Architecture</option>
+                                    </select>
                                 </div>
 
                                 <div>
@@ -105,15 +124,16 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                             </div>
 
                             <div>
-                                <label className="block text-gray-700 font-medium">Project Type</label>
+                                <label className="block text-gray-700 font-medium">Building Configuration</label>
                                 <select
-                                    name="Type"
-                                    value={formData.Type}
+                                    name="configuration"
+                                    value={formData.configuration}
                                     onChange={handleInputChange}
                                     className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
-                                    required
+                                    disabled={formData.Type === 'interior'} // Disable when project type is "interior"
+                                    required={formData.Type === 'architecture'} // Required only when project type is "architecture"
                                 >
-                                    <option value="">Select project type</option>
+                                    <option value="">Select configuration</option>
                                     <option value="G">G</option>
                                     <option value="G+1">G+1</option>
                                     <option value="G+2">G+2</option>

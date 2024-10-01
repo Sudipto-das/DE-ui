@@ -27,12 +27,12 @@ const Navbar: React.FC = () => {
             <div className="flex items-center gap-4 mt-2 ">
                 <button
                     onClick={() => setIsCreateProjectModalOpen(true)} // Open modal on click
-                    className="text-white px-4 py-2 rounded-[0.7rem] font-semibold text-xs md:text-sm"
+                    className="text-white px-4 py-3 md:px-5 rounded-[0.7rem] font-bold text-xs md:text-sm"
                     style={{
                         background: 'linear-gradient(to right,  #113ea5,#479E82)',
                     }}
                 >
-                    Create +
+                    Create+
                 </button>
                 <div className="flex items-center gap-8 ml-4 ">
                     <AiIcon />
