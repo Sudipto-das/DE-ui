@@ -3,7 +3,6 @@ import ConstructionComponent from "../../components/rawMaterials/construction";
 import InteriorComponent from "../../components/rawMaterials/interior";
 import RawMaterialHeader from "../../components/rawMaterials/rawMaterialHeader";
 import FilterModal from "../../components/rawMaterials/filterModal";
-import CartModal from "../../components/rawMaterials/cartModal";
 import { product } from "../../store/rawMaterailState/productState";
 import { interiorProducts } from "../../common/interiorProducts";
 import { constructionProducts } from "../../common/constructionProducts";
@@ -58,7 +57,7 @@ const RawMaterials: React.FC = () => {
 
             {/* Modals */}
             <FilterModal isOpen={isOpen} onClose={closeFilterModal} products={selectedTab === 'construction' ? constructionProducts : interiorProducts} />
-            <CartModal />
+            
         </div>
     );
 };
