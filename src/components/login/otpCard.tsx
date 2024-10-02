@@ -47,7 +47,6 @@ const OtpCard: React.FC<OtpCardProps> = ({ phone, countryCode }) => {
       setLoading(true); // Start loading
     },
     onSuccess: (data) => {
-      console.log("OTP verified successfully:", data);
       setLoggedInUser(data);
       raiseToast("Login successful!", "success");
       navigate("/dashboard/");

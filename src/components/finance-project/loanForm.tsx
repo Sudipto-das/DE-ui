@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { AppContext } from '../../context/Context';
+import { submitLoanApplication } from '../../functions/api/finance/basicLoanReq';
+
 
 enum LoanType {
   HL = "HL",
@@ -16,6 +19,7 @@ interface FormData {
 }
 
 const LoanForm: React.FC = () => {
+  const { user: CurrentUser } = React.useContext(AppContext); // Assuming user context is needed
   const [formData, setFormData] = useState<FormData>({
     loanType: LoanType.HL,
     loanAmountReq: 0,
@@ -25,6 +29,9 @@ const LoanForm: React.FC = () => {
     email: '',
     pincode: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
@@ -33,14 +40,34 @@ const LoanForm: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form Submitted: ', formData);
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    // Add unique id to form data
+    const dataToSubmit = {
+      ...formData,
+      id: CurrentUser.Id,
+    };
+
+    try {
+      const response = await submitLoanApplication(dataToSubmit); // Call the API
+      console.log('API Response:', response);
+      setSuccess(true); // Mark as successful
+    } catch (error) {
+      setError('Failed to submit application. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="w-full mx-auto bg-white shadow-md rounded-lg p-4 sm:p-6 lg:p-8 mt-10 border">
       <h2 className="text-2xl lg:text-3xl font-semibold text-center mb-6">Loan Application Form</h2>
+      {error && <p className="text-red-500 text-center">{error}</p>}
+      {success && <p className="text-green-500 text-center">Application submitted successfully!</p>}
       <form onSubmit={handleSubmit} className="space-y-6">
         
         {/* Loan Type and Loan Amount */}
@@ -140,8 +167,9 @@ const LoanForm: React.FC = () => {
           <button
             type="submit"
             className="w-full sm:w-auto bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-all"
+            disabled={loading}
           >
-            Submit Application
+            {loading ? 'Submitting...' : 'Submit Application'}
           </button>
         </div>
       </form>
