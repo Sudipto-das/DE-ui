@@ -4,7 +4,7 @@ import PartnerCard from './partnerCard';
 
 
 const partners = [
-  { name: 'Axis Bank', logo: 'Axis_Bank-Logo.wine.png' },
+  { name: 'Basic', logo: 'PNG Light.webp' },
   { name: 'HDFC Bank', logo: 'pngegg.png' },
   { name: 'Home Capital', logo: 'Homecapital.png' },
   
