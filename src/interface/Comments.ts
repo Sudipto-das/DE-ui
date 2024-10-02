@@ -2,8 +2,8 @@ export default interface CommentsInterface {
     Title: string;
     Type: number; 
     Description?: string;
-    Image?: File | null;  // Allow null for optional properties
-    Video?: File | null;  // Allow null for optional properties
+    Image?: string;  // Allow null for optional properties
+    Video?: string;  // Allow null for optional properties
     CreatedBy?: string;
     ModifiedBy?: string;
     CreatedDateTime?: string;
@@ -17,8 +17,8 @@ export const EmptyComment: CommentsInterface = {
     Title: "",
     Description: "",
     Type: 0,
-    Image: null,         // Set to null instead of an empty string
-    Video: null,         // Set to null instead of an empty string
+    Image: '',         // Set to null instead of an empty string
+    Video: '',         // Set to null instead of an empty string
     CreatedBy: "",
     ModifiedBy: "",
     CreatedDateTime: "",
