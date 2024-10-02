@@ -4,23 +4,31 @@ import HeaderBox from "../ui/headerBox";
 import Slider from "../ui/slider";
 import { calculateDuration } from "../../functions/durationCalc";
 import { ProjectDetail} from "../../interface/Project";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectDetailsComponentProps {
   project: ProjectDetail;
 }
 
 const ProjectDetailsComponent: React.FC<ProjectDetailsComponentProps> = ({ project }) => {
+  const navigate = useNavigate()
   const projectDetails = [
     { title: 'Designer', subtitle: project.DesignManager, icon: '/Avatar.png' },
     { title: 'Duration', subtitle: calculateDuration(project.StartDate,project.EndDate) + " days", icon: '/date.png' },
     { title: 'Budget', subtitle: project.Budget, icon: '/budget-breakdown.png' },
-    { title: 'Size', subtitle: project.Type, icon: '/measurement.png' },
+    { title: 'Size', subtitle: project.Size, icon: '/measurement.png' },
+    { title: 'Project Type', subtitle: project.Type, icon: '/measurement.png' },
+    { title: 'Stage', subtitle: project.Stage, icon: '/measurement.png' },
+    { title: 'Project Manager', subtitle: project.ProjManager, icon: '/measurement.png' },
   ];
   const images = ['/project/1.jpeg', '/project/2.jpg', '/project/3.jpg', '/project/4.jpg']
   
   return (
+    <>
+    <button className='text-blue-700 mb-2 ml-2' onClick={()=>navigate(-1)}>Go Back</button>
     <div className="flex flex-col gap-6 p-6 bg-white shadow-md rounded-lg">
       {/* Project Image */}
+      
       <div className="w-full rounded-lg overflow-hidden">
         <Slider images={images} />
       </div>
@@ -32,7 +40,7 @@ const ProjectDetailsComponent: React.FC<ProjectDetailsComponentProps> = ({ proje
       </div>
 
       {/* Project Details */}
-      <div className="flex gap-3 flex-col md:flex-row">
+      <div className="flex gap-3 flex-col md:flex-row flex-wrap">
         {projectDetails.map((detail, index) => (
           <HeaderBox
             key={index}
@@ -44,6 +52,7 @@ const ProjectDetailsComponent: React.FC<ProjectDetailsComponentProps> = ({ proje
       </div>
 
     </div>
+    </>
   );
 }
 

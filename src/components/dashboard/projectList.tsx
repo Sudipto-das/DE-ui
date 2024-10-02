@@ -4,6 +4,7 @@ import Loader from '../ui/loader';
 import { ProjectDetail } from '../../interface/Project';
 
 
+
 interface ProjectsListProps {
     projects: ProjectDetail[];
     isLoading: boolean;
