@@ -7,7 +7,6 @@ import { ProjectDetail } from '../../interface/Project';
 import { projectStatusAtom } from '../../store/projectStatus/porjectStatusAtom';
 import { activeProjectAtom } from '../../store/projectsState/activeProjectState';
 import { projectRecIdState } from '../../store/projectsState/projectRecId';
-import { getStatusString } from '../../utils/statusConverter';
 
 const ProjectCard: React.FC<ProjectDetail> = ({ Name, RecId, Description, Budget, StartDate, EndDate, Type, DesignManager, Stage,Size }) => {
   const [activeProject, setActiveProject] = useRecoilState(activeProjectAtom);
@@ -35,7 +34,7 @@ const ProjectCard: React.FC<ProjectDetail> = ({ Name, RecId, Description, Budget
   };
 
   const isActive = location.pathname === '/dashboard' && activeProject === RecId;
-
+console.log(Stage)
   return (
     <div className={`flex flex-col border ${isActive && 'border-2 border-green-700 '} shadow-sm border-gray-300 rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer font-inter`}
       onClick={handleCardClick}>
@@ -73,7 +72,7 @@ const ProjectCard: React.FC<ProjectDetail> = ({ Name, RecId, Description, Budget
             </div>
             <div className='flex items-center'>
               <img src='status.png' className="w-3.5 h-3.5 mr-3" />
-              <h3><span className='font-semibold'>Status</span>: {getStatusString(Stage) || "NA"}</h3>
+              <h3><span className='font-semibold'>Status</span>: {Stage} </h3>
             </div>
           </div>
         </div>

@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import MakePayment from './makePayment';
 import { CalculateBudget } from '../../functions/calculateBudget';
+import { AppContext } from '../../context/Context';
+import createLead from '../../functions/api/projects/createLeads';
+
 
 interface CreateProjectComponentProps {
     isOpen: boolean;
@@ -9,49 +12,64 @@ interface CreateProjectComponentProps {
 }
 
 const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen, setIsOpen }) => {
+    const { user: CurrentUser } = useContext(AppContext);
     const [formData, setFormData] = useState({
-        title: '',
-        description: '',
-        budget: '',  // Budget will be calculated and updated here
-        size: '',
+        Title: '',
+        Description: '',
+        Size: '',
         Type: '',
-        configuration: '', // Add a field for configuration
+        Category: '',
     });
 
-    const [showPayment, setShowPayment] = useState(false); // To handle MakePayment visibility
+    const [showPayment, setShowPayment] = useState(false); 
+    const [budget, setBudget] = useState<string>('0'); 
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
 
-        // Reset configuration if project type changes to "interior"
         if (name === 'Type' && value === 'interior') {
-            setFormData({ ...formData, [name]: value, configuration: '' });
+            setFormData({ ...formData, [name]: value, Category: '' });
         } else {
             setFormData({ ...formData, [name]: value });
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Calculate the budget based on the user inputs
-        const calculatedBudget = CalculateBudget(formData.Type, formData.configuration, parseInt(formData.size));
+        const calculatedBudget = CalculateBudget(formData.Type, formData.Category, parseInt(formData.Size));
+        const budgetString = calculatedBudget ? calculatedBudget.toString() : '0';
 
-        // Update the formData with the calculated budget
-        setFormData({
-            ...formData,
-            budget: calculatedBudget ? calculatedBudget.toString() : '0', // Convert budget to string for consistency
-        });
+        setBudget(budgetString);
 
-        console.log('Project created with budget:', { ...formData, budget: calculatedBudget });
+        // Create lead data
+        const leadData = {
+            Title: formData.Title,
+            Description: formData.Description,
+            Size: formData.Size,
+            Type: formData.Type,
+            Category: formData.Category || "none",
+            AccountNum: CurrentUser.RecId, // Use CurrentUser.Id here
+        };
 
-        // Show the MakePayment component
-        setShowPayment(true);
+        try {
+            // Call the createLead API
+            const response = await createLead(leadData, {
+                Id: CurrentUser.Id,
+                Session: CurrentUser.Session,
+                Token: CurrentUser.Token,
+            });
+            console.log('Lead created successfully:', response);
+            // Show the MakePayment component after successful lead creation
+            setShowPayment(true);
+        } catch (error) {
+            console.error('Error creating lead:', error);
+        }
     };
 
     const handleClose = () => {
         setIsOpen(false);
-        setShowPayment(false); // Ensure both modals are closed when needed
+        setShowPayment(false);
     };
 
     return (
@@ -71,8 +89,8 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                                 <label className="block text-gray-700 font-medium">Title</label>
                                 <input
                                     type="text"
-                                    name="title"
-                                    value={formData.title}
+                                    name="Title"
+                                    value={formData.Title}
                                     onChange={handleInputChange}
                                     className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
                                     placeholder="Enter project title"
@@ -83,8 +101,8 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                             <div>
                                 <label className="block text-gray-700 font-medium">Description</label>
                                 <textarea
-                                    name="description"
-                                    value={formData.description}
+                                    name="Description"
+                                    value={formData.Description}
                                     onChange={handleInputChange}
                                     className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
                                     placeholder="Enter project description"
@@ -113,8 +131,8 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                                     <label className="block text-gray-700 font-medium">Size (sq. ft.)</label>
                                     <input
                                         type="number"
-                                        name="size"
-                                        value={formData.size}
+                                        name="Size"
+                                        value={formData.Size}
                                         onChange={handleInputChange}
                                         className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
                                         placeholder="Enter project size"
@@ -126,12 +144,12 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                             <div>
                                 <label className="block text-gray-700 font-medium">Building Configuration</label>
                                 <select
-                                    name="configuration"
-                                    value={formData.configuration}
+                                    name="Category"
+                                    value={formData.Category}
                                     onChange={handleInputChange}
                                     className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
-                                    disabled={formData.Type === 'interior'} // Disable when project type is "interior"
-                                    required={formData.Type === 'architecture'} // Required only when project type is "architecture"
+                                    disabled={formData.Type === 'interior'}
+                                    required={formData.Type === 'architecture'}
                                 >
                                     <option value="">Select configuration</option>
                                     <option value="G">G</option>
@@ -160,8 +178,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                 </div>
             )}
 
-            {/* Display the MakePayment component after form submission */}
-            {showPayment && <MakePayment formData={formData} closePayment={handleClose} />}
+            {showPayment && <MakePayment formData={formData} budget={budget} closePayment={handleClose} />}
         </>
     );
 };

@@ -2,32 +2,32 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface MakePaymentProps {
+    budget: string; // Make sure to pass budget as a prop
     formData: {
-        title: string;
-        description: string;
-        budget: string;
-        size: string;
+        Title: string;
+        Description: string;
+        Size: string;
         Type: string;
     };
     closePayment: () => void;
 }
 
-const MakePayment: React.FC<MakePaymentProps> = ({ formData, closePayment }) => {
+const MakePayment: React.FC<MakePaymentProps> = ({ budget, formData, closePayment }) => {
     const [selectedMethod, setSelectedMethod] = useState<string>('card');
 
-    const budget = parseFloat(formData.budget);
+    const parsedBudget = parseFloat(budget);
     const discountPercentage = 10; // 10% discount
     const initialPaymentPercentage = 3; // 3% initial payment
 
     // Calculate the discounted budget
-    const discountedBudget = Number(formData.budget) - (Number(formData.budget) * discountPercentage) / 100;
+    const discountedBudget = parsedBudget - (parsedBudget * discountPercentage) / 100;
 
     // Calculate the initial payment (3% of the discounted budget)
     const initialPayment = (discountedBudget * initialPaymentPercentage) / 100;
 
     const handlePayment = () => {
         console.log(`Processing payment for project with data:`, formData);
-        console.log(`Total Budget: $${budget}, Discounted Budget: $${discountedBudget}, Initial Payment: $${initialPayment}`);
+        console.log(`Total Budget: $${parsedBudget}, Discounted Budget: $${discountedBudget}, Initial Payment: $${initialPayment}`);
     };
 
     return (
@@ -43,7 +43,7 @@ const MakePayment: React.FC<MakePaymentProps> = ({ formData, closePayment }) => 
 
                 {/* Display estimated budget with discount */}
                 <div className="bg-gray-100 p-4 rounded-lg mb-6 text-center">
-                    <p className="text-green-600">Estimated Budget: <span className="font-semibold">₹{budget.toFixed(2)}</span></p>
+                    <p className="text-green-600">Estimated Budget: <span className="font-semibold">₹{parsedBudget.toFixed(2)}</span></p>
                     <p className="text-green-600">
                         Discounted Budget (10% Off):
                         <motion.span

@@ -61,8 +61,8 @@ const CommentInput: React.FC = () => {
                 Title: "Remark by " + CurrentUser.Name,
                 Type: commentType,
                 Description: textInput,
-                Image: "",
-                Video: "",
+                Image: null,
+                Video: null,
                 ModifiedBy: CurrentUser.Id,
                 CreatedBy: CurrentUser.Id
             },
