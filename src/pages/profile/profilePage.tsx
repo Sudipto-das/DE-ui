@@ -8,14 +8,14 @@ import { profileDataState } from '../../store/profileState/userProfileState';
 const ProfilePage: React.FC = () => {
   const { user: CurrentUser, raiseToast } = useContext(AppContext);
   const [profileData, setProfileData] = useRecoilState(profileDataState);
-
+console.log(CurrentUser)
   useEffect(() => {
     const fetchProfileData = async () => {
       if (!profileData.user) {
         
         try {
           const data = await getProfileData(CurrentUser); // Call the API function
-          console.log(data)
+          
           setProfileData({
             user: data.data,
             isLoading: false,

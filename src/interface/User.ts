@@ -34,7 +34,7 @@ export interface CustomerResponse {
   Token: string;
   myDesignsCount: number;
   uploadedDesigns: number;
-  0: Address; // Assuming there could be multiple addresses
+  address: Address[]; // Assuming there could be multiple addresses
   RmRating:number
   RmPhone:string
   RmEmail:string
