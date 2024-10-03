@@ -1,15 +1,16 @@
 import { useState } from "react";
 import EditButton from "../ui/editButton";
 import { useRecoilValue } from "recoil";
-import { AddressState } from "../../store/profileState/AddressState";
+import { profileDataState } from "../../store/profileState/userProfileState";
+
 
 
 
 const Address: React.FC= () => {
-    const address = useRecoilValue(AddressState)
+    const profileData = useRecoilValue(profileDataState);
     const [isEditing, setIsEditing] = useState(false);
 
-    console.log(address)
+    
     const toggleEdit = () => setIsEditing(!isEditing);
 
     const saveChanges = () => {
@@ -29,11 +30,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={address?.COUNTRY || 'NA'}
+                                value={profileData.user?.[0].Country || 'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{address?.COUNTRY || 'NA'}</p>
+                            <p className="font-medium font-inter">{profileData.user?.[0].Country || 'NA'}</p>
                         )}
                     </div>
                     <div>
@@ -42,11 +43,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={`${address?.CITY || ''}, ${address?.STATE || 'NA'}`}
+                                value={`${profileData.user?.[0].City || ''}, ${profileData.user?.[0].State || 'NA'}`}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{`${address?.CITY || 'NA'}, ${address?.STATE|| 'NA'}`}</p>
+                            <p className="font-medium font-inter">{`${profileData.user?.[0].City || 'NA'}, ${profileData.user?.[0].State|| 'NA'}`}</p>
                         )}
                     </div>
                     <div>
@@ -55,11 +56,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={address?.ZIPCODE||'NA'}
+                                value={profileData.user?.[0].ZipCode||'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{address?.ZIPCODE||'NA'}</p>
+                            <p className="font-medium font-inter">{profileData.user?.[0].ZipCode||'NA'}</p>
                         )}
                     </div>
                     <div>
@@ -68,11 +69,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={address?.DISTRICT || 'NA'}
+                                value={profileData.user?.[0].District || 'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{address?.DISTRICT || 'NA'}</p>
+                            <p className="font-medium font-inter">{profileData.user?.[0].District || 'NA'}</p>
                         )}
                     </div>
                 </div>

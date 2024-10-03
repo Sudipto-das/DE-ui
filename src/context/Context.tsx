@@ -5,7 +5,6 @@ import Loader from "../components/ui/loader";
 import getProfileData from "../functions/api/profile/fetchProfile";
 import { profileDataState } from "../store/profileState/userProfileState";
 import { useSetRecoilState } from "recoil";
-import { AddressState } from "../store/profileState/AddressState";
 
 export const AppContext = React.createContext<any>({});
 
@@ -15,7 +14,6 @@ export const AppProvider = ({ children }: any) => {
   const [user, setUser] = React.useState<any>({});
   const [Notifications, setNotifications] = React.useState<any>([]);
   const setProfileData = useSetRecoilState(profileDataState);
-  const setAddress = useSetRecoilState(AddressState);
   const toast = useToast();
 
   function setData(data: any) {
@@ -92,8 +90,7 @@ export const AppProvider = ({ children }: any) => {
         user: profileResponse.data,
         isLoading: false,
       });
-      const primaryAddress = profileResponse.data.address.find((addr: any) => addr.IsPrimary === 1);
-      setAddress(primaryAddress);
+      console.log(profileResponse.data)
     } catch (err) {
       setProfileData(prevState => ({ ...prevState, isLoading: false }));
       navigate("/");

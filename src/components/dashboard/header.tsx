@@ -2,31 +2,33 @@ import { useEffect, useState } from "react";
 import './dashboard.css';
 import HeaderBox from "../ui/headerBox";
 import { useRecoilValue } from "recoil";
-import { projectStatusStringSelector } from "../../store/projectStatus/projectStatusSelector";
-import StatusModal from './statusModal'
-const HeaderData = [
-    {
-        title: 'Shortlisted Inspiration',
-        subtitle: 'Style Quiz',
-        icon: 'Frame.png'
-    },
-    {
-        title: 'My design',
-        subtitle: '0',
-        icon: 'Frame2.png'
-    },
-    {
-        title: 'Upload design & document',
-        subtitle: '0',
-        icon: 'Frame3.png'
-    },
-];
+import { projectStatusAtom } from "../../store/projectStatus/porjectStatusAtom";
+import { profileDataState } from "../../store/profileState/userProfileState";
+
 
 const DashboardHeader: React.FC = () => {
+    const profileData = useRecoilValue(profileDataState);
     const [text, setText] = useState("");
-    const statusString = useRecoilValue(projectStatusStringSelector)
+    const statusString = useRecoilValue(projectStatusAtom)
     const [spinCompleted, setSpinCompleted] = useState(false);
-    const [isModalOpen,setIsModalOpen] = useState (false)
+    // const [isModalOpen,setIsModalOpen] = useState (false)
+    const HeaderData = [
+        {
+            title: 'Shortlisted Inspiration',
+            subtitle: 'Style Quiz',
+            icon: 'Frame.png'
+        },
+        {
+            title: 'My design',
+            subtitle: `${profileData.user?.myDesignsCount}`,
+            icon: 'Frame2.png'
+        },
+        {
+            title: 'Upload design & document',
+            subtitle: `${profileData.user?.uploadedDesigns}`,
+            icon: 'Frame3.png'
+        },
+    ];
     useEffect(() => {
         const projectStatusIcon = document.getElementById('project-status-icon');
         if (projectStatusIcon) {
@@ -41,7 +43,7 @@ const DashboardHeader: React.FC = () => {
     useEffect(() => {
         if (spinCompleted) {
             const statusText = statusString;
-            statusText.split("").forEach((char, index) => {
+            statusText?.split("").forEach((char, index) => {
                 setTimeout(() => {
                     setText(prev => prev + char);
                 }, index * 100);
@@ -58,10 +60,10 @@ const DashboardHeader: React.FC = () => {
             }, 1000);
         }
     };
-    const handleModalOpen = () =>{
-        setIsModalOpen(prev => !prev);
-    }
-
+    // const handleModalOpen = () =>{
+    //     setIsModalOpen(prev => !prev);
+    // }
+console.log(profileData)
     return (
         <div className="flex gap-2 flex-col md:flex-row font-inter">
             {HeaderData.map((item, index) => (
@@ -73,7 +75,7 @@ const DashboardHeader: React.FC = () => {
                 />
             ))}
             <div className="flex justify-between items-center border rounded-lg px-4 py-4 md:w-[25%] hover:cursor-pointer transition-all duration-300 bg-gradient-to-r from-gray-100 to-gray-300"
-             onClick={handleModalOpen}>
+             >
                 <div>
                     <p className="text-sm font-medium">Project Status</p>
                     <h1 className="text-2xl text-[#EF466F]">
@@ -92,7 +94,7 @@ const DashboardHeader: React.FC = () => {
                     onMouseEnter={handleMouseEnter} 
                 />
             </div>
-            {isModalOpen && <StatusModal onClose={handleModalOpen}/>}
+            {/* {isModalOpen && <StatusModal onClose={handleModalOpen}/>} */}
         </div>
     );
 };

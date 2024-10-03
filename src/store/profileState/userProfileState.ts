@@ -1,8 +1,8 @@
 import { atom } from "recoil";
-import { User } from "../../interface/User";
+import { CustomerResponse } from "../../interface/User";
 
 interface ProfileDataState {
-  user: User|null ;
+  user: CustomerResponse|null ;
   isLoading: boolean;
 }
 
