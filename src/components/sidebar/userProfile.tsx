@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import UserCard from './userCard';
 import { useRecoilValue } from 'recoil';
 import { profileDataState } from '../../store/profileState/userProfileState';
-import { User } from '../../interface/User';
+import { CustomerResponse } from '../../interface/User';
 
 
 
@@ -14,7 +14,7 @@ interface StatusBadgeProps {
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ category }) => {
-    const badgeColors: Record<User['category'], string> = {
+    const badgeColors: Record<CustomerResponse['category'], string> = {
         Premium: 'bg-green-500',
         Standard: 'bg-yellow-500',
         Ultimate: 'bg-orange-500',

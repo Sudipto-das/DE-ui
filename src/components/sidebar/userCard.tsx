@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 
 import { FaPhoneAlt, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
-import { User } from '../../interface/User';
+import { CustomerResponse } from '../../interface/User';
 
 interface UserCardProps {
-    user: User | null;
+    user: CustomerResponse | null;
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user }) => {

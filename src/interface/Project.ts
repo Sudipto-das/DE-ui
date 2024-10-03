@@ -6,7 +6,7 @@ export interface ProjectDetail {
  AccountNum:string;
  StartDate:string;
  EndDate:string;
- Stage:number;
+ Stage:string;
  ProjManager:string;
  DesignManager:string;
  Type:string;

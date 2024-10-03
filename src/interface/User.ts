@@ -35,5 +35,9 @@ export interface CustomerResponse {
   myDesignsCount: number;
   uploadedDesigns: number;
   0: Address; // Assuming there could be multiple addresses
+  RmRating:number
+  RmPhone:string
+  RmEmail:string
+  category:"Premium" | "Standard" | "Ultimate" 
 }
 
