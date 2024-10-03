@@ -1,8 +1,8 @@
 import { apiClient } from "../../../api";
 
-async function getAllProjects(user: { RecId: string, Session: string, Token: string }) {
+async function getAllProjects(user: { Id: string, Session: string, Token: string }) {
     const data = new URLSearchParams({
-        Id: user.RecId,  // Yeh Id correct hai?
+        Id: user.Id,  // Yeh Id correct hai?
         Session: user.Session,
         Token: user.Token,
     });

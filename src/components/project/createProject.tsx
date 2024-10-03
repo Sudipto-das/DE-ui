@@ -1,14 +1,25 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import MakePayment from './makePayment';
 import { CalculateBudget } from '../../functions/calculateBudget';
 import { AppContext } from '../../context/Context';
 import createLead from '../../functions/api/projects/createLeads';
-
+import getProjectTypes from '../../functions/api/projects/getProjType';
+import getProjectCategory from '../../functions/api/projects/getProjectCategory'; // Import project category function
 
 interface CreateProjectComponentProps {
     isOpen: boolean;
     setIsOpen: (arg0: boolean) => void;
+}
+
+interface ProjectType {
+    Name: string;
+    RecId: string;
+}
+
+interface ProjectCategory {
+    Name: string;
+    RecId: string;
 }
 
 const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen, setIsOpen }) => {
@@ -21,13 +32,68 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
         Category: '',
     });
 
-    const [showPayment, setShowPayment] = useState(false); 
-    const [budget, setBudget] = useState<string>('0'); 
+    const [showPayment, setShowPayment] = useState(false);
+    const [budget, setBudget] = useState<string>('0');
+    const [projectTypes, setProjectTypes] = useState<ProjectType[]>([]); // State for project types
+    const [projectCategories, setProjectCategories] = useState<ProjectCategory[]>([]); // State for project categories
+
+    useEffect(() => {
+        // Fetch project types when component mounts
+        const fetchProjectTypes = async () => {
+            try {
+                const response = await getProjectTypes({
+                    Id: CurrentUser.Id,
+                    Session: CurrentUser.Session,
+                    Token: CurrentUser.Token,
+                });
+
+                const types = response.data.map((type: any) => ({
+                    Name: type.Name,
+                    RecId: type.RecId,
+                }));
+
+                setProjectTypes(types);
+            } catch (error) {
+                console.error('Error fetching project types:', error);
+            }
+        };
+
+        fetchProjectTypes();
+    }, [CurrentUser]);
+
+    useEffect(() => {
+        // Fetch categories when the Type is selected
+        const fetchProjectCategories = async () => {
+            if (formData.Type) {
+                try {
+                    const response = await getProjectCategory({
+                        Id: CurrentUser.Id,
+                        Session: CurrentUser.Session,
+                        Token: CurrentUser.Token,  
+                    }, formData.Type);  // Pass selected Type to the API
+
+                    const categories = response.data.map((category: any) => ({
+                        Name: category.Name,
+                        RecId: category.RecId,
+                    }));
+
+                    setProjectCategories(categories);
+                } catch (error) {
+                    console.error('Error fetching project categories:', error);
+                }
+            } else {
+                setProjectCategories([]); // Clear categories if no type is selected
+            }
+        };
+
+        fetchProjectCategories();
+    }, [formData.Type, CurrentUser]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
 
-        if (name === 'Type' && value === 'interior') {
+        // Reset Category when Type is changed
+        if (name === 'Type') {
             setFormData({ ...formData, [name]: value, Category: '' });
         } else {
             setFormData({ ...formData, [name]: value });
@@ -42,25 +108,22 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
 
         setBudget(budgetString);
 
-        // Create lead data
         const leadData = {
             Title: formData.Title,
             Description: formData.Description,
             Size: formData.Size,
             Type: formData.Type,
             Category: formData.Category || "none",
-            AccountNum: CurrentUser.RecId, // Use CurrentUser.Id here
+            AccountNum: CurrentUser.RecId,
         };
 
         try {
-            // Call the createLead API
             const response = await createLead(leadData, {
                 Id: CurrentUser.Id,
                 Session: CurrentUser.Session,
                 Token: CurrentUser.Token,
             });
             console.log('Lead created successfully:', response);
-            // Show the MakePayment component after successful lead creation
             setShowPayment(true);
         } catch (error) {
             console.error('Error creating lead:', error);
@@ -122,8 +185,11 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                                         required
                                     >
                                         <option value="">Select project type</option>
-                                        <option value="interior">Interior</option>
-                                        <option value="architecture">Architecture</option>
+                                        {projectTypes.map((type) => (
+                                            <option key={type.RecId} value={type.Name}>
+                                                {type.Name}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
 
@@ -148,13 +214,15 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                                     value={formData.Category}
                                     onChange={handleInputChange}
                                     className="w-full border border-gray-300 px-4 py-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-400 transition duration-150"
+                                    required={formData.Type !== 'interior'}
                                     disabled={formData.Type === 'interior'}
-                                    required={formData.Type === 'architecture'}
                                 >
                                     <option value="">Select configuration</option>
-                                    <option value="G">G</option>
-                                    <option value="G+1">G+1</option>
-                                    <option value="G+2">G+2</option>
+                                    {projectCategories.map((category) => (
+                                        <option key={category.RecId} value={category.Name}>
+                                            {category.Name}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
 
