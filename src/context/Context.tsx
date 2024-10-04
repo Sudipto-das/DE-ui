@@ -21,13 +21,12 @@ export const AppProvider = ({ children }: any) => {
       Id: data.Id,
       Token: data.Token,
       Session: data.Session,
-      Name: data.result.Name,
-      Email: data.result.Email,
-      Roles: data.result.Roles,
-      Currency: data.result.Currency,
-      Phone: data.result.Phone,
-      PCode: data.result.PCode,
-      RecId: data.result.RecId,
+      Name: data.Name,
+      Email: data.Email,
+      Currency: data.Currency,
+      Phone: data.Phone,
+      PCode: data.PCode,
+      RecId: data.RecId,
     });
   }
 
@@ -38,7 +37,6 @@ export const AppProvider = ({ children }: any) => {
       Session: data.Session,
       Name: data.Name,
       Email: data.Email,
-      Roles: data.Roles,
       Currency: data.Currency,
       Phone: data.Phone,
       PCode: data.PCode,

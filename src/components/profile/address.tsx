@@ -30,11 +30,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={profileData.user?.address[0].Country || 'NA'}
+                                value={profileData.user?.address[0]?.Country || 'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{profileData.user?.address[0].Country || 'NA'}</p>
+                            <p className="font-medium font-inter">{profileData.user?.address[0]?.Country || 'NA'}</p>
                         )}
                     </div>
                     <div>
@@ -43,11 +43,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={`${profileData.user?.address[0].City || ''}, ${profileData.user?.address[0].State || 'NA'}`}
+                                value={`${profileData.user?.address[0].City || ''}, ${profileData.user?.address[0]?.State || 'NA'}`}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{`${profileData.user?.address[0].City || 'NA'}, ${profileData.user?.address[0].State|| 'NA'}`}</p>
+                            <p className="font-medium font-inter">{`${profileData.user?.address[0]?.City || 'NA'}, ${profileData.user?.address[0]?.State|| 'NA'}`}</p>
                         )}
                     </div>
                     <div>
@@ -60,7 +60,7 @@ const Address: React.FC= () => {
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{profileData.user?.address[0].ZipCode||'NA'}</p>
+                            <p className="font-medium font-inter">{profileData.user?.address[0]?.ZipCode||'NA'}</p>
                         )}
                     </div>
                     <div>
@@ -69,11 +69,11 @@ const Address: React.FC= () => {
                             <input
                                 type="text"
                                 className="block w-full p-2 border rounded"
-                                value={profileData.user?.address[0].District || 'NA'}
+                                value={profileData.user?.address[0]?.District || 'NA'}
 
                             />
                         ) : (
-                            <p className="font-medium font-inter">{profileData.user?.address[0].District || 'NA'}</p>
+                            <p className="font-medium font-inter">{profileData.user?.address[0]?.District || 'NA'}</p>
                         )}
                     </div>
                 </div>

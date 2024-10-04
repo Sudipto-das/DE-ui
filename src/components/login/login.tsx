@@ -1,39 +1,60 @@
 import React, { useState } from 'react';
-import OtpCard from './otpCard';
 import { fetchCountryCodes } from '../../functions/api/fetchCountryCode';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { CountryCode } from '../../types/countryCode';
-import { sendOtp } from '../../functions/api/login/sendOtp';
 import Loader from '../ui/loader';
 import { AppContext } from '../../context/Context';
+import getUserByPhone from '../../functions/api/login/getLogin';
+import { useNavigate } from 'react-router-dom';
+import { profileDataState } from '../../store/profileState/userProfileState';
+import { useSetRecoilState } from 'recoil';
+
 
 const Login: React.FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const [selectedCountryCode, setSelectedCountryCode] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [loading, setLoading] = useState(false);
-    const raiseToast = React.useContext(AppContext);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const setProfileData = useSetRecoilState(profileDataState);
     const { data: countryCodes } = useQuery<CountryCode[]>({ queryKey: ['countryCodes'], queryFn: fetchCountryCodes });
+    const {
+        setData: setLoggedInUser,
+        raiseToast,
 
-    const handleSendOtp = (event: React.FormEvent) => {
-        event.preventDefault();
-        mutation.mutate({ phone: phoneNumber, countryCode: selectedCountryCode })
-    };
-    const mutation = useMutation({
-        mutationFn: sendOtp,
-        onSuccess: () => {
-            setLoading(false);
-            setIsOpen(true);
-        },
-        onMutate: () => {
-            setLoading(true);
-        },
-        onError: (error) => {
-            setLoading(false)
-            raiseToast("Error", error.message || "Server error");
-            console.log(error)
+    } = React.useContext(AppContext);
+    const navigate = useNavigate();
+    const handleLogin = async (e: React.FormEvent) => {
+        e.preventDefault(); // Prevent default form submission
+        if (!phoneNumber || !selectedCountryCode) {
+            return; // Early return if phone number or country code is not selected
         }
-    })
+
+        setLoading(true); // Set loading state to true
+        setErrorMessage(null); // Reset error message
+        try {
+            const response = await getUserByPhone(phoneNumber, selectedCountryCode); // Call the API function
+
+
+            // Check if the response has the expected structure
+            if (response && response.data) {
+                setLoggedInUser(response.data)
+                setProfileData({
+                    user: response.data,
+                    isLoading: false,
+                })
+                raiseToast("Login successful!", "success");
+                navigate("/dashboard/");
+            } else {
+                throw new Error("Invalid response format");
+            }
+
+        } catch (error: any) {
+            console.error(error); // Log the error for debugging
+            setErrorMessage("Failed to login. Please check your details and try again."); // Set error message
+        } finally {
+            setLoading(false); // Set loading state to false
+        }
+    };
 
 
     return (
@@ -52,7 +73,7 @@ const Login: React.FC = () => {
                     <p className="mt-2">Hi, Welcome back 👋</p>
                 </div>
 
-                <form>
+                <form onSubmit={handleLogin}> {/* Attach handleLogin to form submission */}
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Country Code</label>
                         <select
@@ -79,20 +100,18 @@ const Login: React.FC = () => {
                     </div>
 
                     <button
-                        onClick={handleSendOtp}
-                        disabled={loading || !phoneNumber || !countryCodes}
+                        disabled={loading || !phoneNumber || !selectedCountryCode}
                         type="submit"
                         className="w-full bg-green-800 text-white py-2 rounded-md hover:bg-green-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Login
+                        {loading ? <Loader /> : 'Login'} {/* Show loader while loading */}
                     </button>
                 </form>
                 <div className="mt-4 text-center">
                     <span className="text-sm text-gray-600">Not registered yet? <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Create an account</a></span>
                 </div>
-                {loading && <Loader />}
+                {errorMessage && <p className="text-red-600 text-center">{errorMessage}</p>} {/* Show error message */}
             </div>
-            {isOpen && <OtpCard phone={phoneNumber} countryCode={selectedCountryCode} />}
         </div>
     );
 }
