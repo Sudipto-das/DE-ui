@@ -5,12 +5,13 @@ import { AppContext } from "../../context/Context";
 import React, { useEffect, useState } from "react";
 import getAllProjects from "../../functions/api/dashboard/fetchAllProjects";
 import { projectDataState } from "../../store/projectsState/projectDataState";
+import CreateProjectComponent from "./createProject";
 
 const ProjectComponent: React.FC = () => {
     const [projects, setProjects] = useRecoilState(projectDataState);
     const { raiseToast, user: CurrentUser } = React.useContext(AppContext);
     const [isLoading, setIsLoading] = useState(false);
-
+    const [isCreateProjectModalOpen, setIsCreateProjectModalOpen] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
@@ -31,8 +32,9 @@ const ProjectComponent: React.FC = () => {
             fetchData();
         }
     }, [CurrentUser, setProjects, raiseToast]);
-
-
+   const handleClick = ()=>{
+    setIsCreateProjectModalOpen(true)
+   }
 
     if (!isLoading && projects.length === 0) {
         return (
@@ -41,10 +43,14 @@ const ProjectComponent: React.FC = () => {
                     <div className="w-full text-center px-4">
                         <h3 className="text-sm">You Have No Current Projects. Create Your First Project Now</h3>
                     </div>
-                    <button className="px-7 py-5 text-xl font-bold bg-gradient-to-r from-green-700 to-blue-900 rounded-lg shadow-2xl text-slate-200">
+                    <button className="px-7 py-5 text-xl font-bold bg-gradient-to-r from-green-700 to-blue-900 rounded-lg shadow-2xl text-slate-200"
+                    onClick={handleClick}>
                         Create Your Project
                     </button>
                 </div>
+                {isCreateProjectModalOpen && ( // Render the modal if it's open
+                <CreateProjectComponent isOpen={isCreateProjectModalOpen} setIsOpen={setIsCreateProjectModalOpen} />
+            )}
             </div>
         );
     }

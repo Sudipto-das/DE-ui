@@ -12,14 +12,14 @@ interface PersonalDetailsProps {
     referralCode: string;
 }
 
-const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, category, referralCode }) => {
+const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, referralCode }) => {
     const address = useRecoilValue(AddressState)
     const [copied, setCopied] = useState(false);
-    const badgeColors: Record<PersonalDetailsProps['category'], string> = {
-        Premium: 'bg-green-500',
-        Standard: 'bg-yellow-500',
-        Ultimate: 'bg-orange-500',
-    };
+    // const badgeColors: Record<PersonalDetailsProps['category'], string> = {
+    //     Premium: 'bg-green-500',
+    //     Standard: 'bg-yellow-500',
+    //     Ultimate: 'bg-orange-500',
+    // };
 
     const handleCopy = () => {
         copyToClipboard(referralCode, setCopied);
@@ -39,9 +39,7 @@ const PersonalDetails: React.FC<PersonalDetailsProps> = ({ name, role, category,
                         <div>
                             <div className="flex gap-3 items-center">
                                 <h3 className="text-lg font-bold font-inter">{name}</h3>
-                                <div className={`${badgeColors[category]} text-white text-xs font-semibold px-2 py-1 text-center `}>
-                                    <h1 className='flex justify-center items-center font-sans'>{category.toUpperCase()}</h1>
-                                </div>
+                                
                             </div>
                             <p className="text-gray-600 font-inter">{role}</p>
                             <p className="text-gray-600 font-inter">{address?.Address}</p>
