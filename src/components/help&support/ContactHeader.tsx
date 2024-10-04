@@ -30,7 +30,7 @@ const ContactHeader = () => {
                     rel="noopener noreferrer" 
                     className="w-full md:w-auto flex-grow flex flex-col items-center space-y-4 p-4 bg-gradient-to-tr from-blue-100 to-violet-500 rounded-lg shadow-md max-w-xs md:max-w-sm transform transition-transform duration-300 hover:scale-105"
                 >
-                    <img src="logo.png" alt="WhatsApp" className="w-16 h-16"/>
+                    <img src="whatsapp.png" alt="WhatsApp" className="w-16 h-16"/>
                     <span className="text-md md:text-xl text-slate-600 font-semibold">WhatsApp</span>
                 </a>
                 <div className="w-full md:w-auto flex-grow flex flex-col items-center space-y-4 p-4 bg-gradient-to-tr from-blue-200 to-violet-500 rounded-lg shadow-md max-w-xs md:max-w-sm transform transition-transform duration-300 hover:scale-105 relative">
