@@ -15,7 +15,9 @@ export const AppProvider = ({ children }: any) => {
   const [Notifications, setNotifications] = React.useState<any>([]);
   const setProfileData = useSetRecoilState(profileDataState);
   const toast = useToast();
-
+  function setLoadingState(state: boolean) {
+    setLoading(state);
+  }
   function setData(data: any) {
     setDataForUser({
       Id: data.Id,
@@ -116,7 +118,7 @@ export const AppProvider = ({ children }: any) => {
         user,
         setUser,
         setData,
-        setLoading,
+        setLoadingState,
         loading,
         fetchUserDetails,
         raiseToast,

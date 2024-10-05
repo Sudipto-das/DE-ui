@@ -1,0 +1,388 @@
+export const SeasonalDecor = [
+    "Choose",
+    "Halloween",
+    "Christmas",
+    "Thanksgiving",
+    "Fall Season",
+    "Spring Season",
+    "Summer Season",
+    "Winter Season",
+  ];
+
+  export const ColorScheme = [
+    "Choose",
+    "Moss Green, Tan, White",
+    "Gray, Sand, Blue",
+    "Hunter Green, Red",
+    "White, Pops of Color",
+    "Blue, Neon",
+    "Light Blue, Emerald",
+    "Blue, Grass Green",
+    "Blue, Beige",
+    "Gray, Brown",
+    "Black, Red",
+    "Gray-Green, White, Black",
+    "Blue, Gray, Taupe",
+    "Black, Navy",
+    "Emerald, Tan",
+    "Forest Green, Light Gray",
+    "Yellow, Gray",
+    "Pink, Green",
+    "Blush Pink, Black",
+    "Black, White",
+    "Blue, White",
+];
+export const DesignType = [
+    {
+        "id": "1",
+        "value": "minimalist",
+        "name": "Minimalist",
+        "image": "https://prod-config.decor8.ai/styles/minimalist.jpeg",
+        },
+    {
+        "id": "2",
+        "value": "scandinavian",
+        "name": "Scandinavian",
+        "image": "https://prod-config.decor8.ai/styles/scandinavian.jpeg",
+        },
+    {
+        "id": "3",
+        "value": "industrial",
+        "name": "Industrial",
+        "image": "https://prod-config.decor8.ai/styles/industrial.jpeg",
+        },
+    {
+        "id": "4",
+        "value": "boho",
+        "name": "Bohemian (Boho)",
+        "image": "https://prod-config.decor8.ai/styles/boho.jpeg",
+        },
+    {
+        "id": "5",
+        "value": "traditional",
+        "name": "Traditional",
+        "image": "https://prod-config.decor8.ai/styles/traditional.jpeg",
+        },
+    {
+        "id": "6",
+        "value": "artdeco",
+        "name": "Art Deco",
+        "image": "https://prod-config.decor8.ai/styles/artdeco.jpeg",
+        },
+    {
+        "id": "7",
+        "value": "midcenturymodern",
+        "name": "Mid-century Modern",
+        "image": "https://prod-config.decor8.ai/styles/midcenturymodern.jpeg",
+        },
+    {
+        "id": "8",
+        "value": "coastal",
+        "name": "Coastal",
+        "image": "https://prod-config.decor8.ai/styles/coastal.jpeg",
+        },
+    {
+        "id": "9",
+        "value": "tropical",
+        "name": "Tropical",
+        "image": "https://prod-config.decor8.ai/styles/tropical.jpeg",
+        },
+    {
+        "id": "10",
+        "value": "eclectic",
+        "name": "Eclectic",
+        "image": "https://prod-config.decor8.ai/styles/eclectic.jpeg",
+        },
+    {
+        "id": "11",
+        "value": "contemporary",
+        "name": "Contemporary",
+        "image": "https://prod-config.decor8.ai/styles/contemporary.jpeg",
+        },
+    {
+        "id": "12",
+        "value": "frenchcountry",
+        "name": "French Country",
+        "image": "https://prod-config.decor8.ai/styles/frenchcountry.jpeg",
+        },
+    {
+        "id": "13",
+        "value": "rustic",
+        "name": "Rustic",
+        "image": "https://prod-config.decor8.ai/styles/rustic.jpeg",
+        },
+    {
+        "id": "14",
+        "value": "shabbychic",
+        "name": "Shabby Chic",
+        "image": "https://prod-config.decor8.ai/styles/shabbychic.jpeg",
+        },
+    {
+        "id": "15",
+        "value": "vintage",
+        "name": "Vintage",
+        "image": "https://prod-config.decor8.ai/styles/vintage.jpeg",
+        },
+    {
+        "id": "16",
+        "value": "country",
+        "name": "Country",
+        "image": "https://prod-config.decor8.ai/styles/country.jpeg",
+        },
+    {
+        "id": "17",
+        "value": "modern",
+        "name": "Modern",
+        "image": "https://prod-config.decor8.ai/styles/modern.jpeg",
+        },
+    {
+        "id": "18",
+        "value": "ikea",
+        "name": "Ikea",
+        "image": "https://prod-config.decor8.ai/styles/ikea.jpeg",
+        },
+    {
+        "id": "19",
+        "value": "potterybarn",
+        "name": "Pottery Barn",
+        "image": "https://prod-config.decor8.ai/styles/potterybarn.jpeg",
+        },
+    {
+        "id": "20",
+        "value": "westelmmodern",
+        "name": "West Elm Modern",
+        "image": "https://prod-config.decor8.ai/styles/westelmmodern.jpeg",
+        },
+    {
+        "id": "21",
+        "value": "asian_zen",
+        "name": "Asian zen",
+        "image": "https://prod-config.decor8.ai/styles/asian_zen.jpeg",
+        },
+    {
+        "id": "22",
+        "value": "hollywoodregency",
+        "name": "Hollywood Regency",
+        "image": "https://prod-config.decor8.ai/styles/hollywoodregency.jpeg",
+        },
+    {
+        "id": "23",
+        "value": "bauhaus",
+        "name": "Bauhaus",
+        "image": "https://prod-config.decor8.ai/styles/bauhaus.jpeg",
+        },
+    {
+        "id": "24",
+        "value": "mediterranean",
+        "name": "Mediterranean",
+        "image": "https://prod-config.decor8.ai/styles/mediterranean.jpeg",
+        },
+    {
+        "id": "25",
+        "value": "farmhouse",
+        "name": "Farmhouse",
+        "image": "https://prod-config.decor8.ai/styles/farmhouse.jpeg",
+        },
+    {
+        "id": "26",
+        "value": "victorian",
+        "name": "Victorian",
+        "image": "https://prod-config.decor8.ai/styles/victorian.jpeg",
+        },
+    {
+        "id": "27",
+        "value": "gothic",
+        "name": "Gothic",
+        "image": "https://prod-config.decor8.ai/styles/gothic.jpeg",
+        },
+    {
+        "id": "28",
+        "value": "moroccan",
+        "name": "Moroccan",
+        "image": "https://prod-config.decor8.ai/styles/moroccan.jpeg",
+        },
+    {
+        "id": "29",
+        "value": "southwestern",
+        "name": "Southwestern",
+        "image": "https://prod-config.decor8.ai/styles/southwestern.jpeg",
+        },
+    {
+        "id": "30",
+        "value": "transitional",
+        "name": "Transitional",
+        "image": "https://prod-config.decor8.ai/styles/transitional.jpeg",
+        },
+    {
+        "id": "31",
+        "value": "maximalist",
+        "name": "Maximalist",
+        "image": "https://prod-config.decor8.ai/styles/maximalist.jpeg",
+        },
+    {
+        "id": "32",
+        "value": "arabic",
+        "name": "Arabic",
+        "image": "https://prod-config.decor8.ai/styles/arabic.jpeg",
+        },
+    {
+        "id": "33",
+        "value": "japandi",
+        "name": "Japandi",
+        "image": "https://prod-config.decor8.ai/styles/japandi.jpeg",
+        },
+    {
+        "id": "34",
+        "value": "retrofuturism",
+        "name": "Retro Futurism",
+        "image": "https://prod-config.decor8.ai/styles/retrofuturism.jpeg",
+        },
+    {
+        "id": "35",
+        "value": "artnouveau",
+        "name": "Art Nouveau",
+        "image": "https://prod-config.decor8.ai/styles/artnouveau.jpeg",
+        },
+    {
+        "id": "36",
+        "value": "elven",
+        "name": "Elven",
+        "image": "https://prod-config.decor8.ai/styles/elven.jpeg",
+         }
+]
+
+export const RoomType = [
+    {
+      id: "livingroom",
+      name: "Living Room",
+      value: "livingroom",
+    },
+    {
+      id: "kitchen",
+      name: "Kitchen",
+      value: "kitchen",
+    },
+    {
+      id: "diningroom",
+      name: "Dining Room",
+      value: "diningroom",
+    },
+    {
+      id: "bedroom",
+      name: "Bedroom",
+      value: "bedroom",
+    },
+    {
+      id: "bathroom",
+      name: "Bathroom",
+      value: "bathroom",
+    },
+    {
+      id: "kidsroom",
+      name: "Kids Room",
+      value: "kidsroom",
+    },
+    {
+      id: "familyroom",
+      name: "Family Room",
+      value: "familyroom",
+    },
+    {
+      id: "readingnook",
+      name: "Reading Nook",
+      value: "readingnook",
+    },
+    {
+      id: "sunroom",
+      name: "Sun Room",
+      value: "sunroom",
+    },
+    {
+      id: "walkincloset",
+      name: "Walk-in Closet",
+      value: "walkincloset",
+    },
+    {
+      id: "mudroom",
+      name: "Mud Room",
+      value: "mudroom",
+    },
+    {
+      id: "toyroom",
+      name: "Toy Room",
+      value: "toyroom",
+    },
+    {
+      id: "office",
+      name: "Office",
+      value: "office",
+    },
+    {
+      id: "foyer",
+      name: "Foyer",
+      value: "foyer",
+    },
+    {
+      id: "powderroom",
+      name: "Powder Room",
+      value: "powderroom",
+    },
+    {
+      id: "laundryroom",
+      name: "Laundry Room",
+      value: "laundryroom",
+    },
+    {
+      id: "gym",
+      name: "Gym",
+      value: "gym",
+    },
+    {
+      id: "basement",
+      name: "Basement",
+      value: "basement",
+    },
+    {
+      id: "garage",
+      name: "Garage",
+      value: "garage",
+    },
+    {
+      id: "balcony",
+      name: "Balcony",
+      value: "balcony",
+    },
+    {
+      id: "cafe",
+      name: "Cafe",
+      value: "cafe",
+    },
+    {
+      id: "homebar",
+      name: "Home Bar",
+      value: "homebar",
+    },
+    {
+      id: "study_room",
+      name: "Study Room",
+      value: "study_room",
+    },
+    {
+      id: "front_porch",
+      name: "Front Porch",
+      value: "front_porch",
+    },
+    {
+      id: "back_porch",
+      name: "Back Porch",
+      value: "back_porch",
+    },
+    {
+      id: "back_patio",
+      name: "Back Patio",
+      value: "back_patio",
+    },
+  ];
+  
+ 
+  

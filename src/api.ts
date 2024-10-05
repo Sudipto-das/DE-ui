@@ -9,3 +9,4 @@ export const apiClient = axios.create({
     },
 });
 
+export const BASE_API_URL = "https://www.designelementary.com/api";

@@ -25,6 +25,7 @@ import UploadDocuments from './pages/upload/UploadDocument';
 import MyOrders from './pages/MyOrders/myOrders';
 import CartPage from './components/rawMaterials/cartModal';
 import CheckoutComponent from './components/rawMaterials/checkout/chcekout';
+import DesignAI from './pages/designAi/designAI';
 
 
 const Layout = () => {
@@ -64,6 +65,7 @@ const Layout = () => {
             <Route path='/uploaddesign&document' element={<UploadDocuments />} />
             <Route path='/myorders' element={<MyOrders />} />
             <Route path='/cart' element={<CartPage />} />
+            <Route path='/design-ai' element={<DesignAI />} />
           </Routes>
         </div>
       </div>
