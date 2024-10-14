@@ -1,6 +1,5 @@
 import { apiClient } from "../../../api";
 
-
 async function createLead(leadData: {
     Title: string;
     Description: string;
@@ -29,11 +28,14 @@ async function createLead(leadData: {
             }
         );
 
-        // Return the full response.data
+        // Return the full response data
         return response.data; 
     } catch (error: any) {
-        // Handle error and throw a detailed message if available
-        throw new Error(error.response?.data || "Error creating lead");
+        // Check if the error has a response and message, and throw that error message
+        const errorMessage = error.response?.data?.message || "Error creating lead";
+        
+        // Throw the error message so it can be caught by the calling function
+        throw new Error(errorMessage);
     }
 }
 

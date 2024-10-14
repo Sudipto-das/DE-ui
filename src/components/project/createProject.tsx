@@ -6,7 +6,6 @@ import { AppContext } from '../../context/Context';
 import createLead from '../../functions/api/projects/createLeads';
 import getProjectTypes from '../../functions/api/projects/getProjType';
 import getProjectCategory from '../../functions/api/projects/getProjectCategory'; // Import project category function
-
 interface CreateProjectComponentProps {
     isOpen: boolean;
     setIsOpen: (arg0: boolean) => void;
@@ -23,7 +22,7 @@ interface ProjectCategory {
 }
 
 const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen, setIsOpen }) => {
-    const { user: CurrentUser } = useContext(AppContext);
+    const { user: CurrentUser, raiseToast } = useContext(AppContext); // Get raiseToast from context
     const [formData, setFormData] = useState({
         Title: '',
         Description: '',
@@ -102,12 +101,12 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         const calculatedBudget = CalculateBudget(formData.Type, formData.Category, parseInt(formData.Size));
         const budgetString = calculatedBudget ? calculatedBudget.toString() : '0';
-
+    
         setBudget(budgetString);
-
+    
         const leadData = {
             Title: formData.Title,
             Description: formData.Description,
@@ -116,7 +115,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
             Category: formData.Category || "none",
             AccountNum: CurrentUser.RecId,
         };
-
+    
         try {
             const response = await createLead(leadData, {
                 Id: CurrentUser.Id,
@@ -125,10 +124,22 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
             });
             console.log('Lead created successfully:', response);
             setShowPayment(true);
-        } catch (error) {
-            console.error('Error creating lead:', error);
+        } catch (error: any) {
+            // Check if the error has a response with a data object, then extract the message
+            let errorMessage = 'Something went wrong';
+            
+            if (error.response && typeof error.response.data === 'object') {
+                errorMessage = error.response.data.message || JSON.stringify(error.response.data);
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+    
+            // Use raiseToast function to display the error message
+            raiseToast('Error', 'error', errorMessage);
+            console.error(errorMessage);
         }
     };
+    
 
     const handleClose = () => {
         setIsOpen(false);
@@ -217,7 +228,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({ isOpen,
                                     required={formData.Type !== 'interior'}
                                     disabled={formData.Type === 'interior'}
                                 >
-                                    <option value="">Select configuration</option>
+                                    <option value="blank">Select configuration</option>
                                     {projectCategories.map((category) => (
                                         <option key={category.RecId} value={category.Name}>
                                             {category.Name}
