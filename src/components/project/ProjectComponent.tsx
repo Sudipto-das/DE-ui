@@ -43,7 +43,7 @@ const ProjectComponent: React.FC = () => {
                     <div className="w-full text-center px-4">
                         <h3 className="text-sm">You Have No Current Projects. Create Your First Project Now</h3>
                     </div>
-                    <button className="px-7 py-5 text-xl font-bold bg-gradient-to-r from-green-700 to-blue-900 rounded-lg shadow-2xl text-slate-200"
+                    <button className="px-7 py-5 text-xl font-bold bg-gradient-to-r from-green-700 to-green-800 rounded-lg shadow-2xl text-slate-200"
                     onClick={handleClick}>
                         Create Your Project
                     </button>

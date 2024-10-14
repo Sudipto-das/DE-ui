@@ -41,7 +41,7 @@ const CheckoutComponent = () => {
       <div className="w-[60%]">
         <button className="text-xs text-blue-600 flex items-center gap-1 justify-center text-center py-2 px-4 rounded-md hover:bg-blue-50 transition-colors">
           <IoChevronBackCircleOutline size={20} />
-          <span className="mt-0.5" onClick={()=>{navigate('/raw-materials')}}>Back to cart</span>
+          <span className="mt-0.5" onClick={()=>{navigate('/cart')}}>Back to cart</span>
         </button>
 
         {step === 'address' && <AddressForm addresses={addresses} onNext={handleNextStep} />}

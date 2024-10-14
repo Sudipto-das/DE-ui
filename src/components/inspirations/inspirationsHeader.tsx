@@ -8,7 +8,7 @@ const InspirationsHeader: React.FC<{ renderComponent: React.ReactNode }> = ({ re
 
     const categories = [
         { name: 'Interior', img: 'interior-design.png' },
-        { name: 'Architecture', img: 'architecture.png' },
+        { name: 'Architecture', img: 'architechture.png' },
         { name: 'Saved Designs', img: 'save.png' },
     ];
 
@@ -37,7 +37,7 @@ const InspirationsHeader: React.FC<{ renderComponent: React.ReactNode }> = ({ re
                         <div>
                             <h1 className="text-xl font-semibold">{category.name}</h1>
                         </div>
-                        <img src={category.img} className="w-10 h-10" alt={category.name} />
+                        <img src={category.img} className="w-12 h-12 bg-yellow-300 p-1 rounded-full text-center" alt={category.name} />
                     </div>
                     {isOpen && selectedCategory === category.name && (
                         <div className="block md:hidden">

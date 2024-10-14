@@ -43,7 +43,7 @@ const OrderSummary = () => {
                 ))}
             </div>
             <div className="flex gap-3">
-            <button className="px-5 py-2 border rounded-md bg-green-500 text-white font-semibold">Add More Items</button>
+            <button className="px-5 py-2 border rounded-md bg-green-500 text-white font-semibold" onClick={()=>navigate('/raw-materials')}>Add More Items</button>
 
                 <button
                     className="px-4 py-2 border rounded-md text-white font-semibold bg-gradient-to-r from-violet-700 to-pink-500"
