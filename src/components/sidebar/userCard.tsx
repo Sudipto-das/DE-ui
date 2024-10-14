@@ -16,7 +16,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
         if (isMobile) {
             setWhatsAppLink(`whatsapp://send?phone=${user?.RmPhone}`);
         } else {
-            setWhatsAppLink(`https://web.whatsapp.com/send?phone=${user?.RmPhone}`);
+            setWhatsAppLink(`https://web.whatsapp.com/send?phone=${user?.RmPhone || '+918867430197'}`);
         }
     }, []);
     return (
@@ -42,11 +42,11 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
                 <div className="flex flex-col space-y-2 mb-4">
                     <div className="flex items-center">
                         <FaEnvelope className="mr-2" />
-                        <span>{user?.RmPhone || '8240435788'}</span>
+                        <span>{user?.RmPhone || '+918867430197'}</span>
                     </div>
                     <div className="flex items-center">
                         <FaPhoneAlt className="mr-2" />
-                        <span>{user?.RmEmail || 'abc@gmail.com'}</span>
+                        <span>{user?.RmEmail || 'care@designelementary.com'}</span>
                     </div>
                 </div>
 
