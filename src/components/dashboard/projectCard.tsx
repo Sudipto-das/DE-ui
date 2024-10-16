@@ -7,14 +7,16 @@ import { ProjectDetail } from '../../interface/Project';
 import { projectStatusAtom } from '../../store/projectStatus/porjectStatusAtom';
 import { activeProjectAtom } from '../../store/projectsState/activeProjectState';
 import { projectRecIdState } from '../../store/projectsState/projectRecId';
+import { selectProjectAtom } from '../../store/slectProjectState';
 
-const ProjectCard: React.FC<ProjectDetail> = ({ Name, RecId, Description, Budget, StartDate, EndDate, Type, DesignManager, Stage,Size }) => {
+const ProjectCard: React.FC<ProjectDetail> = ({ Name, RecId, Description, Budget, StartDate, EndDate, Type, DesignManager, Stage, Size }) => {
   const [activeProject, setActiveProject] = useRecoilState(activeProjectAtom);
+  const selectProject = useSetRecoilState(selectProjectAtom)
   const setStatus = useSetRecoilState(projectStatusAtom);
   const navigate = useNavigate();
   const location = useLocation();
   const setProjectRecId = useSetRecoilState(projectRecIdState);
-  
+
   const handleClick = (id: string) => {
     navigate(`/projects/${id}`);
   };
@@ -30,11 +32,16 @@ const ProjectCard: React.FC<ProjectDetail> = ({ Name, RecId, Description, Budget
       handleCommentChange();
     } else if (location.pathname === '/projects') {
       handleClick(RecId + '');
+    } else {
+      handleProductionPageClick()
     }
   };
+  const handleProductionPageClick = () => {
+    selectProject(RecId)
+  }
 
   const isActive = location.pathname === '/dashboard' && activeProject === RecId;
-console.log(Stage)
+  console.log(Stage)
   return (
     <div className={`flex flex-col border ${isActive && 'border-2 border-green-700 '} shadow-sm border-gray-300 rounded-lg overflow-hidden mb-4 items-center px-3 flex-grow md:flex-row hover:cursor-pointer font-inter`}
       onClick={handleCardClick}>
